@@ -15,6 +15,7 @@ public:
 	virtual void ShutdownModule() override;
 
 private:
+	void ExtendLevelEditorToolbar();
 	void AddToolbarButton(FToolBarBuilder& Builder);
 	void ToggleServer();
 	void StartServer();

@@ -10,6 +10,8 @@
 #include "Styling/SlateStyle.h"
 #include "Styling/SlateStyleMacros.h"
 #include "ISettingsModule.h"
+#include "ToolMenus.h"
+#include "ToolMenuSection.h"
 
 #define LOCTEXT_NAMESPACE "FUnrealMCPModule"
 
@@ -66,9 +68,14 @@ TSharedPtr<FMCPPluginStyle> FMCPPluginStyle::Instance = nullptr;
 
 void FUnrealMCPModule::StartupModule()
 {
+	UE_LOG(LogTemp, Warning, TEXT("UnrealMCP Plugin is starting up"));
+	
 	// Register style set
 	FMCPPluginStyle::Initialize();
 	FSlateStyleRegistry::RegisterSlateStyle(*FMCPPluginStyle::Get());
+	
+	// More debug logging
+	UE_LOG(LogTemp, Warning, TEXT("UnrealMCP Style registered"));
 
 	// Register settings
 	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
@@ -80,7 +87,19 @@ void FUnrealMCPModule::StartupModule()
 		);
 	}
 
-	// Add toolbar button
+	// Make sure UToolMenus is initialized
+	/*
+	if (!UToolMenus::IsToolMenuUIEnabled())
+	{
+		UToolMenus::Initialize();
+		UE_LOG(LogTemp, Warning, TEXT("Initialized UToolMenus"));
+	}
+	*/
+
+	// Register for post engine init to add toolbar button
+	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
+	
+	// Also try the legacy approach as a fallback
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender);
 	ToolbarExtender->AddToolBarExtension(
@@ -90,6 +109,7 @@ void FUnrealMCPModule::StartupModule()
 		FToolBarExtensionDelegate::CreateRaw(this, &FUnrealMCPModule::AddToolbarButton)
 	);
 	LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
+	UE_LOG(LogTemp, Warning, TEXT("Added legacy toolbar extender"));
 }
 
 void FUnrealMCPModule::ShutdownModule()
@@ -108,8 +128,59 @@ void FUnrealMCPModule::ShutdownModule()
 	{
 		StopServer();
 	}
+	
+	// Clean up delegates
+	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
 }
 
+void FUnrealMCPModule::ExtendLevelEditorToolbar()
+{
+	// Register the main menu
+	UToolMenus::Get()->RegisterMenu("LevelEditor.MainMenu", "MainFrame.MainMenu");
+	
+	// Add to the main toolbar
+	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
+	if (ToolbarMenu)
+	{
+		FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("MCP");
+		
+		Section.AddEntry(FToolMenuEntry::InitToolBarButton(
+			"MCPServerToggle",
+			FUIAction(
+				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::ToggleServer),
+				FCanExecuteAction(),
+				FIsActionChecked::CreateRaw(this, &FUnrealMCPModule::IsServerRunning)
+			),
+			LOCTEXT("MCPButtonLabel", "MCP Server"),
+			LOCTEXT("MCPButtonTooltip", "Start/Stop MCP Server"),
+			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon")
+		));
+		
+		UE_LOG(LogTemp, Warning, TEXT("MCP Server button added to main toolbar"));
+	}
+	
+	// Add to Window menu
+	UToolMenu* WindowMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.MainMenu.Window");
+	if (WindowMenu)
+	{
+		FToolMenuSection& Section = WindowMenu->FindOrAddSection("WindowLayout");
+		Section.AddMenuEntry(
+			"MCPServerToggleWindow",
+			LOCTEXT("MCPWindowMenuLabel", "MCP Server"),
+			LOCTEXT("MCPWindowMenuTooltip", "Start/Stop MCP Server"),
+			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
+			FUIAction(
+				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::ToggleServer),
+				FCanExecuteAction(),
+				FIsActionChecked::CreateRaw(this, &FUnrealMCPModule::IsServerRunning)
+			),
+			EUserInterfaceActionType::ToggleButton
+		);
+		UE_LOG(LogTemp, Warning, TEXT("MCP Server entry added to Window menu"));
+	}
+}
+
+// Legacy toolbar extension method - no longer used
 void FUnrealMCPModule::AddToolbarButton(FToolBarBuilder& Builder)
 {
 	Builder.AddToolBarButton(

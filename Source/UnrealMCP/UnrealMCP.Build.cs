@@ -26,7 +26,7 @@ public class UnrealMCP : ModuleRules
 			new string[] {
 				"Core", "CoreUObject", "Engine", "UnrealEd",
 				"Networking", "Sockets", "Slate", "SlateCore", "EditorStyle",
-				"DeveloperSettings", "Projects"
+				"DeveloperSettings", "Projects", "ToolMenus"
 			}
 		);
 			

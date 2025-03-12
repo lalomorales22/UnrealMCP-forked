@@ -11,6 +11,7 @@
 #include "Interfaces/IPv4/IPv4Address.h"
 #include "Interfaces/IPv4/IPv4Endpoint.h"
 #include "ActorEditorUtils.h"
+#include "EngineUtils.h"
 #include "Containers/Ticker.h"
 
 FMCPTCPServer::FMCPTCPServer(int32 InPort) : Port(InPort), Listener(nullptr), ClientSocket(nullptr), bRunning(false)
@@ -235,7 +236,7 @@ void FMCPTCPServer::HandleCreateObject(const TSharedPtr<FJsonObject>& Params)
     }
 
     AActor* NewActor = nullptr;
-    FScopedTransaction Transaction(TEXT("MCP Create Object"));
+    FScopedTransaction Transaction(FText::FromString(TEXT("MCP Create Object")));
     
     if (Type == "CUBE")
     {
@@ -309,7 +310,7 @@ void FMCPTCPServer::HandleModifyObject(const TSharedPtr<FJsonObject>& Params)
         return;
     }
     
-    FScopedTransaction Transaction(TEXT("MCP Modify Object"));
+    FScopedTransaction Transaction(FText::FromString(TEXT("MCP Modify Object")));
     TargetActor->Modify();
     
     // Handle location change
@@ -386,7 +387,7 @@ void FMCPTCPServer::HandleDeleteObject(const TSharedPtr<FJsonObject>& Params)
         return;
     }
     
-    FScopedTransaction Transaction(TEXT("MCP Delete Object"));
+    FScopedTransaction Transaction(FText::FromString(TEXT("MCP Delete Object")));
     World->EditorDestroyActor(TargetActor, true);
     
     TSharedPtr<FJsonObject> Result = MakeShared<FJsonObject>();

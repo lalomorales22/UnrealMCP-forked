@@ -25,14 +25,15 @@ public class UnrealMCP : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[] {
 				"Core", "CoreUObject", "Engine", "UnrealEd",
-				"Networking", "Sockets", "Slate", "SlateCore", "EditorStyle"
+				"Networking", "Sockets", "Slate", "SlateCore", "EditorStyle",
+				"DeveloperSettings", "Projects"
 			}
 		);
 			
 		
 		PrivateDependencyModuleNames.AddRange(
 			new string[] { 
-				"Json", "JsonUtilities", "Settings"
+				"Json", "JsonUtilities", "Settings", "InputCore"
 			}
 		);
 		

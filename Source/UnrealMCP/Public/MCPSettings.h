@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DeveloperSettings.h"
+#include "Engine/DeveloperSettings.h"
 #include "MCPSettings.generated.h"
 
 UCLASS(config = Editor, defaultconfig)

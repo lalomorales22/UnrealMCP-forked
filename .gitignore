@@ -1,0 +1,10 @@
+# Unreal Engine Plugin Ignores
+Binaries/
+Intermediate/
+DerivedDataCache/
+Saved/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.pdb

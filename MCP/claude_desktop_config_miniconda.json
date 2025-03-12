@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "blender": {
+            "command": "C:\\Users\\mikek\\miniconda3\\Scripts\\uvx.exe",
+            "args": [
+                "blender-mcp"
+            ]
+        },
+        "unreal": {
+            "command": "D:\AISlop\UnrealMCP_Dev\Plugins\UnrealMCP\run_unreal_mcp_miniconda.bat",
+            "args": []
+        }
+    }
+}

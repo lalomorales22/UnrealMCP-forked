@@ -1,0 +1,2 @@
+mcp>=0.1.0
+# socket and json are part of Python's standard library and don't need to be listed 

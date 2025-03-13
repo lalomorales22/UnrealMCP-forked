@@ -131,5 +131,7 @@ SOFTWARE.
 - X: [@kvickart](https://x.com/kvickart)
 - [@sidahuj](https://x.com/sidahuj) for the inspriation
 
+- Discord: https://discord.gg/abRftdSe
+
 ## Contributing
 Contributions are welcome, but I will need some time to wrap my head around things and cleanup first, lol

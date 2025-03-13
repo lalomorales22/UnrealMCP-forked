@@ -9,8 +9,9 @@
 UNREALMCP_API DECLARE_LOG_CATEGORY_EXTERN(LogMCP, Log, All);
 
 class FMCPTCPServer;
+class SWindow;
 
-class FUnrealMCPModule : public IModuleInterface
+class FUnrealMCPModule : public IModuleInterface, public TSharedFromThis<FUnrealMCPModule>
 {
 public:
 	/** IModuleInterface implementation */
@@ -24,6 +25,15 @@ private:
 	void StartServer();
 	void StopServer();
 	bool IsServerRunning() const;
-
+	
+	// MCP Control Panel functions
+	void OpenMCPControlPanel();
+	void CloseMCPControlPanel();
+	void OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window);
+	TSharedRef<class SWidget> CreateMCPControlPanelContent();
+	FReply OnStartServerClicked();
+	FReply OnStopServerClicked();
+	
 	TUniquePtr<FMCPTCPServer> Server;
+	TSharedPtr<SWindow> MCPControlPanelWindow;
 };

@@ -14,6 +14,16 @@
 #include "ToolMenus.h"
 #include "ToolMenuSection.h"
 #include "MCPFileLogger.h"
+#include "Widgets/SWindow.h"
+#include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SBorder.h"
+#include "Widgets/Layout/SScrollBox.h"
+#include "Widgets/Text/STextBlock.h"
+#include "Widgets/Input/SButton.h"
+#include "Widgets/Layout/SGridPanel.h"
+#include "Widgets/Layout/SUniformGridPanel.h"
+#include "Framework/Application/SlateApplication.h"
+#include "EditorStyleSet.h"
 
 // Define the log category
 DEFINE_LOG_CATEGORY(LogMCP);
@@ -134,6 +144,9 @@ void FUnrealMCPModule::ShutdownModule()
 		StopServer();
 	}
 	
+	// Close control panel if open
+	CloseMCPControlPanel();
+	
 	// Clean up delegates
 	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
 }
@@ -159,15 +172,15 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 	{
 		FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("MCP");
 		
+		// Create a button that opens the control panel instead of directly toggling the server
 		Section.AddEntry(FToolMenuEntry::InitToolBarButton(
-			"MCPServerToggle",
+			"MCPServerControl",
 			FUIAction(
-				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::ToggleServer),
-				FCanExecuteAction(),
-				FIsActionChecked::CreateRaw(this, &FUnrealMCPModule::IsServerRunning)
+				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+				FCanExecuteAction()
 			),
 			LOCTEXT("MCPButtonLabel", "MCP Server"),
-			LOCTEXT("MCPButtonTooltip", "Start/Stop MCP Server"),
+			LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"),
 			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon")
 		));
 		
@@ -180,16 +193,14 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 	{
 		FToolMenuSection& Section = WindowMenu->FindOrAddSection("WindowLayout");
 		Section.AddMenuEntry(
-			"MCPServerToggleWindow",
-			LOCTEXT("MCPWindowMenuLabel", "MCP Server"),
-			LOCTEXT("MCPWindowMenuTooltip", "Start/Stop MCP Server"),
+			"MCPServerControlWindow",
+			LOCTEXT("MCPWindowMenuLabel", "MCP Server Control Panel"),
+			LOCTEXT("MCPWindowMenuTooltip", "Open MCP Server Control Panel"),
 			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
 			FUIAction(
-				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::ToggleServer),
-				FCanExecuteAction(),
-				FIsActionChecked::CreateRaw(this, &FUnrealMCPModule::IsServerRunning)
-			),
-			EUserInterfaceActionType::ToggleButton
+				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+				FCanExecuteAction()
+			)
 		);
 		MCP_LOG_WARNING("MCP Server entry added to Window menu");
 	}
@@ -202,16 +213,202 @@ void FUnrealMCPModule::AddToolbarButton(FToolBarBuilder& Builder)
 {
 	Builder.AddToolBarButton(
 		FUIAction(
-			FExecuteAction::CreateRaw(this, &FUnrealMCPModule::ToggleServer),
-			FCanExecuteAction(),
-			FIsActionChecked::CreateRaw(this, &FUnrealMCPModule::IsServerRunning)
+			FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+			FCanExecuteAction()
 		),
 		NAME_None,
 		LOCTEXT("MCPButtonLabel", "MCP Server"),
-		LOCTEXT("MCPButtonTooltip", "Start/Stop MCP Server"),
-		FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
-		EUserInterfaceActionType::ToggleButton
+		LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"),
+		FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon")
 	);
+}
+
+void FUnrealMCPModule::OpenMCPControlPanel()
+{
+	// If the window already exists, just focus it
+	if (MCPControlPanelWindow.IsValid())
+	{
+		MCPControlPanelWindow->BringToFront();
+		return;
+	}
+
+	// Create a new window
+	MCPControlPanelWindow = SNew(SWindow)
+		.Title(LOCTEXT("MCPControlPanelTitle", "MCP Server Control Panel"))
+		.SizingRule(ESizingRule::Autosized)
+		.SupportsMaximize(false)
+		.SupportsMinimize(false)
+		.HasCloseButton(true)
+		.CreateTitleBar(true)
+		.IsTopmostWindow(true)
+		.MinWidth(300)
+		.MinHeight(150);
+
+	// Set the content of the window
+	MCPControlPanelWindow->SetContent(CreateMCPControlPanelContent());
+
+	// Register a callback for when the window is closed
+	MCPControlPanelWindow->GetOnWindowClosedEvent().AddRaw(this, &FUnrealMCPModule::OnMCPControlPanelClosed);
+
+	// Show the window
+	FSlateApplication::Get().AddWindow(MCPControlPanelWindow.ToSharedRef());
+
+	MCP_LOG_INFO("MCP Control Panel opened");
+}
+
+void FUnrealMCPModule::OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window)
+{
+	MCPControlPanelWindow.Reset();
+	MCP_LOG_INFO("MCP Control Panel closed");
+}
+
+void FUnrealMCPModule::CloseMCPControlPanel()
+{
+	if (MCPControlPanelWindow.IsValid())
+	{
+		MCPControlPanelWindow->RequestDestroyWindow();
+		MCPControlPanelWindow.Reset();
+		MCP_LOG_INFO("MCP Control Panel closed");
+	}
+}
+
+TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
+{
+	const UMCPSettings* Settings = GetDefault<UMCPSettings>();
+	
+	return SNew(SBorder)
+		.BorderImage(FAppStyle::GetBrush("ToolPanel.GroupBorder"))
+		.Padding(8.0f)
+		[
+			SNew(SVerticalBox)
+			
+			// Status section
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 0, 0, 8)
+			[
+				SNew(SHorizontalBox)
+				
+				+ SHorizontalBox::Slot()
+				.AutoWidth()
+				.VAlign(VAlign_Center)
+				.Padding(0, 0, 8, 0)
+				[
+					SNew(STextBlock)
+					.Text(LOCTEXT("ServerStatusLabel", "Server Status:"))
+					.Font(FAppStyle::GetFontStyle("NormalText"))
+				]
+				
+				+ SHorizontalBox::Slot()
+				.FillWidth(1.0f)
+				.VAlign(VAlign_Center)
+				[
+					SNew(STextBlock)
+					.Text_Lambda([this]() -> FText {
+						return IsServerRunning() 
+							? LOCTEXT("ServerRunningStatus", "Running") 
+							: LOCTEXT("ServerStoppedStatus", "Stopped");
+					})
+					.ColorAndOpacity_Lambda([this]() -> FSlateColor {
+						return IsServerRunning() 
+							? FSlateColor(FLinearColor(0.0f, 0.8f, 0.0f)) 
+							: FSlateColor(FLinearColor(0.8f, 0.0f, 0.0f));
+					})
+					.Font(FAppStyle::GetFontStyle("NormalText"))
+				]
+			]
+			
+			// Port information
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 0, 0, 8)
+			[
+				SNew(SHorizontalBox)
+				
+				+ SHorizontalBox::Slot()
+				.AutoWidth()
+				.VAlign(VAlign_Center)
+				.Padding(0, 0, 8, 0)
+				[
+					SNew(STextBlock)
+					.Text(LOCTEXT("ServerPortLabel", "Port:"))
+					.Font(FAppStyle::GetFontStyle("NormalText"))
+				]
+				
+				+ SHorizontalBox::Slot()
+				.FillWidth(1.0f)
+				.VAlign(VAlign_Center)
+				[
+					SNew(STextBlock)
+					.Text(FText::AsNumber(Settings->Port))
+					.Font(FAppStyle::GetFontStyle("NormalText"))
+				]
+			]
+			
+			// Buttons
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 8, 0, 0)
+			.HAlign(HAlign_Center)
+			[
+				SNew(SUniformGridPanel)
+				.SlotPadding(FMargin(5.0f))
+				.MinDesiredSlotWidth(100.0f)
+				
+				// Start button
+				+ SUniformGridPanel::Slot(0, 0)
+				[
+					SNew(SButton)
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
+					.Text(LOCTEXT("StartServerButton", "Start Server"))
+					.IsEnabled_Lambda([this]() -> bool { return !IsServerRunning(); })
+					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OnStartServerClicked))
+				]
+				
+				// Stop button
+				+ SUniformGridPanel::Slot(1, 0)
+				[
+					SNew(SButton)
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
+					.Text(LOCTEXT("StopServerButton", "Stop Server"))
+					.IsEnabled_Lambda([this]() -> bool { return IsServerRunning(); })
+					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OnStopServerClicked))
+				]
+			]
+			
+			// Settings button
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 16, 0, 0)
+			.HAlign(HAlign_Center)
+			[
+				SNew(SButton)
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.Text(LOCTEXT("OpenSettingsButton", "Open Settings"))
+				.OnClicked_Lambda([this]() -> FReply {
+					if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+					{
+						SettingsModule->ShowViewer("Editor", "Plugins", "MCP Settings");
+					}
+					return FReply::Handled();
+				})
+			]
+		];
+}
+
+FReply FUnrealMCPModule::OnStartServerClicked()
+{
+	StartServer();
+	return FReply::Handled();
+}
+
+FReply FUnrealMCPModule::OnStopServerClicked()
+{
+	StopServer();
+	return FReply::Handled();
 }
 
 void FUnrealMCPModule::ToggleServer()

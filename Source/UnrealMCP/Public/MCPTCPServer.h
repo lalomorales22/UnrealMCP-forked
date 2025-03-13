@@ -7,6 +7,23 @@
 #include "Sockets.h"
 #include "SocketSubsystem.h"
 
+// Structure to track client connection information
+struct FMCPClientConnection
+{
+    FSocket* Socket;
+    FIPv4Endpoint Endpoint;
+    float TimeSinceLastActivity;
+    TArray<uint8> ReceiveBuffer;
+
+    FMCPClientConnection(FSocket* InSocket, const FIPv4Endpoint& InEndpoint)
+        : Socket(InSocket)
+        , Endpoint(InEndpoint)
+        , TimeSinceLastActivity(0.0f)
+    {
+        ReceiveBuffer.SetNumUninitialized(8192); // 8KB buffer
+    }
+};
+
 class UNREALMCP_API FMCPTCPServer
 {
 public:
@@ -21,29 +38,29 @@ private:
     bool Tick(float DeltaTime);
     void ProcessPendingConnections();
     void ProcessClientData();
-    void ProcessCommand(const FString& CommandJson);
+    void ProcessCommand(const FString& CommandJson, FSocket* ClientSocket);
     void SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>& Response);
-    void CheckClientTimeout(float DeltaTime);
-    void CleanupClientConnection();
+    void CheckClientTimeouts(float DeltaTime);
+    void CleanupClientConnection(FMCPClientConnection& ClientConnection);
+    void CleanupClientConnection(FSocket* ClientSocket);
+    void CleanupAllClientConnections();
     FString GetSafeSocketDescription(FSocket* Socket);
     
     // Connection handler
     bool HandleConnectionAccepted(FSocket* InSocket, const FIPv4Endpoint& Endpoint);
 
     // Command handlers
-    void HandleGetSceneInfo(const TSharedPtr<FJsonObject>& Params);
-    void HandleCreateObject(const TSharedPtr<FJsonObject>& Params);
-    void HandleModifyObject(const TSharedPtr<FJsonObject>& Params);
-    void HandleDeleteObject(const TSharedPtr<FJsonObject>& Params);
+    void HandleGetSceneInfo(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket);
+    void HandleCreateObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket);
+    void HandleModifyObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket);
+    void HandleDeleteObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket);
 
     FTcpListener* Listener;
-    FSocket* ClientSocket;
-    TArray<uint8> ReceiveBuffer;
+    TArray<FMCPClientConnection> ClientConnections;
     int32 Port;
     bool bRunning;
     FTSTicker::FDelegateHandle TickerHandle;
     float ClientTimeoutSeconds;
-    float TimeSinceLastClientActivity;
 
-    TMap<FString, TFunction<void(const TSharedPtr<FJsonObject>&)>> CommandHandlers;
+    TMap<FString, TFunction<void(const TSharedPtr<FJsonObject>&, FSocket*)>> CommandHandlers;
 }; 

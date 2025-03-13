@@ -1,20 +1,194 @@
-MCP Server Log - Started at 2025.03.12-18.09.19
-[2025.03.12-18.09.19][Warning] UnrealMCP Style registered
-[2025.03.12-18.09.19][Warning] Registering OnPostEngineInit delegate
-[2025.03.12-18.09.21][Warning] ExtendLevelEditorToolbar called - first time
-[2025.03.12-18.09.21][Warning] MCP Server button added to main toolbar
-[2025.03.12-18.09.21][Warning] MCP Server entry added to Window menu
-[2025.03.12-18.09.51][Warning] ToggleServer called - Server state: Not Running
-[2025.03.12-18.09.51][Warning] Starting server...
-[2025.03.12-18.09.51][Warning] Creating new server instance
-[2025.03.12-18.09.51][Warning] Starting MCP server on port 9876
-[2025.03.12-18.09.51][Log] MCP Server started on port 9876
-[2025.03.12-18.09.51][Warning] ToggleServer completed - Server state: Running
-[2025.03.12-18.09.56][Verbose] Connection attempt from 127.0.0.1:56538
-[2025.03.12-18.09.56][Log] MCP Client connected from 127.0.0.1:56538
-[2025.03.12-18.09.57][Verbose] Connection attempt from 127.0.0.1:56548
-[2025.03.12-18.09.57][Warning] Rejecting connection from 127.0.0.1:56548 - already have an active client
-[2025.03.12-18.10.43][Warning] Client timed out after 30.2 seconds of inactivity, disconnecting
-[2025.03.12-18.10.43][Log] Cleaning up client connection
-[2025.03.12-18.10.43][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-18.10.43][Log] MCP Client disconnected
+MCP Server Log - Started at 2025.03.12-18.39.45
+[2025.03.12-18.39.45][Warning] UnrealMCP Style registered
+[2025.03.12-18.39.45][Warning] Registering OnPostEngineInit delegate
+[2025.03.12-18.39.48][Warning] ExtendLevelEditorToolbar called - first time
+[2025.03.12-18.39.48][Warning] MCP Server button added to main toolbar
+[2025.03.12-18.39.48][Warning] MCP Server entry added to Window menu
+[2025.03.12-18.40.16][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-18.40.16][Warning] Starting server...
+[2025.03.12-18.40.16][Warning] Creating new server instance
+[2025.03.12-18.40.16][Warning] Starting MCP server on port 9876
+[2025.03.12-18.40.16][Log] MCP Server started on port 9876
+[2025.03.12-18.40.16][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-18.40.28][Verbose] Connection attempt from 127.0.0.1:59680
+[2025.03.12-18.40.28][Log] MCP Client connected from 127.0.0.1:59680 (Total clients: 1)
+[2025.03.12-18.40.28][Verbose] Connection attempt from 127.0.0.1:59687
+[2025.03.12-18.40.28][Log] MCP Client connected from 127.0.0.1:59687 (Total clients: 2)
+[2025.03.12-18.40.41][Verbose] Connection attempt from 127.0.0.1:59707
+[2025.03.12-18.40.41][Log] MCP Client connected from 127.0.0.1:59707 (Total clients: 3)
+[2025.03.12-18.40.41][Verbose] Client from 127.0.0.1:59707 has 40 bytes of pending data
+[2025.03.12-18.40.41][Verbose] Read 40 bytes from client 127.0.0.1:59707
+[2025.03.12-18.40.41][Verbose] Processing command: {"type": "get_scene_info", "params": {}}
+[2025.03.12-18.40.41][Log] Processing command: get_scene_info
+[2025.03.12-18.40.41][Log] Handling get_scene_info command
+[2025.03.12-18.40.41][Log] Sending get_scene_info response with 9 actors
+[2025.03.12-18.40.41][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"level": "ThirdPersonMap",
+		"actor_count": 9,
+		"actors": [
+			{
+				"name": "WorldInfo_0",
+				"type": "WorldSettings",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "Brush_0",
+				"type": "Brush",
+				"location": [ 230, 70, 130 ]
+			},
+			{
+				"name": "ThirdPersonExampleMap_C_0",
+				"type": "ThirdPersonMap_C",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "WorldDataLayers",
+				"type": "WorldDataLayers",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "DefaultPhysicsVolume_0",
+				"type": "DefaultPhysicsVolume",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "GameplayDebuggerPlayerManager_0",
+				"type": "GameplayDebuggerPlayerManager",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "ChaosDebugDrawActor",
+				"type": "Actor",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "WorldPartitionMiniMap_0",
+				"type": "WorldPartitionMiniMap",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "AbstractNavData-Default",
+				"type": "AbstractNavData",
+				"location": [ 0, 0, 0 ]
+			}
+		]
+	}
+}
+[2025.03.12-18.40.41][Verbose] Sent 1121/1121 bytes
+[2025.03.12-18.40.41][Log] Successfully sent complete response (1121 bytes)
+[2025.03.12-18.40.41][Log] get_scene_info response sent
+[2025.03.12-18.40.41][Log] Client connection from 127.0.0.1:59707 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.40.41][Log] Cleaning up client connection from 127.0.0.1:59707
+[2025.03.12-18.40.41][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.40.41][Verbose] Successfully destroyed client socket
+[2025.03.12-18.40.41][Log] MCP Client disconnected (Remaining clients: 2)
+[2025.03.12-18.40.59][Verbose] Connection attempt from 127.0.0.1:59748
+[2025.03.12-18.40.59][Log] MCP Client connected from 127.0.0.1:59748 (Total clients: 3)
+[2025.03.12-18.40.59][Verbose] Client from 127.0.0.1:59748 has 40 bytes of pending data
+[2025.03.12-18.40.59][Verbose] Read 40 bytes from client 127.0.0.1:59748
+[2025.03.12-18.40.59][Verbose] Processing command: {"type": "get_scene_info", "params": {}}
+[2025.03.12-18.40.59][Log] Processing command: get_scene_info
+[2025.03.12-18.40.59][Log] Handling get_scene_info command
+[2025.03.12-18.40.59][Log] Sending get_scene_info response with 9 actors
+[2025.03.12-18.40.59][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"level": "ThirdPersonMap",
+		"actor_count": 9,
+		"actors": [
+			{
+				"name": "WorldInfo_0",
+				"type": "WorldSettings",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "Brush_0",
+				"type": "Brush",
+				"location": [ 230, 70, 130 ]
+			},
+			{
+				"name": "ThirdPersonExampleMap_C_0",
+				"type": "ThirdPersonMap_C",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "WorldDataLayers",
+				"type": "WorldDataLayers",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "DefaultPhysicsVolume_0",
+				"type": "DefaultPhysicsVolume",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "GameplayDebuggerPlayerManager_0",
+				"type": "GameplayDebuggerPlayerManager",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "ChaosDebugDrawActor",
+				"type": "Actor",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "WorldPartitionMiniMap_0",
+				"type": "WorldPartitionMiniMap",
+				"location": [ 0, 0, 0 ]
+			},
+			{
+				"name": "AbstractNavData-Default",
+				"type": "AbstractNavData",
+				"location": [ 0, 0, 0 ]
+			}
+		]
+	}
+}
+[2025.03.12-18.40.59][Verbose] Sent 1121/1121 bytes
+[2025.03.12-18.40.59][Log] Successfully sent complete response (1121 bytes)
+[2025.03.12-18.40.59][Log] get_scene_info response sent
+[2025.03.12-18.40.59][Log] Client connection from 127.0.0.1:59748 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.40.59][Log] Cleaning up client connection from 127.0.0.1:59748
+[2025.03.12-18.40.59][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.40.59][Verbose] Successfully destroyed client socket
+[2025.03.12-18.40.59][Log] MCP Client disconnected (Remaining clients: 2)
+[2025.03.12-18.41.03][Verbose] Connection attempt from 127.0.0.1:59751
+[2025.03.12-18.41.03][Log] MCP Client connected from 127.0.0.1:59751 (Total clients: 3)
+[2025.03.12-18.41.03][Verbose] Client from 127.0.0.1:59751 has 78 bytes of pending data
+[2025.03.12-18.41.03][Verbose] Read 78 bytes from client 127.0.0.1:59751
+[2025.03.12-18.41.03][Verbose] Processing command: {"type": "create_object", "params": {"type": "Cube", "location": [0, 0, 100]}}
+[2025.03.12-18.41.03][Log] Processing command: create_object
+[2025.03.12-18.41.03][Warning] Unsupported actor type: Cube
+[2025.03.12-18.41.03][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Unsupported actor type: Cube"
+}
+[2025.03.12-18.41.03][Verbose] Sent 69/69 bytes
+[2025.03.12-18.41.03][Log] Successfully sent complete response (69 bytes)
+[2025.03.12-18.41.03][Log] Client connection from 127.0.0.1:59751 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.41.03][Log] Cleaning up client connection from 127.0.0.1:59751
+[2025.03.12-18.41.03][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.41.03][Verbose] Successfully destroyed client socket
+[2025.03.12-18.41.03][Log] MCP Client disconnected (Remaining clients: 2)
+[2025.03.12-18.41.05][Verbose] Connection attempt from 127.0.0.1:59758
+[2025.03.12-18.41.05][Log] MCP Client connected from 127.0.0.1:59758 (Total clients: 3)
+[2025.03.12-18.41.05][Verbose] Client from 127.0.0.1:59758 has 89 bytes of pending data
+[2025.03.12-18.41.05][Verbose] Read 89 bytes from client 127.0.0.1:59758
+[2025.03.12-18.41.05][Verbose] Processing command: {"type": "create_object", "params": {"type": "StaticMeshActor", "location": [0, 0, 100]}}
+[2025.03.12-18.41.05][Log] Processing command: create_object
+[2025.03.12-18.41.05][Log] Created StaticMeshActor at location (0.000000, 0.000000, 100.000000)
+[2025.03.12-18.41.05][Verbose] Preparing to send response: {
+	"status": "success",
+	"actor_name": "StaticMeshActor_UAID_C87F545D1F04835402_1246643255"
+}
+[2025.03.12-18.41.05][Verbose] Sent 96/96 bytes
+[2025.03.12-18.41.05][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-18.41.05][Log] Client connection from 127.0.0.1:59758 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.41.05][Log] Cleaning up client connection from 127.0.0.1:59758
+[2025.03.12-18.41.05][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.41.05][Verbose] Successfully destroyed client socket
+[2025.03.12-18.41.05][Log] MCP Client disconnected (Remaining clients: 2)

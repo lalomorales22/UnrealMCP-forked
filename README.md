@@ -40,7 +40,7 @@ Working on getting some installation instructions now.
 
 ## With Claude for Desktop
 You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry and make it look like so:
-```
+```json
 {
     "mcpServers": {
         "unreal": {
@@ -50,6 +50,7 @@ You will need to find your installation directory for claude for desktop. Find c
     }
 }
 ```
+IN THE COMMAND FIELD PUT YOUR PATH TO YOUR PLUGIN DIRECTORY POINTED TO THE SCRIPT: "run_unreal_mcp.bat"
 
 You can refer to this link for more info:
 https://modelcontextprotocol.io/quickstart/user

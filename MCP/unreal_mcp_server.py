@@ -1,11 +1,43 @@
 import json
 import socket
 import sys
+import os
 
-# Constants
-DEFAULT_PORT = 1337
-DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
+# Try to get the port from MCPConstants
+try:
+    # Default values in case we can't read from MCPConstants
+    DEFAULT_PORT = 1337
+    DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
+    
+    # Try to read the port from the C++ constants
+    plugin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    constants_path = os.path.join(plugin_dir, "Source", "UnrealMCP", "Public", "MCPConstants.h")
+    
+    if os.path.exists(constants_path):
+        with open(constants_path, 'r') as f:
+            constants_content = f.read()
+            
+            # Extract port from MCPConstants
+            port_match = constants_content.find("DEFAULT_PORT = ")
+            if port_match != -1:
+                port_line = constants_content[port_match:].split(';')[0]
+                DEFAULT_PORT = int(port_line.split('=')[1].strip())
+                
+            # Extract buffer size from MCPConstants
+            buffer_match = constants_content.find("DEFAULT_RECEIVE_BUFFER_SIZE = ")
+            if buffer_match != -1:
+                buffer_line = constants_content[buffer_match:].split(';')[0]
+                DEFAULT_BUFFER_SIZE = int(buffer_line.split('=')[1].strip())
+except Exception as e:
+    # If anything goes wrong, use the defaults
+    print(f"Warning: Could not read constants from MCPConstants.h: {e}", file=sys.stderr)
+    DEFAULT_PORT = 1337
+    DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
+
 DEFAULT_TIMEOUT = 10  # 10 second timeout
+
+print(f"Using port: {DEFAULT_PORT}", file=sys.stderr)
+print(f"Using buffer size: {DEFAULT_BUFFER_SIZE}", file=sys.stderr)
 
 try:
     from mcp.server.fastmcp import FastMCP, Context
@@ -64,7 +96,7 @@ def send_command(command_type, params=None):
                 
             return json.loads(response_data.decode('utf-8'))
     except ConnectionRefusedError:
-        print("Error: Could not connect to Unreal MCP server on localhost:1337.", file=sys.stderr)
+        print(f"Error: Could not connect to Unreal MCP server on localhost:{DEFAULT_PORT}.", file=sys.stderr)
         print("Make sure your Unreal Engine with MCP plugin is running.", file=sys.stderr)
         raise Exception("Failed to connect to Unreal MCP server: Connection refused")
     except socket.timeout:

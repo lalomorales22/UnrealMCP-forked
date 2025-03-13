@@ -4,104 +4,103 @@ This guide explains how to set up the Model Context Protocol (MCP) interface for
 
 ## Prerequisites
 
-1. Python installed on your system
+1. Python installed on your system (3.7 or newer)
 2. Claude Desktop application
-3. Unreal Engine with the MCP plugin running
+3. Unreal Engine with the UnrealMCP plugin enabled
 
 ## Quick Setup
 
-### Option 1: Standard Setup
-For a general setup that works with any Python environment:
+The setup process has been simplified to use a single setup script that handles all installation scenarios:
 
 ```
-Plugins\UnrealMCP\setup_unreal_mcp.bat
-```
-
-This script will:
-1. Ask which Python environment to use (system, Miniconda, or custom)
-2. Install the required `mcp` package in that environment
-3. Create a wrapper script to ensure the correct Python is used
-4. Generate a new Claude Desktop configuration file
-5. Offer to copy the configuration file to the Claude Desktop location
-
-### Option 2: Miniconda Setup (Recommended)
-If Claude Desktop is using Miniconda for other MCP servers (like Blender), use this setup:
-
-```
-Plugins\UnrealMCP\quick_setup_miniconda.bat
+Plugins\UnrealMCP\MCP\setup_unreal_mcp.bat
 ```
 
 This script will:
-1. Automatically use the same Python environment that Claude Desktop uses for Blender
-2. Install the required `mcp` package in that environment
-3. Create a Miniconda-specific wrapper script
-4. Generate a configuration file that matches your Blender setup
-5. Offer to copy the configuration file to the Claude Desktop location
 
-## Troubleshooting MCP Installation
+1. Detect available Python environments on your system (System Python, Miniconda/Anaconda, Claude Desktop environment)
+2. Let you choose which Python environment to use
+3. Install the required `mcp` package in the selected environment
+4. Create a single run script (`run_unreal_mcp.bat`) that uses the correct Python environment
+5. Create or update the Claude Desktop configuration file
 
-If you're having issues with the MCP package not being found, you can use the dedicated installation script:
+### Python Environment Options
 
-```
-Plugins\UnrealMCP\install_mcp.bat
-```
+The setup script supports several Python environment options:
 
-This will:
-1. Show which Python interpreter is being used
-2. Check if the MCP package is already installed
-3. Install the MCP package if needed
-4. Verify the installation was successful
+1. **System Python**: Uses the Python installation available in your system PATH
+2. **Miniconda/Anaconda**: Uses a Python environment from Miniconda/Anaconda (recommended if you use Claude Desktop with Blender)
+3. **Claude Desktop Environment**: Uses the Python environment that comes with Claude Desktop (if available)
+4. **Custom Python Path**: Allows you to specify a custom Python executable path
 
-**Important**: Make sure you run this script with the same Python interpreter that Claude Desktop will use.
+## Manual Configuration
 
-## Manual Setup Instructions
+If you need to manually configure the MCP interface:
 
-### 1. Install Required Python Packages
+### 1. Install Required Python Package
 
 ```
 python -m pip install mcp>=0.1.0
 ```
 
-### 2. Test Connection to Unreal Engine
+### 2. Create a Run Script
 
-Before configuring Claude Desktop, verify that your Unreal Engine MCP server is running and accessible:
+Create a batch file (`run_unreal_mcp.bat`) with the following content:
 
+```batch
+@echo off
+setlocal
+cd /d "%~dp0"
+python "%~dp0unreal_mcp_server.py"
 ```
-python Plugins\UnrealMCP\test_unreal_connection.py
-```
-
-This will test if your Unreal Engine C++ MCP server is running on port 1337 and responding to commands.
 
 ### 3. Configure Claude Desktop
 
-Copy the generated configuration file to:
+Create or update the Claude Desktop configuration file at:
 ```
-C:\Users\[YourUsername]\AppData\Roaming\Claude\claude_desktop_config.json
+%APPDATA%\Claude\claude_desktop_config.json
 ```
 
-Or update your existing configuration file to include:
+With the following content:
 ```json
 {
     "mcpServers": {
         "unreal": {
-            "command": "D:\\AISlop\\UnrealMCP_Dev\\Plugins\\UnrealMCP\\run_unreal_mcp_miniconda.bat",
+            "command": "C:\\Path\\To\\Your\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
             "args": []
         }
     }
 }
 ```
 
-Make sure the path points to the wrapper batch file created by the setup script.
+Replace the path with the actual path to your `run_unreal_mcp.bat` file.
 
-### 4. Verify Your Unreal C++ MCP Server
+## Troubleshooting
 
-Ensure your Unreal Engine C++ MCP server is:
-- Running and listening on port 1337
-- Accepting the commands defined in the Python script:
-  - `get_scene_info`
-  - `create_object`
-  - `modify_object`
-  - `delete_object`
+### Common Issues
+
+1. **"No module named 'mcp'"**
+   - The `mcp` package is not installed in the Python environment that Claude Desktop is using
+   - Solution: Run the setup script again and make sure to select the correct Python environment
+
+2. **Connection refused errors**
+   - The Unreal Engine MCP server is not running or not listening on port 1337
+   - Solution: Make sure your Unreal Engine is running with the MCP plugin enabled
+   - Check that the port setting in the MCP plugin matches the default (1337)
+
+3. **Claude Desktop can't start the MCP server**
+   - Check the logs at: `%APPDATA%\Claude\logs\mcp-server-unreal.log`
+   - Make sure the path in the configuration file is correct
+   - Verify that the wrapper batch file exists and points to the correct Python interpreter
+
+### Checking Logs
+
+Claude Desktop logs MCP server output to:
+```
+%APPDATA%\Claude\logs\mcp-server-unreal.log
+```
+
+Check this file for error messages if you're having trouble.
 
 ## Usage
 
@@ -113,56 +112,21 @@ Ensure your Unreal Engine C++ MCP server is:
    - "Modify the object named 'Cube_1' to have scale [2, 2, 2]"
    - "Delete the object named 'Cube_1'"
 
-## Troubleshooting
+## Available Commands
 
-### Common Issues
+The MCP interface supports the following commands:
 
-1. **"No module named 'mcp'"**
-   - The `mcp` package is not installed in the Python environment that Claude Desktop is using
-   - Solution: Run `Plugins\UnrealMCP\quick_setup_miniconda.bat` to use the same Python environment as Blender
-   - Alternatively, manually install with `python -m pip install mcp` in the correct environment
+- `get_scene_info`: Retrieve information about the current scene
+- `create_object`: Spawn a new object in the scene
+- `modify_object`: Change properties of an existing object
+- `delete_object`: Remove an object from the scene
 
-2. **"'run_unreal_mcp.bat' is not recognized as an internal or external command"**
-   - The wrapper batch file doesn't exist or the path is incorrect
-   - Solution: Run one of the setup scripts to create the wrapper file
-   - Make sure the path in the Claude Desktop configuration matches the actual location of the file
+## Testing the MCP Server Directly
 
-3. **Connection refused errors**
-   - The Unreal Engine C++ MCP server is not running or not listening on port 1337
-   - Solution: Make sure your Unreal Engine is running with the MCP plugin enabled
-
-4. **Claude Desktop can't start the MCP server**
-   - Check the logs at: `C:\Users\[YourUsername]\AppData\Roaming\Claude\logs\mcp-server-unreal.log`
-   - Make sure the path in the configuration file is correct
-   - Verify that the wrapper batch file exists and points to the correct Python interpreter
-
-5. **Invalid JSON responses**
-   - The Unreal Engine C++ MCP server is returning malformed JSON
-   - Check your C++ server implementation for formatting issues
-
-### Checking Logs
-
-Claude Desktop logs MCP server output to:
-```
-C:\Users\[YourUsername]\AppData\Roaming\Claude\logs\mcp-server-unreal.log
-```
-
-Check this file for error messages if you're having trouble.
-
-## Extending Functionality
-
-To add more tools to the MCP interface:
-
-1. Add new methods to the Unreal Engine C++ MCP server
-2. Add corresponding functions to the `unreal_mcp_server.py` script using the `@mcp.tool()` decorator
-3. Restart Claude Desktop to pick up the new tools
-
-## Advanced: Testing the MCP Server Directly
-
-You can test the MCP server directly without Claude Desktop:
+You can test the MCP server directly without Claude Desktop by running:
 
 ```
-Plugins\UnrealMCP\run_unreal_mcp_miniconda.bat
+Plugins\UnrealMCP\MCP\run_unreal_mcp.bat
 ```
 
 This will start the MCP server using the correct Python interpreter and listen for connections from Claude Desktop. 

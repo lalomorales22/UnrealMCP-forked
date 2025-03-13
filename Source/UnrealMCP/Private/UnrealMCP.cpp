@@ -3,6 +3,7 @@
 #include "UnrealMCP.h"
 #include "MCPTCPServer.h"
 #include "MCPSettings.h"
+#include "MCPConstants.h"
 #include "LevelEditor.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "Styling/SlateStyleRegistry.h"
@@ -36,7 +37,8 @@ public:
 		const FVector2D Icon20x20(20.0f, 20.0f);
 		const FVector2D Icon40x40(40.0f, 40.0f);
 
-		SetContentRoot(IPluginManager::Get().FindPlugin("UnrealMCP")->GetBaseDir() / TEXT("Resources"));
+		// Use path constants instead of finding the plugin each time
+		SetContentRoot(MCPConstants::PluginResourcesPath);
 
 		// Register icon
 		FSlateImageBrush* MCPIconBrush = new FSlateImageBrush(RootToContentDir(TEXT("Icon128.png")), Icon16x16);
@@ -79,12 +81,14 @@ TSharedPtr<FMCPPluginStyle> FMCPPluginStyle::Instance = nullptr;
 
 void FUnrealMCPModule::StartupModule()
 {
+	// Initialize path constants first
+	MCPConstants::InitializePathConstants();
+	
 	// Initialize our custom log category
 	MCP_LOG_WARNING("UnrealMCP Plugin is starting up");
 	
-	// Initialize file logger
-	FString PluginDir = IPluginManager::Get().FindPlugin("UnrealMCP")->GetBaseDir();
-	FString LogFilePath = FPaths::Combine(PluginDir, TEXT("Logs"), TEXT("MCPServer.log"));
+	// Initialize file logger - now using path constants
+	FString LogFilePath = FPaths::Combine(MCPConstants::PluginLogsPath, TEXT("MCPServer.log"));
 	FMCPFileLogger::Get().Initialize(LogFilePath);
 	
 	// Register style set

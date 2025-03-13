@@ -23,4 +23,16 @@ namespace MCPConstants
     
     // Performance constants
     constexpr int32 MAX_ACTORS_IN_SCENE_INFO = 100;
+    
+    // Path constants - use these instead of hardcoded paths
+    // These will be initialized at runtime in the module startup
+    extern FString ProjectRootPath;         // Root path of the project
+    extern FString PluginRootPath;          // Root path of the MCP plugin
+    extern FString PluginContentPath;       // Path to the plugin's content directory
+    extern FString PluginResourcesPath;     // Path to the plugin's resources directory
+    extern FString PluginLogsPath;          // Path to the plugin's logs directory
+    extern FString PluginMCPScriptsPath;    // Path to the plugin's MCP scripts directory
+    
+    // Function to initialize all path variables at runtime
+    void InitializePathConstants();
 } 

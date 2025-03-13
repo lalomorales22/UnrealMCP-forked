@@ -2,27 +2,22 @@
 setlocal enabledelayedexpansion
 
 echo ========================================================
-echo Unreal Engine MCP Setup
+echo Unreal MCP - Python Environment Setup
 echo ========================================================
 echo.
 
-:: Get the directory where this script is located
+REM Get the directory where this script is located
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
 
-:: Set paths using MCPConstants
-set "PLUGIN_ROOT=%SCRIPT_DIR%\.."
-set "MCP_SCRIPTS_DIR=%SCRIPT_DIR%"
-set "CLAUDE_CONFIG_DIR=%APPDATA%\Claude"
-set "CLAUDE_CONFIG_FILE=%CLAUDE_CONFIG_DIR%\claude_desktop_config.json"
+REM Set paths for local environment
+set "ENV_DIR=%SCRIPT_DIR%\python_env"
+set "MODULES_DIR=%SCRIPT_DIR%\python_modules"
 
-:: Create Claude config directory if it doesn't exist
-if not exist "%CLAUDE_CONFIG_DIR%" (
-    mkdir "%CLAUDE_CONFIG_DIR%"
-    echo Created Claude configuration directory.
-)
+echo Setting up Python environment in: %ENV_DIR%
+echo.
 
-:: Check if Python is installed
+REM Check if Python is installed
 where python >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo ERROR: Python is not installed or not in your PATH.
@@ -30,222 +25,134 @@ if %ERRORLEVEL% neq 0 (
     goto :end
 )
 
-:: Detect Python environments
-echo Detecting Python environments...
+REM Get Python version and path
+for /f "tokens=*" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
+for /f "tokens=*" %%i in ('where python') do set SYSTEM_PYTHON=%%i
+echo Detected %PYTHON_VERSION% at %SYSTEM_PYTHON%
 echo.
 
-:: Check for system Python
-set "SYSTEM_PYTHON="
-for /f "tokens=*" %%i in ('where python') do (
-    set "SYSTEM_PYTHON=%%i"
-    goto :found_system_python
-)
-:found_system_python
-
-:: Check for Miniconda/Anaconda
-set "CONDA_PATH="
-if exist "%LOCALAPPDATA%\miniconda3\Scripts\activate.bat" (
-    set "CONDA_PATH=%LOCALAPPDATA%\miniconda3"
-) else if exist "%USERPROFILE%\miniconda3\Scripts\activate.bat" (
-    set "CONDA_PATH=%USERPROFILE%\miniconda3"
-) else if exist "%LOCALAPPDATA%\Continuum\miniconda3\Scripts\activate.bat" (
-    set "CONDA_PATH=%LOCALAPPDATA%\Continuum\miniconda3"
-) else if exist "%LOCALAPPDATA%\Anaconda3\Scripts\activate.bat" (
-    set "CONDA_PATH=%LOCALAPPDATA%\Anaconda3"
-) else if exist "%USERPROFILE%\Anaconda3\Scripts\activate.bat" (
-    set "CONDA_PATH=%USERPROFILE%\Anaconda3"
+REM Create directories if they don't exist
+if not exist "%ENV_DIR%" (
+    echo Creating Python environment directory...
+    mkdir "%ENV_DIR%"
 )
 
-:: Check for Claude Desktop's Python environment
-set "CLAUDE_ENV_PATH="
-if exist "%APPDATA%\Claude\claude-env" (
-    set "CLAUDE_ENV_PATH=%APPDATA%\Claude\claude-env"
+if not exist "%MODULES_DIR%" (
+    echo Creating Python modules directory...
+    mkdir "%MODULES_DIR%"
 )
 
-:: Display detected environments
-echo Available Python environments:
-echo.
-echo 1. System Python
-if not "%SYSTEM_PYTHON%"=="" (
-    echo    Path: %SYSTEM_PYTHON%
+REM Check if virtualenv is installed
+python -c "import virtualenv" >nul 2>&1
+if %ERRORLEVEL% neq 0 (
+    echo Installing virtualenv...
+    python -m pip install virtualenv
+)
+
+REM Create virtual environment if it doesn't exist
+if not exist "%ENV_DIR%\Scripts\python.exe" (
+    echo Creating virtual environment...
+    python -m virtualenv "%ENV_DIR%"
 ) else (
-    echo    Not found
+    echo Virtual environment already exists.
 )
+
+REM Activate the virtual environment and install packages
 echo.
+echo Activating virtual environment and installing packages...
+call "%ENV_DIR%\Scripts\activate.bat"
 
-echo 2. Miniconda/Anaconda
-if not "%CONDA_PATH%"=="" (
-    echo    Path: %CONDA_PATH%
-) else (
-    echo    Not found
-)
-echo.
-
-echo 3. Claude Desktop Environment
-if not "%CLAUDE_ENV_PATH%"=="" (
-    echo    Path: %CLAUDE_ENV_PATH%
-) else (
-    echo    Not found
-)
-echo.
-
-:: Ask user which environment to use
-echo Which Python environment would you like to use?
-echo 1. System Python
-echo 2. Miniconda/Anaconda (recommended if you use Claude Desktop with Blender)
-echo 3. Claude Desktop Environment (if available)
-echo 4. Custom Python path
-set /p ENV_CHOICE="Enter choice (1-4): "
-
-set "PYTHON_PATH="
-set "PYTHON_ACTIVATE="
-set "ENV_NAME="
-
-if "%ENV_CHOICE%"=="1" (
-    set "PYTHON_PATH=%SYSTEM_PYTHON%"
-    set "ENV_TYPE=system"
-) else if "%ENV_CHOICE%"=="2" (
-    if "%CONDA_PATH%"=="" (
-        echo Miniconda/Anaconda not found.
-        goto :end
-    )
-    
-    echo.
-    echo Available Conda environments:
-    call "%CONDA_PATH%\Scripts\conda.exe" env list
-    echo.
-    set /p ENV_NAME="Enter environment name (or press Enter for base): "
-    if "%ENV_NAME%"=="" set "ENV_NAME=base"
-    
-    set "PYTHON_ACTIVATE=call "%CONDA_PATH%\Scripts\activate.bat" %ENV_NAME% &&"
-    set "PYTHON_PATH=%CONDA_PATH%\python.exe"
-    set "ENV_TYPE=conda"
-) else if "%ENV_CHOICE%"=="3" (
-    if "%CLAUDE_ENV_PATH%"=="" (
-        echo Claude Desktop environment not found.
-        goto :end
-    )
-    
-    set "PYTHON_PATH=%CLAUDE_ENV_PATH%\python.exe"
-    set "ENV_TYPE=claude"
-) else if "%ENV_CHOICE%"=="4" (
-    set /p PYTHON_PATH="Enter full path to Python executable: "
-    if not exist "%PYTHON_PATH%" (
-        echo The specified Python path does not exist.
-        goto :end
-    )
-    set "ENV_TYPE=custom"
-) else (
-    echo Invalid choice.
+REM Check if activation was successful
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: Failed to activate virtual environment.
     goto :end
 )
 
-echo.
+REM Install MCP package in the virtual environment
 echo Installing MCP package...
-echo.
+python -m pip install mcp>=0.1.0
 
-:: Install MCP package
-if "%ENV_TYPE%"=="conda" (
-    %PYTHON_ACTIVATE% python -m pip install mcp>=0.1.0
-) else (
-    "%PYTHON_PATH%" -m pip install mcp>=0.1.0
-)
+REM Also install to modules directory as a backup
+echo Installing MCP package to modules directory as backup...
+python -m pip install mcp>=0.1.0 -t "%MODULES_DIR%"
 
-:: Verify installation
+REM Verify installation
 echo.
 echo Verifying MCP installation...
-echo.
+python -c "import mcp; print(f'MCP package installed successfully. Version: {getattr(mcp, \"__version__\", \"unknown\")}')"
 
-if "%ENV_TYPE%"=="conda" (
-    %PYTHON_ACTIVATE% python -c "import mcp; print(f'MCP version {mcp.__version__} installed successfully')"
-) else (
-    "%PYTHON_PATH%" -c "import mcp; print(f'MCP version {mcp.__version__} installed successfully')"
+REM Create a configuration file for Claude Desktop
+set "CLAUDE_CONFIG_DIR=%APPDATA%\Claude"
+set "CLAUDE_CONFIG_FILE=%CLAUDE_CONFIG_DIR%\claude_desktop_config.json"
+
+REM Create Claude config directory if it doesn't exist
+if not exist "%CLAUDE_CONFIG_DIR%" (
+    mkdir "%CLAUDE_CONFIG_DIR%"
+    echo Created Claude configuration directory.
 )
 
-if %ERRORLEVEL% neq 0 (
-    echo ERROR: Failed to install MCP package.
-    goto :end
-)
-
-:: Create run script
-echo.
-echo Creating run script...
-echo.
-
-(
-    echo @echo off
-    echo setlocal
-    echo.
-    if "%ENV_TYPE%"=="conda" (
-        echo call "%CONDA_PATH%\Scripts\activate.bat" %ENV_NAME%
-    )
-    echo cd /d "%SCRIPT_DIR%"
-    if "%ENV_TYPE%"=="conda" (
-        echo python "%SCRIPT_DIR%\unreal_mcp_server.py"
-    ) else (
-        echo "%PYTHON_PATH%" "%SCRIPT_DIR%\unreal_mcp_server.py"
-    )
-) > "%SCRIPT_DIR%\run_unreal_mcp.bat"
-
-echo Created run script: %SCRIPT_DIR%\run_unreal_mcp.bat
-
-:: Create Claude Desktop configuration
 echo.
 echo Creating Claude Desktop configuration...
+set "PYTHON_PATH=%ENV_DIR%\Scripts\python.exe"
+set "PYTHON_PATH_JSON=%PYTHON_PATH:\=\\%"
+
+echo {> "%CLAUDE_CONFIG_FILE%"
+echo   "tools": {>> "%CLAUDE_CONFIG_FILE%"
+echo     "unreal": {>> "%CLAUDE_CONFIG_FILE%"
+echo       "pythonPath": "%PYTHON_PATH_JSON%",>> "%CLAUDE_CONFIG_FILE%"
+echo       "connection": {>> "%CLAUDE_CONFIG_FILE%"
+echo         "type": "local",>> "%CLAUDE_CONFIG_FILE%"
+echo         "port": 1337>> "%CLAUDE_CONFIG_FILE%"
+echo       }>> "%CLAUDE_CONFIG_FILE%"
+echo     }>> "%CLAUDE_CONFIG_FILE%"
+echo   }>> "%CLAUDE_CONFIG_FILE%"
+echo }>> "%CLAUDE_CONFIG_FILE%"
+
+echo Claude Desktop configuration created at: %CLAUDE_CONFIG_FILE%
+
+REM Create the run script
+echo Creating run script...
+(
+echo @echo off
+echo setlocal
 echo.
-
-:: Check if config file already exists
-set "CONFIG_EXISTS="
-if exist "%CLAUDE_CONFIG_FILE%" set "CONFIG_EXISTS=1"
-
-:: Create or update config
-if "%CONFIG_EXISTS%"=="1" (
-    echo Claude Desktop configuration already exists.
-    set /p UPDATE_CONFIG="Would you like to update it? (y/n): "
-    if /i not "%UPDATE_CONFIG%"=="y" goto :skip_config
-    
-    :: Backup existing config
-    copy "%CLAUDE_CONFIG_FILE%" "%CLAUDE_CONFIG_FILE%.bak"
-    echo Backed up existing configuration to %CLAUDE_CONFIG_FILE%.bak
-) else (
-    :: Create new config
-    (
-        echo {
-        echo     "mcpServers": {
-        echo         "unreal": {
-        echo             "command": "%SCRIPT_DIR:\=\\%\\run_unreal_mcp.bat",
-        echo             "args": []
-        echo         }
-        echo     }
-        echo }
-    ) > "%CLAUDE_CONFIG_FILE%"
-    
-    echo Created new Claude Desktop configuration.
-    goto :config_done
-)
-
-:: Update existing config
-powershell -Command "$config = Get-Content -Raw '%CLAUDE_CONFIG_FILE%' | ConvertFrom-Json; if (-not $config.mcpServers) { $config | Add-Member -MemberType NoteProperty -Name 'mcpServers' -Value @{} }; $config.mcpServers.unreal = @{ command='%SCRIPT_DIR:\=\\%\\run_unreal_mcp.bat'; args=@() }; $config | ConvertTo-Json -Depth 10 | Set-Content '%CLAUDE_CONFIG_FILE%'"
-
-echo Updated Claude Desktop configuration.
-
-:config_done
-:skip_config
+echo REM Get the directory where this script is located
+echo set "SCRIPT_DIR=%%~dp0"
+echo set "SCRIPT_DIR=%%SCRIPT_DIR:~0,-1%%"
+echo.
+echo REM Set paths for local environment
+echo set "ENV_DIR=%%SCRIPT_DIR%%\python_env"
+echo set "PYTHON_PATH=%%ENV_DIR%%\Scripts\python.exe"
+echo.
+echo REM Check if Python environment exists
+echo if not exist "%%PYTHON_PATH%%" (
+echo     echo ERROR: Python environment not found. Please run setup_unreal_mcp.bat first. ^>^&2
+echo     goto :end
+echo )
+echo.
+echo REM Activate the virtual environment silently
+echo call "%%ENV_DIR%%\Scripts\activate.bat" ^>nul 2^>^&1
+echo.
+echo REM Log start message to stderr
+echo echo Starting Unreal MCP bridge... ^>^&2
+echo.
+echo REM Run the Python bridge script
+echo python "%%SCRIPT_DIR%%\unreal_mcp_bridge.py" %%*
+echo.
+echo :end
+) > "%SCRIPT_DIR%\run_unreal_mcp.bat"
 
 echo.
 echo ========================================================
-echo Setup Complete!
+echo Setup complete!
+echo.
+echo To use with Claude Desktop:
+echo 1. Run run_unreal_mcp.bat to start the MCP bridge
+echo 2. Open Claude Desktop and it should automatically use the correct configuration
 echo ========================================================
 echo.
-echo To use the Unreal MCP with Claude Desktop:
-echo.
-echo 1. Start your Unreal Engine project with the MCP plugin enabled
-echo 2. Launch Claude Desktop
-echo 3. Claude should now be able to control Unreal Engine
-echo.
-echo If you encounter any issues, check the logs at:
-echo %APPDATA%\Claude\logs\mcp-server-unreal.log
-echo.
+echo Press any key to exit...
+pause > nul
 
 :end
-pause 
+deactivate 

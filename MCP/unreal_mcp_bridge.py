@@ -1,7 +1,25 @@
+"""
+Bridge module connecting Unreal Engine to MCP (Model Context Protocol).
+
+This module serves as a bridge between the Unreal Engine MCP plugin and
+the MCP server provided by the 'mcp' Python package. It handles the communication
+between Claude for Desktop and Unreal Engine through the MCP protocol.
+
+Requirements:
+    - Python 3.7+
+    - MCP package (pip install mcp>=0.1.0)
+    - Running Unreal Engine with the UnrealMCP plugin enabled
+
+The bridge connects to the Unreal Engine plugin (which acts as the actual MCP server)
+and exposes MCP functionality to Claude for Desktop. This allows Claude to interact
+with Unreal Engine through natural language commands.
+"""
+
 import json
 import socket
 import sys
 import os
+import importlib.util
 
 # Try to get the port from MCPConstants
 try:
@@ -39,11 +57,30 @@ DEFAULT_TIMEOUT = 10  # 10 second timeout
 print(f"Using port: {DEFAULT_PORT}", file=sys.stderr)
 print(f"Using buffer size: {DEFAULT_BUFFER_SIZE}", file=sys.stderr)
 
+# Check for local python_modules directory first
+local_modules_path = os.path.join(os.path.dirname(__file__), "python_modules")
+if os.path.exists(local_modules_path):
+    print(f"Found local python_modules directory: {local_modules_path}", file=sys.stderr)
+    sys.path.insert(0, local_modules_path)
+    print(f"Added local python_modules to sys.path", file=sys.stderr)
+
+# Try to import MCP
+mcp_spec = importlib.util.find_spec("mcp")
+if mcp_spec is None:
+    print("Error: The 'mcp' package is not installed.", file=sys.stderr)
+    print("Please install it using one of the following methods:", file=sys.stderr)
+    print("1. Run setup_unreal_mcp.bat to install it globally", file=sys.stderr)
+    print("2. Run: pip install mcp", file=sys.stderr)
+    print("3. Run: pip install mcp -t ./python_modules", file=sys.stderr)
+    sys.exit(1)
+
 try:
     from mcp.server.fastmcp import FastMCP, Context
-except ImportError:
-    print("Error: The 'mcp' package is not installed.", file=sys.stderr)
-    print("Please install it using: pip install mcp", file=sys.stderr)
+except ImportError as e:
+    print(f"Error importing from mcp package: {e}", file=sys.stderr)
+    print("The mcp package is installed but there was an error importing from it.", file=sys.stderr)
+    print("This could be due to a version mismatch or incomplete installation.", file=sys.stderr)
+    print("Please try reinstalling the package using: pip install --upgrade mcp", file=sys.stderr)
     sys.exit(1)
 
 # Initialize the MCP server
@@ -242,10 +279,19 @@ def execute_python(ctx: Context, code: str = None, file: str = None) -> str:
     except Exception as e:
         return f"Error executing Python: {str(e)}"
 
-if __name__ == "__main__":
-    print("Starting Unreal MCP server...", file=sys.stderr)
+def main():
+    """Main entry point for the Unreal MCP bridge to the MCP server.
+    
+    This script acts as a bridge between Unreal Engine and the MCP server.
+    It connects to the Unreal Engine plugin and forwards commands to the
+    actual MCP server, which is provided by the 'mcp' Python package.
+    """
+    print("Starting Unreal MCP bridge...", file=sys.stderr)
     try:
-        mcp.run()  # Start the MCP server
+        mcp.run()  # Start the MCP bridge to connect to the server
     except Exception as e:
-        print(f"Error starting MCP server: {str(e)}", file=sys.stderr)
-        sys.exit(1) 
+        print(f"Error starting MCP bridge: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main() 

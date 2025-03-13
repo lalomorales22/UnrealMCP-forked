@@ -1,6 +1,27 @@
 @echo off
-REM This wrapper script ensures the correct Python interpreter is used for the MCP server
-REM It will be updated by setup_unreal_mcp.bat when run
+setlocal
 
-REM Default to system Python if not configured
-python "%~dp0unreal_mcp_server.py" %* 
+REM Get the directory where this script is located
+set "SCRIPT_DIR=%~dp0"
+set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
+
+REM Set paths for local environment
+set "ENV_DIR=%SCRIPT_DIR%\python_env"
+set "PYTHON_PATH=%ENV_DIR%\Scripts\python.exe"
+
+REM Check if Python environment exists
+if not exist "%PYTHON_PATH%" (
+    echo ERROR: Python environment not found. Please run setup_unreal_mcp.bat first. >&2
+    goto :end
+)
+
+REM Activate the virtual environment silently
+call "%ENV_DIR%\Scripts\activate.bat" >nul 2>&1
+
+REM Log start message to stderr
+echo Starting Unreal MCP bridge... >&2
+
+REM Run the Python bridge script, keeping stdout clean for MCP
+python "%SCRIPT_DIR%\unreal_mcp_bridge.py" %*
+
+:end

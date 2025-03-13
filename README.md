@@ -53,8 +53,7 @@ The TCP server can be started/stopped from here.
 Check the output log under log filter LogMCP
 
 Once the server is confirmed up and running from the editor.
-Open Claude for Desktop, ensure that the tools have successfully enabled
-Ask Claude to work in unreal.
+Open Claude for Desktop, ensure that the tools have successfully enabled, ask Claude to work in unreal.
 
 Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python.
 Claude makes a lot of errors with unreal python as I believe there aren't a ton of examples for it, but let it run and it will usually figure things out.

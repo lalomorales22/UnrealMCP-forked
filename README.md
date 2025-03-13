@@ -34,18 +34,31 @@ Working on getting some installation instructions now.
    ```
 2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
 3. Open your project and enable the plugin in Edit > Plugins > Integration > UnrealMCP
+4. Enable Python plugins in Unreal
 
 ## With Claude for Desktop
-You will need to find your installation directory for claude for desktop.
-
+You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry like so:
 "unreal": {
             "command": "Path to plugin \\UnrealMCP\\MCP\\run_unreal_mcp_miniconda.bat",
             "args": []
         }
 
+On my Windows PC the path is:
+C:\Users\USERNAME\AppData\Roaming\Claude
+
 ## Usage
 ### In Unreal Editor
-Once the plugin is enabled, you'll find MCP controls in the editor toolbar. The TCP server can be started/stopped from here.
+Once the plugin is enabled, you'll find MCP controls in the editor toolbar. 
+The TCP server can be started/stopped from here.
+Check the output log under log filter LogMCP
+
+Once the server is confirmed up and running from the editor.
+Open Claude for Desktop, ensure that the tools have successfully enabled
+Ask Claude to work in unreal.
+
+Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python.
+Claude makes a lot of errors with unreal python as I believe there aren't a ton of examples for it, but let it run and it will usually figure things out.
+I would really like to improve this aspect of how it works but it's low hanging fruit for adding functionality into unreal.
 
 ### Client-Side Integration
 Use the provided Python scripts in the `MCP` directory to connect to and control your Unreal Engine instance:

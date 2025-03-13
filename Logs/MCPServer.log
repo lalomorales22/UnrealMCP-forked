@@ -192,3 +192,452 @@ MCP Server Log - Started at 2025.03.12-18.39.45
 [2025.03.12-18.41.05][Verbose] Closing client socket with description: FTcpListener client
 [2025.03.12-18.41.05][Verbose] Successfully destroyed client socket
 [2025.03.12-18.41.05][Log] MCP Client disconnected (Remaining clients: 2)
+[2025.03.12-18.44.44][Warning] ToggleServer called - Server state: Running
+[2025.03.12-18.44.44][Warning] Stopping server...
+[2025.03.12-18.44.44][Log] Cleaning up all client connections (2 total)
+[2025.03.12-18.44.44][Log] Cleaning up client connection from 127.0.0.1:59680
+[2025.03.12-18.44.44][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.44.44][Verbose] Successfully destroyed client socket
+[2025.03.12-18.44.44][Log] MCP Client disconnected (Remaining clients: 1)
+[2025.03.12-18.44.44][Log] Cleaning up client connection from 127.0.0.1:59687
+[2025.03.12-18.44.44][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.44.44][Verbose] Successfully destroyed client socket
+[2025.03.12-18.44.44][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.44.45][Log] MCP Server stopped
+[2025.03.12-18.44.45][Log] Cleaning up all client connections (0 total)
+[2025.03.12-18.44.45][Log] MCP Server stopped
+[2025.03.12-18.44.45][Log] MCP Server stopped
+[2025.03.12-18.44.45][Warning] ToggleServer completed - Server state: Not Running
+[2025.03.12-18.44.48][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-18.44.48][Warning] Starting server...
+[2025.03.12-18.44.48][Warning] Creating new server instance
+[2025.03.12-18.44.48][Warning] Starting MCP server on port 9876
+[2025.03.12-18.44.48][Log] MCP Server started on port 9876
+[2025.03.12-18.44.48][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-18.45.00][Verbose] Connection attempt from 127.0.0.1:60181
+[2025.03.12-18.45.00][Log] MCP Client connected from 127.0.0.1:60181 (Total clients: 1)
+[2025.03.12-18.45.00][Verbose] Client from 127.0.0.1:60181 has 78 bytes of pending data
+[2025.03.12-18.45.00][Verbose] Read 78 bytes from client 127.0.0.1:60181
+[2025.03.12-18.45.00][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 0, 100]}}
+[2025.03.12-18.45.00][Log] Processing command: create_object
+[2025.03.12-18.45.00][Log] Created Cube at location (0.000000, 0.000000, 100.000000)
+[2025.03.12-18.45.00][Log] Set cube mesh
+[2025.03.12-18.45.00][Verbose] Preparing to send response: {
+	"status": "success",
+	"actor_name": "StaticMeshActor_UAID_C87F545D1F04835402_1481717256"
+}
+[2025.03.12-18.45.00][Verbose] Sent 96/96 bytes
+[2025.03.12-18.45.00][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-18.45.01][Log] Client connection from 127.0.0.1:60181 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.45.01][Log] Cleaning up client connection from 127.0.0.1:60181
+[2025.03.12-18.45.01][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.45.01][Verbose] Successfully destroyed client socket
+[2025.03.12-18.45.01][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.45.02][Verbose] Connection attempt from 127.0.0.1:60184
+[2025.03.12-18.45.02][Log] MCP Client connected from 127.0.0.1:60184 (Total clients: 1)
+[2025.03.12-18.45.03][Verbose] Client from 127.0.0.1:60184 has 78 bytes of pending data
+[2025.03.12-18.45.03][Verbose] Read 78 bytes from client 127.0.0.1:60184
+[2025.03.12-18.45.03][Verbose] Processing command: {"type": "create_object", "params": {"type": "Cube", "location": [0, 0, 100]}}
+[2025.03.12-18.45.03][Log] Processing command: create_object
+[2025.03.12-18.45.03][Log] Created Cube at location (0.000000, 0.000000, 100.000000)
+[2025.03.12-18.45.03][Log] Set cube mesh
+[2025.03.12-18.45.03][Verbose] Preparing to send response: {
+	"status": "success",
+	"actor_name": "StaticMeshActor_UAID_C87F545D1F04835402_1484051257"
+}
+[2025.03.12-18.45.03][Verbose] Sent 96/96 bytes
+[2025.03.12-18.45.03][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-18.45.03][Log] Client connection from 127.0.0.1:60184 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.45.03][Log] Cleaning up client connection from 127.0.0.1:60184
+[2025.03.12-18.45.03][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.45.03][Verbose] Successfully destroyed client socket
+[2025.03.12-18.45.03][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.45.05][Verbose] Connection attempt from 127.0.0.1:60186
+[2025.03.12-18.45.05][Log] MCP Client connected from 127.0.0.1:60186 (Total clients: 1)
+[2025.03.12-18.45.05][Verbose] Client from 127.0.0.1:60186 has 84 bytes of pending data
+[2025.03.12-18.45.05][Verbose] Read 84 bytes from client 127.0.0.1:60186
+[2025.03.12-18.45.05][Verbose] Processing command: {"type": "create_object", "params": {"type": "StaticMesh", "location": [0, 0, 100]}}
+[2025.03.12-18.45.05][Log] Processing command: create_object
+[2025.03.12-18.45.05][Warning] Unsupported actor type: StaticMesh
+[2025.03.12-18.45.05][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Unsupported actor type: StaticMesh"
+}
+[2025.03.12-18.45.05][Verbose] Sent 75/75 bytes
+[2025.03.12-18.45.05][Log] Successfully sent complete response (75 bytes)
+[2025.03.12-18.45.05][Log] Client connection from 127.0.0.1:60186 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.45.05][Log] Cleaning up client connection from 127.0.0.1:60186
+[2025.03.12-18.45.05][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.45.05][Verbose] Successfully destroyed client socket
+[2025.03.12-18.45.05][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.01][Verbose] Connection attempt from 127.0.0.1:60397
+[2025.03.12-18.47.01][Log] MCP Client connected from 127.0.0.1:60397 (Total clients: 1)
+[2025.03.12-18.47.01][Verbose] Client from 127.0.0.1:60397 has 81 bytes of pending data
+[2025.03.12-18.47.01][Verbose] Read 81 bytes from client 127.0.0.1:60397
+[2025.03.12-18.47.01][Verbose] Processing command: {"type": "create_object", "params": {"type": "BP_Cube", "location": [0, 0, 100]}}
+[2025.03.12-18.47.01][Log] Processing command: create_object
+[2025.03.12-18.47.01][Warning] Unsupported actor type: BP_Cube
+[2025.03.12-18.47.01][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Unsupported actor type: BP_Cube"
+}
+[2025.03.12-18.47.01][Verbose] Sent 72/72 bytes
+[2025.03.12-18.47.01][Log] Successfully sent complete response (72 bytes)
+[2025.03.12-18.47.01][Log] Client connection from 127.0.0.1:60397 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.01][Log] Cleaning up client connection from 127.0.0.1:60397
+[2025.03.12-18.47.01][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.01][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.01][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.03][Verbose] Connection attempt from 127.0.0.1:60399
+[2025.03.12-18.47.03][Log] MCP Client connected from 127.0.0.1:60399 (Total clients: 1)
+[2025.03.12-18.47.03][Verbose] Client from 127.0.0.1:60399 has 79 bytes of pending data
+[2025.03.12-18.47.03][Verbose] Read 79 bytes from client 127.0.0.1:60399
+[2025.03.12-18.47.03][Verbose] Processing command: {"type": "create_object", "params": {"type": "Actor", "location": [0, 0, 100]}}
+[2025.03.12-18.47.03][Log] Processing command: create_object
+[2025.03.12-18.47.03][Warning] Unsupported actor type: Actor
+[2025.03.12-18.47.03][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Unsupported actor type: Actor"
+}
+[2025.03.12-18.47.03][Verbose] Sent 70/70 bytes
+[2025.03.12-18.47.03][Log] Successfully sent complete response (70 bytes)
+[2025.03.12-18.47.04][Log] Client connection from 127.0.0.1:60399 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.04][Log] Cleaning up client connection from 127.0.0.1:60399
+[2025.03.12-18.47.04][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.04][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.04][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.06][Verbose] Connection attempt from 127.0.0.1:60402
+[2025.03.12-18.47.06][Log] MCP Client connected from 127.0.0.1:60402 (Total clients: 1)
+[2025.03.12-18.47.06][Verbose] Client from 127.0.0.1:60402 has 77 bytes of pending data
+[2025.03.12-18.47.06][Verbose] Read 77 bytes from client 127.0.0.1:60402
+[2025.03.12-18.47.06][Verbose] Processing command: {"type": "create_object", "params": {"type": "Box", "location": [0, 0, 100]}}
+[2025.03.12-18.47.06][Log] Processing command: create_object
+[2025.03.12-18.47.06][Warning] Unsupported actor type: Box
+[2025.03.12-18.47.06][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Unsupported actor type: Box"
+}
+[2025.03.12-18.47.06][Verbose] Sent 68/68 bytes
+[2025.03.12-18.47.06][Log] Successfully sent complete response (68 bytes)
+[2025.03.12-18.47.06][Log] Client connection from 127.0.0.1:60402 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.06][Log] Cleaning up client connection from 127.0.0.1:60402
+[2025.03.12-18.47.06][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.06][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.06][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.21][Verbose] Connection attempt from 127.0.0.1:60422
+[2025.03.12-18.47.21][Log] MCP Client connected from 127.0.0.1:60422 (Total clients: 1)
+[2025.03.12-18.47.21][Verbose] Client from 127.0.0.1:60422 has 53 bytes of pending data
+[2025.03.12-18.47.21][Verbose] Read 53 bytes from client 127.0.0.1:60422
+[2025.03.12-18.47.21][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube"}}
+[2025.03.12-18.47.21][Log] Processing command: create_object
+[2025.03.12-18.47.21][Warning] Invalid 'location' field in create_object command
+[2025.03.12-18.47.21][Verbose] Preparing to send response: {
+	"status": "error",
+	"message": "Invalid 'location' field"
+}
+[2025.03.12-18.47.21][Verbose] Sent 65/65 bytes
+[2025.03.12-18.47.21][Log] Successfully sent complete response (65 bytes)
+[2025.03.12-18.47.21][Log] Client connection from 127.0.0.1:60422 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.21][Log] Cleaning up client connection from 127.0.0.1:60422
+[2025.03.12-18.47.21][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.21][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.21][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.24][Verbose] Connection attempt from 127.0.0.1:60433
+[2025.03.12-18.47.24][Log] MCP Client connected from 127.0.0.1:60433 (Total clients: 1)
+[2025.03.12-18.47.24][Verbose] Client from 127.0.0.1:60433 has 76 bytes of pending data
+[2025.03.12-18.47.24][Verbose] Read 76 bytes from client 127.0.0.1:60433
+[2025.03.12-18.47.24][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 0, 0]}}
+[2025.03.12-18.47.24][Log] Processing command: create_object
+[2025.03.12-18.47.24][Log] Created Cube at location (0.000000, 0.000000, 0.000000)
+[2025.03.12-18.47.24][Log] Set cube mesh
+[2025.03.12-18.47.24][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1625551258",
+		"label": "MCP_Cube_2783"
+	}
+}
+[2025.03.12-18.47.24][Verbose] Sent 140/140 bytes
+[2025.03.12-18.47.24][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.47.24][Log] Client connection from 127.0.0.1:60433 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.24][Log] Cleaning up client connection from 127.0.0.1:60433
+[2025.03.12-18.47.24][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.24][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.24][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.26][Verbose] Connection attempt from 127.0.0.1:60435
+[2025.03.12-18.47.26][Log] MCP Client connected from 127.0.0.1:60435 (Total clients: 1)
+[2025.03.12-18.47.27][Verbose] Client from 127.0.0.1:60435 has 78 bytes of pending data
+[2025.03.12-18.47.27][Verbose] Read 78 bytes from client 127.0.0.1:60435
+[2025.03.12-18.47.27][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [200, 0, 0]}}
+[2025.03.12-18.47.27][Log] Processing command: create_object
+[2025.03.12-18.47.27][Log] Created Cube at location (200.000000, 0.000000, 0.000000)
+[2025.03.12-18.47.27][Log] Set cube mesh
+[2025.03.12-18.47.27][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1628218259",
+		"label": "MCP_Cube_6253"
+	}
+}
+[2025.03.12-18.47.27][Verbose] Sent 140/140 bytes
+[2025.03.12-18.47.27][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.47.27][Log] Client connection from 127.0.0.1:60435 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.27][Log] Cleaning up client connection from 127.0.0.1:60435
+[2025.03.12-18.47.27][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.27][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.27][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.29][Verbose] Connection attempt from 127.0.0.1:60437
+[2025.03.12-18.47.29][Log] MCP Client connected from 127.0.0.1:60437 (Total clients: 1)
+[2025.03.12-18.47.29][Verbose] Client from 127.0.0.1:60437 has 78 bytes of pending data
+[2025.03.12-18.47.29][Verbose] Read 78 bytes from client 127.0.0.1:60437
+[2025.03.12-18.47.29][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 200, 0]}}
+[2025.03.12-18.47.29][Log] Processing command: create_object
+[2025.03.12-18.47.29][Log] Created Cube at location (0.000000, 200.000000, 0.000000)
+[2025.03.12-18.47.29][Log] Set cube mesh
+[2025.03.12-18.47.29][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1630219260",
+		"label": "MCP_Cube_4525"
+	}
+}
+[2025.03.12-18.47.29][Verbose] Sent 140/140 bytes
+[2025.03.12-18.47.29][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.47.29][Log] Client connection from 127.0.0.1:60437 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.29][Log] Cleaning up client connection from 127.0.0.1:60437
+[2025.03.12-18.47.29][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.29][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.29][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.47.31][Verbose] Connection attempt from 127.0.0.1:60444
+[2025.03.12-18.47.31][Log] MCP Client connected from 127.0.0.1:60444 (Total clients: 1)
+[2025.03.12-18.47.31][Verbose] Client from 127.0.0.1:60444 has 78 bytes of pending data
+[2025.03.12-18.47.31][Verbose] Read 78 bytes from client 127.0.0.1:60444
+[2025.03.12-18.47.31][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 0, 200]}}
+[2025.03.12-18.47.31][Log] Processing command: create_object
+[2025.03.12-18.47.31][Log] Created Cube at location (0.000000, 0.000000, 200.000000)
+[2025.03.12-18.47.31][Log] Set cube mesh
+[2025.03.12-18.47.31][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1632871261",
+		"label": "MCP_Cube_6967"
+	}
+}
+[2025.03.12-18.47.31][Verbose] Sent 140/140 bytes
+[2025.03.12-18.47.31][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.47.31][Log] Client connection from 127.0.0.1:60444 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.47.31][Log] Cleaning up client connection from 127.0.0.1:60444
+[2025.03.12-18.47.31][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.47.31][Verbose] Successfully destroyed client socket
+[2025.03.12-18.47.31][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.47][Verbose] Connection attempt from 127.0.0.1:60550
+[2025.03.12-18.48.47][Log] MCP Client connected from 127.0.0.1:60550 (Total clients: 1)
+[2025.03.12-18.48.47][Verbose] Client from 127.0.0.1:60550 has 82 bytes of pending data
+[2025.03.12-18.48.47][Verbose] Read 82 bytes from client 127.0.0.1:60550
+[2025.03.12-18.48.47][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [-200, -200, 0]}}
+[2025.03.12-18.48.47][Log] Processing command: create_object
+[2025.03.12-18.48.47][Log] Created Cube at location (-200.000000, -200.000000, 0.000000)
+[2025.03.12-18.48.47][Log] Set cube mesh
+[2025.03.12-18.48.47][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1708677262",
+		"label": "MCP_Cube_5458"
+	}
+}
+[2025.03.12-18.48.47][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.47][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.47][Log] Client connection from 127.0.0.1:60550 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.47][Log] Cleaning up client connection from 127.0.0.1:60550
+[2025.03.12-18.48.47][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.47][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.47][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.49][Verbose] Connection attempt from 127.0.0.1:60554
+[2025.03.12-18.48.49][Log] MCP Client connected from 127.0.0.1:60554 (Total clients: 1)
+[2025.03.12-18.48.49][Verbose] Client from 127.0.0.1:60554 has 79 bytes of pending data
+[2025.03.12-18.48.49][Verbose] Read 79 bytes from client 127.0.0.1:60554
+[2025.03.12-18.48.49][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, -200, 0]}}
+[2025.03.12-18.48.49][Log] Processing command: create_object
+[2025.03.12-18.48.49][Log] Created Cube at location (0.000000, -200.000000, 0.000000)
+[2025.03.12-18.48.49][Log] Set cube mesh
+[2025.03.12-18.48.49][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1710746263",
+		"label": "MCP_Cube_4269"
+	}
+}
+[2025.03.12-18.48.49][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.49][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.49][Log] Client connection from 127.0.0.1:60554 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.49][Log] Cleaning up client connection from 127.0.0.1:60554
+[2025.03.12-18.48.49][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.49][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.49][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.51][Verbose] Connection attempt from 127.0.0.1:60561
+[2025.03.12-18.48.51][Log] MCP Client connected from 127.0.0.1:60561 (Total clients: 1)
+[2025.03.12-18.48.51][Verbose] Client from 127.0.0.1:60561 has 81 bytes of pending data
+[2025.03.12-18.48.51][Verbose] Read 81 bytes from client 127.0.0.1:60561
+[2025.03.12-18.48.51][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [200, -200, 0]}}
+[2025.03.12-18.48.51][Log] Processing command: create_object
+[2025.03.12-18.48.51][Log] Created Cube at location (200.000000, -200.000000, 0.000000)
+[2025.03.12-18.48.51][Log] Set cube mesh
+[2025.03.12-18.48.51][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1712753264",
+		"label": "MCP_Cube_3267"
+	}
+}
+[2025.03.12-18.48.51][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.51][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.51][Log] Client connection from 127.0.0.1:60561 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.51][Log] Cleaning up client connection from 127.0.0.1:60561
+[2025.03.12-18.48.51][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.51][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.51][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.53][Verbose] Connection attempt from 127.0.0.1:60564
+[2025.03.12-18.48.53][Log] MCP Client connected from 127.0.0.1:60564 (Total clients: 1)
+[2025.03.12-18.48.53][Verbose] Client from 127.0.0.1:60564 has 79 bytes of pending data
+[2025.03.12-18.48.53][Verbose] Read 79 bytes from client 127.0.0.1:60564
+[2025.03.12-18.48.53][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [-200, 0, 0]}}
+[2025.03.12-18.48.53][Log] Processing command: create_object
+[2025.03.12-18.48.53][Log] Created Cube at location (-200.000000, 0.000000, 0.000000)
+[2025.03.12-18.48.53][Log] Set cube mesh
+[2025.03.12-18.48.53][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1714753265",
+		"label": "MCP_Cube_8620"
+	}
+}
+[2025.03.12-18.48.53][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.53][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.53][Log] Client connection from 127.0.0.1:60564 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.53][Log] Cleaning up client connection from 127.0.0.1:60564
+[2025.03.12-18.48.53][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.53][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.53][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.55][Verbose] Connection attempt from 127.0.0.1:60566
+[2025.03.12-18.48.55][Log] MCP Client connected from 127.0.0.1:60566 (Total clients: 1)
+[2025.03.12-18.48.55][Verbose] Client from 127.0.0.1:60566 has 78 bytes of pending data
+[2025.03.12-18.48.55][Verbose] Read 78 bytes from client 127.0.0.1:60566
+[2025.03.12-18.48.55][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 0, 100]}}
+[2025.03.12-18.48.55][Log] Processing command: create_object
+[2025.03.12-18.48.55][Log] Created Cube at location (0.000000, 0.000000, 100.000000)
+[2025.03.12-18.48.55][Log] Set cube mesh
+[2025.03.12-18.48.55][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1716661266",
+		"label": "MCP_Cube_6100"
+	}
+}
+[2025.03.12-18.48.55][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.55][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.55][Log] Client connection from 127.0.0.1:60566 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.55][Log] Cleaning up client connection from 127.0.0.1:60566
+[2025.03.12-18.48.55][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.55][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.55][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.48.57][Verbose] Connection attempt from 127.0.0.1:60568
+[2025.03.12-18.48.57][Log] MCP Client connected from 127.0.0.1:60568 (Total clients: 1)
+[2025.03.12-18.48.57][Verbose] Client from 127.0.0.1:60568 has 78 bytes of pending data
+[2025.03.12-18.48.57][Verbose] Read 78 bytes from client 127.0.0.1:60568
+[2025.03.12-18.48.57][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [200, 0, 0]}}
+[2025.03.12-18.48.57][Log] Processing command: create_object
+[2025.03.12-18.48.57][Log] Created Cube at location (200.000000, 0.000000, 0.000000)
+[2025.03.12-18.48.57][Log] Set cube mesh
+[2025.03.12-18.48.57][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1718759267",
+		"label": "MCP_Cube_5806"
+	}
+}
+[2025.03.12-18.48.57][Verbose] Sent 140/140 bytes
+[2025.03.12-18.48.57][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.48.57][Log] Client connection from 127.0.0.1:60568 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.48.57][Log] Cleaning up client connection from 127.0.0.1:60568
+[2025.03.12-18.48.57][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.48.57][Verbose] Successfully destroyed client socket
+[2025.03.12-18.48.57][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.49.00][Verbose] Connection attempt from 127.0.0.1:60575
+[2025.03.12-18.49.00][Log] MCP Client connected from 127.0.0.1:60575 (Total clients: 1)
+[2025.03.12-18.49.00][Verbose] Client from 127.0.0.1:60575 has 81 bytes of pending data
+[2025.03.12-18.49.00][Verbose] Read 81 bytes from client 127.0.0.1:60575
+[2025.03.12-18.49.00][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [-200, 200, 0]}}
+[2025.03.12-18.49.00][Log] Processing command: create_object
+[2025.03.12-18.49.00][Log] Created Cube at location (-200.000000, 200.000000, 0.000000)
+[2025.03.12-18.49.00][Log] Set cube mesh
+[2025.03.12-18.49.00][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1721272268",
+		"label": "MCP_Cube_8467"
+	}
+}
+[2025.03.12-18.49.00][Verbose] Sent 140/140 bytes
+[2025.03.12-18.49.00][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.49.00][Log] Client connection from 127.0.0.1:60575 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.49.00][Log] Cleaning up client connection from 127.0.0.1:60575
+[2025.03.12-18.49.00][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.49.00][Verbose] Successfully destroyed client socket
+[2025.03.12-18.49.00][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.49.03][Verbose] Connection attempt from 127.0.0.1:60578
+[2025.03.12-18.49.03][Log] MCP Client connected from 127.0.0.1:60578 (Total clients: 1)
+[2025.03.12-18.49.03][Verbose] Client from 127.0.0.1:60578 has 78 bytes of pending data
+[2025.03.12-18.49.03][Verbose] Read 78 bytes from client 127.0.0.1:60578
+[2025.03.12-18.49.03][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [0, 200, 0]}}
+[2025.03.12-18.49.03][Log] Processing command: create_object
+[2025.03.12-18.49.03][Log] Created Cube at location (0.000000, 200.000000, 0.000000)
+[2025.03.12-18.49.03][Log] Set cube mesh
+[2025.03.12-18.49.03][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1724379269",
+		"label": "MCP_Cube_2002"
+	}
+}
+[2025.03.12-18.49.03][Verbose] Sent 140/140 bytes
+[2025.03.12-18.49.03][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.49.03][Log] Client connection from 127.0.0.1:60578 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.49.03][Log] Cleaning up client connection from 127.0.0.1:60578
+[2025.03.12-18.49.03][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.49.03][Verbose] Successfully destroyed client socket
+[2025.03.12-18.49.03][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-18.49.05][Verbose] Connection attempt from 127.0.0.1:60580
+[2025.03.12-18.49.05][Log] MCP Client connected from 127.0.0.1:60580 (Total clients: 1)
+[2025.03.12-18.49.05][Verbose] Client from 127.0.0.1:60580 has 80 bytes of pending data
+[2025.03.12-18.49.05][Verbose] Read 80 bytes from client 127.0.0.1:60580
+[2025.03.12-18.49.05][Verbose] Processing command: {"type": "create_object", "params": {"type": "cube", "location": [200, 200, 0]}}
+[2025.03.12-18.49.05][Log] Processing command: create_object
+[2025.03.12-18.49.05][Log] Created Cube at location (200.000000, 200.000000, 0.000000)
+[2025.03.12-18.49.05][Log] Set cube mesh
+[2025.03.12-18.49.05][Verbose] Preparing to send response: {
+	"status": "success",
+	"result":
+	{
+		"name": "StaticMeshActor_UAID_C87F545D1F04835402_1726484270",
+		"label": "MCP_Cube_9790"
+	}
+}
+[2025.03.12-18.49.05][Verbose] Sent 140/140 bytes
+[2025.03.12-18.49.05][Log] Successfully sent complete response (140 bytes)
+[2025.03.12-18.49.05][Log] Client connection from 127.0.0.1:60580 appears to be closed (error code 0), cleaning up
+[2025.03.12-18.49.05][Log] Cleaning up client connection from 127.0.0.1:60580
+[2025.03.12-18.49.05][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.49.05][Verbose] Successfully destroyed client socket
+[2025.03.12-18.49.05][Log] MCP Client disconnected (Remaining clients: 0)

@@ -473,6 +473,9 @@ void FMCPTCPServer::HandleCreateObject(const TSharedPtr<FJsonObject>& Params, FS
         return;
     }
     
+    // Convert type to lowercase for case-insensitive comparison
+    FString TypeLower = Type.ToLower();
+    
     if (Type == "StaticMeshActor")
     {
         // Get location
@@ -526,6 +529,67 @@ void FMCPTCPServer::HandleCreateObject(const TSharedPtr<FJsonObject>& Params, FS
             MCP_LOG_ERROR("Failed to create StaticMeshActor");
             Response->SetStringField("status", "error");
             Response->SetStringField("message", "Failed to create actor");
+        }
+    }
+    else if (TypeLower == "cube")
+    {
+        // Get location
+        const TArray<TSharedPtr<FJsonValue>>* LocationArrayPtr = nullptr;
+        if (!Params->TryGetArrayField(FStringView(TEXT("location")), LocationArrayPtr) || !LocationArrayPtr || LocationArrayPtr->Num() != 3)
+        {
+            MCP_LOG_WARNING("Invalid 'location' field in create_object command");
+            Response->SetStringField("status", "error");
+            Response->SetStringField("message", "Invalid 'location' field");
+            SendResponse(ClientSocket, Response);
+            return;
+        }
+        
+        FVector Location(
+            (*LocationArrayPtr)[0]->AsNumber(),
+            (*LocationArrayPtr)[1]->AsNumber(),
+            (*LocationArrayPtr)[2]->AsNumber()
+        );
+        
+        // Create a StaticMeshActor with a cube mesh
+        FActorSpawnParameters SpawnParams;
+        SpawnParams.Name = NAME_None;
+        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+        
+        AStaticMeshActor* NewActor = World->SpawnActor<AStaticMeshActor>(Location, FRotator::ZeroRotator, SpawnParams);
+        if (NewActor)
+        {
+            MCP_LOG_INFO("Created Cube at location (%f, %f, %f)", Location.X, Location.Y, Location.Z);
+            
+            // Set cube mesh
+            UStaticMesh* CubeMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
+            if (CubeMesh)
+            {
+                NewActor->GetStaticMeshComponent()->SetStaticMesh(CubeMesh);
+                MCP_LOG_INFO("Set cube mesh");
+                
+                // Set a descriptive label
+                NewActor->SetActorLabel(FString::Printf(TEXT("MCP_Cube_%d"), FMath::RandRange(1000, 9999)));
+                
+                // Create a result object with the actor information
+                TSharedPtr<FJsonObject> Result = MakeShared<FJsonObject>();
+                Result->SetStringField("name", NewActor->GetName());
+                Result->SetStringField("label", NewActor->GetActorLabel());
+                
+                Response->SetStringField("status", "success");
+                Response->SetObjectField("result", Result);
+            }
+            else
+            {
+                MCP_LOG_WARNING("Failed to load cube mesh");
+                Response->SetStringField("status", "error");
+                Response->SetStringField("message", "Failed to load cube mesh");
+            }
+        }
+        else
+        {
+            MCP_LOG_ERROR("Failed to create Cube");
+            Response->SetStringField("status", "error");
+            Response->SetStringField("message", "Failed to create cube");
         }
     }
     else

@@ -106,7 +106,8 @@ SOFTWARE.
 
 ## Credits
 - Created by: kvick
-- Twitter: [@kvickart](https://x.com/kvickart)
+- X: [@kvickart](https://x.com/kvickart)
+- [@sidahuj](https://x.com/sidahuj) for the inspriation
 
 ## Contributing
-Contributions are welcome, but I will need some time to wrap my head around things first, lol
+Contributions are welcome, but I will need some time to wrap my head around things and cleanup first, lol

@@ -14,12 +14,12 @@ def main():
     """Connect to the MCP Server and execute Python code."""
     try:
         # Create socket
-        print("Connecting to MCP Server on localhost:1337...")
+        print("Connecting to MCP Server on localhost:13377...")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(5)  # 5 second timeout
         
         # Connect to server
-        s.connect(("localhost", 1337))
+        s.connect(("localhost", 13377))
         print("✓ Connected successfully")
         
         # Python code to execute

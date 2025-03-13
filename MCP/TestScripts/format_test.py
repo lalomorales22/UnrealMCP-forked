@@ -8,7 +8,7 @@ import time
 
 # Configuration
 HOST = '127.0.0.1'
-PORT = 1337
+PORT = 13377
 TIMEOUT = 5  # seconds
 
 # Simple Python code to execute

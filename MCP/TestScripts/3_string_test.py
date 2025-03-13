@@ -20,7 +20,7 @@ def main():
         s.settimeout(10)  # 10 second timeout
         
         # Connect to server
-        s.connect(("localhost", 1337))
+        s.connect(("localhost", 13377))
         print("✓ Connected successfully")
         
         # Python code with various string formats

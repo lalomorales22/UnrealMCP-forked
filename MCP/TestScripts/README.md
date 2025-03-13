@@ -50,7 +50,7 @@ The command should be sent as a JSON string followed by a newline character.
 If you encounter issues:
 
 1. Make sure the MCP Server is running in Unreal Engine
-2. Check that you're connecting to the correct host and port (default: localhost:1337)
+2. Check that you're connecting to the correct host and port (default: localhost:13377)
 3. Verify the command format is correct
 4. Check the Unreal Engine log for any error messages
 

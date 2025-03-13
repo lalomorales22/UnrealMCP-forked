@@ -124,7 +124,7 @@ def trace_socket_errors(error):
 def main():
     """Connect to the MCP Server and verify the connection works."""
     host = "localhost"
-    port = 1337
+    port = 13377
     timeout = 5  # 5 second timeout
     
     print("\n=== NETWORK DIAGNOSTICS ===")

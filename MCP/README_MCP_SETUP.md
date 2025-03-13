@@ -105,10 +105,10 @@ Add or update it with the following content, replacing the path with the actual 
    - **Solution**: Rerun the `setup_unreal_mcp.bat` script and select the correct Python environment.
 
 2. **Connection refused errors**
-   - **Cause**: The MCP server isn’t running or isn’t listening on port 1337.
+   - **Cause**: The MCP server isn’t running or isn’t listening on port 13377.
    - **Solution**:
      - Ensure Unreal Engine is running with the MCP plugin enabled.
-     - Confirm the MCP plugin’s port setting matches the default (1337).
+     - Confirm the MCP plugin’s port setting matches the default (13377).
 
 3. **Claude Desktop can’t start the MCP server**
    - **Cause**: Configuration or file path issues.

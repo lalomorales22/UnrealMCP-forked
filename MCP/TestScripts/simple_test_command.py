@@ -13,12 +13,12 @@ def main():
     """Send a simple Python command to the MCP Server."""
     try:
         # Create socket
-        print("Connecting to MCP Server on localhost:1337...")
+        print("Connecting to MCP Server on localhost:13377...")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(5)  # 5 second timeout
         
         # Connect to server
-        s.connect(("localhost", 1337))
+        s.connect(("localhost", 13377))
         print("Connected successfully")
         
         # Very simple Python code
@@ -80,7 +80,7 @@ def main():
             # Create a new socket for each test
             test_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             test_socket.settimeout(5)
-            test_socket.connect(("localhost", 1337))
+            test_socket.connect(("localhost", 13377))
             
             # Send command with newline
             command_str = json.dumps(command) + "\n"

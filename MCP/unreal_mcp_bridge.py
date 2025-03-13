@@ -24,7 +24,7 @@ import importlib.util
 # Try to get the port from MCPConstants
 try:
     # Default values in case we can't read from MCPConstants
-    DEFAULT_PORT = 1337
+    DEFAULT_PORT = 13377
     DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
     
     # Try to read the port from the C++ constants
@@ -49,7 +49,7 @@ try:
 except Exception as e:
     # If anything goes wrong, use the defaults
     print(f"Warning: Could not read constants from MCPConstants.h: {e}", file=sys.stderr)
-    DEFAULT_PORT = 1337
+    DEFAULT_PORT = 13377
     DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
 
 DEFAULT_TIMEOUT = 10  # 10 second timeout

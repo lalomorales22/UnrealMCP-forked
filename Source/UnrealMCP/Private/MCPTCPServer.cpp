@@ -34,6 +34,7 @@ FMCPTCPServer::FMCPTCPServer(const FMCPTCPServerConfig& InConfig)
     RegisterCommandHandler(MakeShared<FMCPCreateObjectHandler>());
     RegisterCommandHandler(MakeShared<FMCPModifyObjectHandler>());
     RegisterCommandHandler(MakeShared<FMCPDeleteObjectHandler>());
+    RegisterCommandHandler(MakeShared<FMCPExecutePythonHandler>());
 }
 
 FMCPTCPServer::~FMCPTCPServer()

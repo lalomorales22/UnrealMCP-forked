@@ -111,19 +111,6 @@ void FUnrealMCPModule::StartupModule()
 	MCP_LOG_WARNING("Registering OnPostEngineInit delegate");
 	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
 	
-	// Also try the legacy approach as a fallback
-	/*
-	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
-	TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender);
-	ToolbarExtender->AddToolBarExtension(
-		"Settings",
-		EExtensionHook::After,
-		nullptr,
-		FToolBarExtensionDelegate::CreateRaw(this, &FUnrealMCPModule::AddToolbarButton)
-	);
-	LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
-	UE_LOG(LogTemp, Warning, TEXT("Added legacy toolbar extender"));
-	 */
 }
 
 void FUnrealMCPModule::ShutdownModule()

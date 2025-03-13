@@ -1,146 +1,71 @@
-MCP Server Log - Started at 2025.03.12-19.44.20
-[2025.03.12-19.44.20][Warning] UnrealMCP Style registered
-[2025.03.12-19.44.20][Warning] Registering OnPostEngineInit delegate
-[2025.03.12-19.44.22][Warning] ExtendLevelEditorToolbar called - first time
-[2025.03.12-19.44.22][Warning] MCP Server button added to main toolbar
-[2025.03.12-19.44.22][Warning] MCP Server entry added to Window menu
-[2025.03.12-19.44.48][Warning] ToggleServer called - Server state: Not Running
-[2025.03.12-19.44.48][Warning] Starting server...
-[2025.03.12-19.44.48][Warning] Creating new server instance
-[2025.03.12-19.44.48][Log] Registered command handler for 'get_scene_info'
-[2025.03.12-19.44.48][Log] Registered command handler for 'create_object'
-[2025.03.12-19.44.48][Log] Registered command handler for 'modify_object'
-[2025.03.12-19.44.48][Log] Registered command handler for 'delete_object'
-[2025.03.12-19.44.48][Warning] Starting MCP server on port 1337
-[2025.03.12-19.44.48][Log] MCP Server started on port 1337
-[2025.03.12-19.44.48][Warning] ToggleServer completed - Server state: Running
-[2025.03.12-19.48.46][Verbose] Connection attempt from 127.0.0.1:49883
-[2025.03.12-19.48.46][Log] MCP Client connected from 127.0.0.1:49883 (Total clients: 1)
-[2025.03.12-19.48.47][Log] Processing command: get_scene_info
-[2025.03.12-19.48.47][Log] Handling get_scene_info command
-[2025.03.12-19.48.47][Log] Sending get_scene_info response with 9 actors
-[2025.03.12-19.48.47][Log] Successfully sent complete response (1121 bytes)
-[2025.03.12-19.48.47][Log] Client connection from 127.0.0.1:49883 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.48.47][Log] Cleaning up client connection from 127.0.0.1:49883
-[2025.03.12-19.48.47][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.48.47][Verbose] Successfully destroyed client socket
-[2025.03.12-19.48.47][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.48.51][Verbose] Connection attempt from 127.0.0.1:49891
-[2025.03.12-19.48.51][Log] MCP Client connected from 127.0.0.1:49891 (Total clients: 1)
-[2025.03.12-19.48.51][Log] Processing command: create_object
-[2025.03.12-19.48.51][Log] Created Cube at location (0.000000, 0.000000, 100.000000)
-[2025.03.12-19.48.51][Log] Set cube mesh
-[2025.03.12-19.48.51][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.48.51][Log] Client connection from 127.0.0.1:49891 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.48.51][Log] Cleaning up client connection from 127.0.0.1:49891
-[2025.03.12-19.48.51][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.48.51][Verbose] Successfully destroyed client socket
-[2025.03.12-19.48.51][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.48.53][Verbose] Connection attempt from 127.0.0.1:49895
-[2025.03.12-19.48.53][Log] MCP Client connected from 127.0.0.1:49895 (Total clients: 1)
-[2025.03.12-19.48.53][Log] Processing command: create_object
-[2025.03.12-19.48.53][Log] Created Cube at location (0.000000, 0.000000, 60.000000)
-[2025.03.12-19.48.53][Log] Set cube mesh
-[2025.03.12-19.48.53][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.48.53][Log] Client connection from 127.0.0.1:49895 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.48.53][Log] Cleaning up client connection from 127.0.0.1:49895
-[2025.03.12-19.48.53][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.48.53][Verbose] Successfully destroyed client socket
-[2025.03.12-19.48.53][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.48.58][Verbose] Connection attempt from 127.0.0.1:49905
-[2025.03.12-19.48.58][Log] MCP Client connected from 127.0.0.1:49905 (Total clients: 1)
-[2025.03.12-19.48.59][Log] Processing command: modify_object
-[2025.03.12-19.48.59][Log] Updated scale of StaticMeshActor_UAID_C87F545D1F04865402_2091271783 to (1.200000, 1.200000, 1.200000)
-[2025.03.12-19.48.59][Log] Successfully sent complete response (26 bytes)
-[2025.03.12-19.48.59][Log] Client connection from 127.0.0.1:49905 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.48.59][Log] Cleaning up client connection from 127.0.0.1:49905
-[2025.03.12-19.48.59][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.48.59][Verbose] Successfully destroyed client socket
-[2025.03.12-19.48.59][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.02][Verbose] Connection attempt from 127.0.0.1:49910
-[2025.03.12-19.49.02][Log] MCP Client connected from 127.0.0.1:49910 (Total clients: 1)
-[2025.03.12-19.49.02][Log] Processing command: modify_object
-[2025.03.12-19.49.02][Log] Updated scale of StaticMeshActor_UAID_C87F545D1F04865402_2093270784 to (1.200000, 1.000000, 2.000000)
-[2025.03.12-19.49.02][Log] Successfully sent complete response (26 bytes)
-[2025.03.12-19.49.02][Log] Client connection from 127.0.0.1:49910 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.02][Log] Cleaning up client connection from 127.0.0.1:49910
-[2025.03.12-19.49.02][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.02][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.02][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.04][Verbose] Connection attempt from 127.0.0.1:49912
-[2025.03.12-19.49.04][Log] MCP Client connected from 127.0.0.1:49912 (Total clients: 1)
-[2025.03.12-19.49.04][Log] Processing command: create_object
-[2025.03.12-19.49.04][Log] Created Cube at location (15.000000, 0.000000, 70.000000)
-[2025.03.12-19.49.04][Log] Set cube mesh
-[2025.03.12-19.49.04][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.05][Log] Client connection from 127.0.0.1:49912 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.05][Log] Cleaning up client connection from 127.0.0.1:49912
-[2025.03.12-19.49.05][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.05][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.05][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.14][Verbose] Connection attempt from 127.0.0.1:49927
-[2025.03.12-19.49.14][Log] MCP Client connected from 127.0.0.1:49927 (Total clients: 1)
-[2025.03.12-19.49.14][Log] Processing command: create_object
-[2025.03.12-19.49.14][Log] Created Cube at location (-15.000000, 0.000000, 70.000000)
-[2025.03.12-19.49.14][Log] Set cube mesh
-[2025.03.12-19.49.14][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.14][Log] Client connection from 127.0.0.1:49927 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.14][Log] Cleaning up client connection from 127.0.0.1:49927
-[2025.03.12-19.49.14][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.14][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.14][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.28][Verbose] Connection attempt from 127.0.0.1:49950
-[2025.03.12-19.49.28][Log] MCP Client connected from 127.0.0.1:49950 (Total clients: 1)
-[2025.03.12-19.49.28][Log] Processing command: create_object
-[2025.03.12-19.49.28][Log] Created Cube at location (7.000000, 0.000000, 30.000000)
-[2025.03.12-19.49.28][Log] Set cube mesh
-[2025.03.12-19.49.28][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.28][Log] Client connection from 127.0.0.1:49950 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.28][Log] Cleaning up client connection from 127.0.0.1:49950
-[2025.03.12-19.49.28][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.28][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.28][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.30][Verbose] Connection attempt from 127.0.0.1:49952
-[2025.03.12-19.49.30][Log] MCP Client connected from 127.0.0.1:49952 (Total clients: 1)
-[2025.03.12-19.49.30][Log] Processing command: create_object
-[2025.03.12-19.49.30][Log] Created Cube at location (-7.000000, 0.000000, 30.000000)
-[2025.03.12-19.49.30][Log] Set cube mesh
-[2025.03.12-19.49.30][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.30][Log] Client connection from 127.0.0.1:49952 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.30][Log] Cleaning up client connection from 127.0.0.1:49952
-[2025.03.12-19.49.30][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.30][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.30][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.32][Verbose] Connection attempt from 127.0.0.1:49954
-[2025.03.12-19.49.32][Log] MCP Client connected from 127.0.0.1:49954 (Total clients: 1)
-[2025.03.12-19.49.32][Log] Processing command: create_object
-[2025.03.12-19.49.32][Log] Created Cube at location (4.000000, 7.000000, 102.000000)
-[2025.03.12-19.49.32][Log] Set cube mesh
-[2025.03.12-19.49.32][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.33][Log] Client connection from 127.0.0.1:49954 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.33][Log] Cleaning up client connection from 127.0.0.1:49954
-[2025.03.12-19.49.33][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.33][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.33][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.34][Verbose] Connection attempt from 127.0.0.1:49960
-[2025.03.12-19.49.34][Log] MCP Client connected from 127.0.0.1:49960 (Total clients: 1)
-[2025.03.12-19.49.34][Log] Processing command: create_object
-[2025.03.12-19.49.34][Log] Created Cube at location (-4.000000, 7.000000, 102.000000)
-[2025.03.12-19.49.34][Log] Set cube mesh
-[2025.03.12-19.49.34][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.34][Log] Client connection from 127.0.0.1:49960 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.34][Log] Cleaning up client connection from 127.0.0.1:49960
-[2025.03.12-19.49.34][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.34][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.34][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-19.49.36][Verbose] Connection attempt from 127.0.0.1:49967
-[2025.03.12-19.49.36][Log] MCP Client connected from 127.0.0.1:49967 (Total clients: 1)
-[2025.03.12-19.49.36][Log] Processing command: create_object
-[2025.03.12-19.49.36][Log] Created Cube at location (0.000000, 7.000000, 95.000000)
-[2025.03.12-19.49.36][Log] Set cube mesh
-[2025.03.12-19.49.36][Log] Successfully sent complete response (140 bytes)
-[2025.03.12-19.49.36][Log] Client connection from 127.0.0.1:49967 appears to be closed (error code 0), cleaning up
-[2025.03.12-19.49.36][Log] Cleaning up client connection from 127.0.0.1:49967
-[2025.03.12-19.49.36][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-19.49.36][Verbose] Successfully destroyed client socket
-[2025.03.12-19.49.36][Log] MCP Client disconnected (Remaining clients: 0)
+MCP Server Log - Started at 2025.03.12-20.44.40
+[2025.03.12-20.44.40][Warning] UnrealMCP Style registered
+[2025.03.12-20.44.40][Warning] Registering OnPostEngineInit delegate
+[2025.03.12-20.44.42][Warning] ExtendLevelEditorToolbar called - first time
+[2025.03.12-20.44.42][Warning] MCP Server button added to main toolbar
+[2025.03.12-20.44.42][Warning] MCP Server entry added to Window menu
+[2025.03.12-20.45.57][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-20.45.57][Warning] Starting server...
+[2025.03.12-20.45.57][Warning] Creating new server instance
+[2025.03.12-20.45.57][Log] Registered command handler for 'get_scene_info'
+[2025.03.12-20.45.57][Log] Registered command handler for 'create_object'
+[2025.03.12-20.45.57][Log] Registered command handler for 'modify_object'
+[2025.03.12-20.45.57][Log] Registered command handler for 'delete_object'
+[2025.03.12-20.45.57][Log] Registered command handler for 'execute_python'
+[2025.03.12-20.45.57][Warning] Starting MCP server on port 1337
+[2025.03.12-20.45.57][Log] MCP Server started on port 1337
+[2025.03.12-20.45.57][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-20.46.07][Verbose] Connection attempt from 127.0.0.1:55528
+[2025.03.12-20.46.07][Log] MCP Client connected from 127.0.0.1:55528 (Total clients: 1)
+[2025.03.12-20.46.07][Log] Processing command: execute_python
+[2025.03.12-20.46.07][Log] Executing Python code
+[2025.03.12-20.46.07][Log] Python execution successful
+[2025.03.12-20.46.07][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-20.46.08][Log] Client connection from 127.0.0.1:55528 appears to be closed (error code 0), cleaning up
+[2025.03.12-20.46.08][Log] Cleaning up client connection from 127.0.0.1:55528
+[2025.03.12-20.46.08][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-20.46.08][Verbose] Successfully destroyed client socket
+[2025.03.12-20.46.08][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-20.48.27][Warning] ToggleServer called - Server state: Running
+[2025.03.12-20.48.27][Warning] Stopping server...
+[2025.03.12-20.48.27][Log] Cleaning up all client connections (0 total)
+[2025.03.12-20.48.27][Log] MCP Server stopped
+[2025.03.12-20.48.27][Log] Cleaning up all client connections (0 total)
+[2025.03.12-20.48.27][Log] MCP Server stopped
+[2025.03.12-20.48.27][Log] MCP Server stopped
+[2025.03.12-20.48.27][Warning] ToggleServer completed - Server state: Not Running
+[2025.03.12-20.48.30][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-20.48.30][Warning] Starting server...
+[2025.03.12-20.48.30][Warning] Creating new server instance
+[2025.03.12-20.48.30][Log] Registered command handler for 'get_scene_info'
+[2025.03.12-20.48.30][Log] Registered command handler for 'create_object'
+[2025.03.12-20.48.30][Log] Registered command handler for 'modify_object'
+[2025.03.12-20.48.30][Log] Registered command handler for 'delete_object'
+[2025.03.12-20.48.30][Log] Registered command handler for 'execute_python'
+[2025.03.12-20.48.30][Warning] Starting MCP server on port 1337
+[2025.03.12-20.48.30][Log] MCP Server started on port 1337
+[2025.03.12-20.48.30][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-20.48.44][Verbose] Connection attempt from 127.0.0.1:55779
+[2025.03.12-20.48.44][Log] MCP Client connected from 127.0.0.1:55779 (Total clients: 1)
+[2025.03.12-20.48.44][Log] Processing command: execute_python
+[2025.03.12-20.48.44][Log] Executing Python code via temporary file
+[2025.03.12-20.48.44][Log] Python execution successful
+[2025.03.12-20.48.44][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-20.48.44][Log] Client connection from 127.0.0.1:55779 appears to be closed (error code 0), cleaning up
+[2025.03.12-20.48.44][Log] Cleaning up client connection from 127.0.0.1:55779
+[2025.03.12-20.48.44][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-20.48.44][Verbose] Successfully destroyed client socket
+[2025.03.12-20.48.44][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-20.49.30][Verbose] Connection attempt from 127.0.0.1:55842
+[2025.03.12-20.49.30][Log] MCP Client connected from 127.0.0.1:55842 (Total clients: 1)
+[2025.03.12-20.49.30][Log] Processing command: execute_python
+[2025.03.12-20.49.30][Log] Executing Python code via temporary file
+[2025.03.12-20.49.30][Log] Python execution successful
+[2025.03.12-20.49.30][Log] Successfully sent complete response (96 bytes)
+[2025.03.12-20.49.30][Log] Client connection from 127.0.0.1:55842 appears to be closed (error code 0), cleaning up
+[2025.03.12-20.49.30][Log] Cleaning up client connection from 127.0.0.1:55842
+[2025.03.12-20.49.30][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-20.49.30][Verbose] Successfully destroyed client socket
+[2025.03.12-20.49.30][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-20.51.24][Verbose] Connection attempt from 127.0.0.1:55997
+[2025.03.12-20.51.24][Log] MCP Client connected from 127.0.0.1:55997 (Total clients: 1)

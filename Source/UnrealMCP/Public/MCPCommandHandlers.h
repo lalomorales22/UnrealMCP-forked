@@ -111,17 +111,19 @@ protected:
      * @param World - The world to create the actor in
      * @param Location - The location to create the actor at
      * @param MeshPath - Optional path to the mesh to use
+     * @param Label - Optional custom label for the actor in the outliner
      * @return The created actor and a success flag
      */
-    TPair<AStaticMeshActor*, bool> CreateStaticMeshActor(UWorld* World, const FVector& Location, const FString& MeshPath = "");
+    TPair<AStaticMeshActor*, bool> CreateStaticMeshActor(UWorld* World, const FVector& Location, const FString& MeshPath = "", const FString& Label = "");
 
     /**
      * Create a cube actor
      * @param World - The world to create the actor in
      * @param Location - The location to create the actor at
+     * @param Label - Optional custom label for the actor in the outliner
      * @return The created actor and a success flag
      */
-    TPair<AStaticMeshActor*, bool> CreateCubeActor(UWorld* World, const FVector& Location);
+    TPair<AStaticMeshActor*, bool> CreateCubeActor(UWorld* World, const FVector& Location, const FString& Label = "");
 };
 
 /**
@@ -157,6 +159,26 @@ public:
 
     /**
      * Handle the delete_object command
+     * @param Params - The command parameters
+     * @param ClientSocket - The client socket
+     * @return JSON response object
+     */
+    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+};
+
+/**
+ * Handler for the execute_python command
+ */
+class FMCPExecutePythonHandler : public FMCPCommandHandlerBase
+{
+public:
+    FMCPExecutePythonHandler()
+        : FMCPCommandHandlerBase("execute_python")
+    {
+    }
+
+    /**
+     * Handle the execute_python command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object

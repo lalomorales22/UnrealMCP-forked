@@ -82,15 +82,17 @@ def get_scene_info(ctx: Context) -> str:
         return f"Error getting scene info: {str(e)}"
 
 @mcp.tool()
-def create_object(ctx: Context, type: str, location: list = None) -> str:
+def create_object(ctx: Context, type: str, location: list = None, label: str = None) -> str:
     """Create a new object in the Unreal scene."""
     try:
         params = {"type": type}
         if location:
             params["location"] = location
+        if label:
+            params["label"] = label
         response = send_command("create_object", params)
         if response["status"] == "success":
-            return f"Created object: {response['result']['name']}"
+            return f"Created object: {response['result']['name']} with label: {response['result']['label']}"
         else:
             return f"Error: {response['message']}"
     except Exception as e:
@@ -126,6 +128,37 @@ def delete_object(ctx: Context, name: str) -> str:
             return f"Error: {response['message']}"
     except Exception as e:
         return f"Error deleting object: {str(e)}"
+
+@mcp.tool()
+def execute_python(ctx: Context, code: str = None, file: str = None) -> str:
+    """Execute Python code or a Python script file in Unreal Engine.
+    
+    Args:
+        code: Python code to execute as a string
+        file: Path to a Python script file to execute
+        
+    Note: You must provide either code or file, but not both.
+    """
+    try:
+        if not code and not file:
+            return "Error: You must provide either 'code' or 'file' parameter"
+        
+        if code and file:
+            return "Error: You can only provide either 'code' or 'file', not both"
+        
+        params = {}
+        if code:
+            params["code"] = code
+        if file:
+            params["file"] = file
+            
+        response = send_command("execute_python", params)
+        if response["status"] == "success":
+            return f"Python execution successful:\n{response['result']['output']}"
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        return f"Error executing Python: {str(e)}"
 
 if __name__ == "__main__":
     print("Starting Unreal MCP server...", file=sys.stderr)

@@ -1,512 +1,1078 @@
-MCP Server Log - Started at 2025.03.12-21.11.06
-[2025.03.12-21.11.06][Warning] UnrealMCP Style registered
-[2025.03.12-21.11.06][Warning] Registering OnPostEngineInit delegate
-[2025.03.12-21.11.08][Warning] ExtendLevelEditorToolbar called - first time
-[2025.03.12-21.11.08][Warning] MCP Server button added to main toolbar
-[2025.03.12-21.11.08][Warning] MCP Server entry added to Window menu
-[2025.03.12-21.11.20][Warning] ToggleServer called - Server state: Not Running
-[2025.03.12-21.11.20][Warning] Starting server...
-[2025.03.12-21.11.20][Warning] Creating new server instance
-[2025.03.12-21.11.20][Log] Registered command handler for 'get_scene_info'
-[2025.03.12-21.11.20][Log] Registered command handler for 'create_object'
-[2025.03.12-21.11.20][Log] Registered command handler for 'modify_object'
-[2025.03.12-21.11.20][Log] Registered command handler for 'delete_object'
-[2025.03.12-21.11.20][Log] Registered command handler for 'execute_python'
-[2025.03.12-21.11.20][Warning] Starting MCP server on port 1337
-[2025.03.12-21.11.20][Log] MCP Server started on port 1337
-[2025.03.12-21.11.20][Warning] ToggleServer completed - Server state: Running
-[2025.03.12-21.11.53][Verbose] Connection attempt from 127.0.0.1:58509
-[2025.03.12-21.11.53][Log] MCP Client connected from 127.0.0.1:58509 (Total clients: 1)
-[2025.03.12-21.11.53][Log] Processing command: execute_python
-[2025.03.12-21.11.53][Log] Executing Python code via temporary file
-[2025.03.12-21.11.53][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_1748F6474D732E44D91F90A1CA3AB82D.py", line 37, in <module>
+MCP Server Log - Started at 2025.03.12-22.07.57
+[2025.03.12-22.07.57][Warning] UnrealMCP Style registered
+[2025.03.12-22.07.57][Warning] Registering OnPostEngineInit delegate
+[2025.03.12-22.07.59][Warning] ExtendLevelEditorToolbar called - first time
+[2025.03.12-22.07.59][Warning] MCP Server button added to main toolbar
+[2025.03.12-22.07.59][Warning] MCP Server entry added to Window menu
+[2025.03.12-22.08.38][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-22.08.38][Warning] Starting server...
+[2025.03.12-22.08.38][Warning] Creating new server instance
+[2025.03.12-22.08.38][Log] Registered command handler for 'get_scene_info'
+[2025.03.12-22.08.38][Log] Registered command handler for 'create_object'
+[2025.03.12-22.08.38][Log] Registered command handler for 'modify_object'
+[2025.03.12-22.08.38][Log] Registered command handler for 'delete_object'
+[2025.03.12-22.08.38][Log] Registered command handler for 'execute_python'
+[2025.03.12-22.08.38][Warning] Starting MCP server on port 1337
+[2025.03.12-22.08.38][Log] MCP Server started on port 1337
+[2025.03.12-22.08.38][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-22.08.42][Verbose] Connection attempt from 127.0.0.1:64511
+[2025.03.12-22.08.42][Log] MCP Client connected from 127.0.0.1:64511 (Total clients: 1)
+[2025.03.12-22.08.42][Log] Processing command: get_scene_info
+[2025.03.12-22.08.42][Log] Handling get_scene_info command
+[2025.03.12-22.08.42][Log] Sending get_scene_info response with 6 actors
+[2025.03.12-22.08.42][Log] Successfully sent complete response (769 bytes)
+[2025.03.12-22.08.42][Log] Client connection from 127.0.0.1:64511 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.08.42][Log] Cleaning up client connection from 127.0.0.1:64511
+[2025.03.12-22.08.42][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.08.42][Verbose] Successfully destroyed client socket
+[2025.03.12-22.08.42][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.08.43][Verbose] Connection attempt from 127.0.0.1:64512
+[2025.03.12-22.08.43][Log] MCP Client connected from 127.0.0.1:64512 (Total clients: 1)
+[2025.03.12-22.08.43][Log] Processing command: execute_python
+[2025.03.12-22.08.43][Warning] Missing 'code' or 'file' field in execute_python command
+[2025.03.12-22.08.43][Log] Successfully sent complete response (124 bytes)
+[2025.03.12-22.08.44][Log] Client connection from 127.0.0.1:64512 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.08.44][Log] Cleaning up client connection from 127.0.0.1:64512
+[2025.03.12-22.08.44][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.08.44][Verbose] Successfully destroyed client socket
+[2025.03.12-22.08.44][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.08.44][Verbose] Connection attempt from 127.0.0.1:64514
+[2025.03.12-22.08.44][Log] MCP Client connected from 127.0.0.1:64514 (Total clients: 1)
+[2025.03.12-22.08.45][Log] Processing command: execute_python
+[2025.03.12-22.08.45][Warning] Missing 'code' or 'file' field in execute_python command
+[2025.03.12-22.08.45][Log] Successfully sent complete response (124 bytes)
+[2025.03.12-22.08.45][Log] Client connection from 127.0.0.1:64514 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.08.45][Log] Cleaning up client connection from 127.0.0.1:64514
+[2025.03.12-22.08.45][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.08.45][Verbose] Successfully destroyed client socket
+[2025.03.12-22.08.45][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.10.31][Verbose] Connection attempt from 127.0.0.1:64684
+[2025.03.12-22.10.31][Log] MCP Client connected from 127.0.0.1:64684 (Total clients: 1)
+[2025.03.12-22.10.31][Warning] Missing 'type' field in command
+[2025.03.12-22.10.31][Log] Successfully sent complete response (61 bytes)
+[2025.03.12-22.10.36][Log] Client connection from 127.0.0.1:64684 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.10.36][Log] Cleaning up client connection from 127.0.0.1:64684
+[2025.03.12-22.10.36][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.10.36][Verbose] Successfully destroyed client socket
+[2025.03.12-22.10.36][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.10.37][Verbose] Connection attempt from 127.0.0.1:64697
+[2025.03.12-22.10.37][Log] MCP Client connected from 127.0.0.1:64697 (Total clients: 1)
+[2025.03.12-22.10.37][Log] Processing command: execute_python
+[2025.03.12-22.10.37][Warning] Missing 'code' or 'file' field in execute_python command
+[2025.03.12-22.10.37][Log] Successfully sent complete response (124 bytes)
+[2025.03.12-22.10.43][Log] Client connection from 127.0.0.1:64697 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.10.43][Log] Cleaning up client connection from 127.0.0.1:64697
+[2025.03.12-22.10.43][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.10.43][Verbose] Successfully destroyed client socket
+[2025.03.12-22.10.43][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.10.43][Verbose] Connection attempt from 127.0.0.1:64705
+[2025.03.12-22.10.43][Log] MCP Client connected from 127.0.0.1:64705 (Total clients: 1)
+[2025.03.12-22.10.44][Warning] Missing 'type' field in command
+[2025.03.12-22.10.44][Log] Successfully sent complete response (61 bytes)
+[2025.03.12-22.10.49][Log] Client connection from 127.0.0.1:64705 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.10.49][Log] Cleaning up client connection from 127.0.0.1:64705
+[2025.03.12-22.10.49][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.10.49][Verbose] Successfully destroyed client socket
+[2025.03.12-22.10.49][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.10.50][Verbose] Connection attempt from 127.0.0.1:64713
+[2025.03.12-22.10.50][Log] MCP Client connected from 127.0.0.1:64713 (Total clients: 1)
+[2025.03.12-22.10.50][Log] Processing command: execute_python
+[2025.03.12-22.10.50][Warning] Missing 'code' or 'file' field in execute_python command
+[2025.03.12-22.10.50][Log] Successfully sent complete response (124 bytes)
+[2025.03.12-22.10.55][Log] Client connection from 127.0.0.1:64713 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.10.55][Log] Cleaning up client connection from 127.0.0.1:64713
+[2025.03.12-22.10.55][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.10.55][Verbose] Successfully destroyed client socket
+[2025.03.12-22.10.55][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.10.56][Verbose] Connection attempt from 127.0.0.1:64720
+[2025.03.12-22.10.56][Log] MCP Client connected from 127.0.0.1:64720 (Total clients: 1)
+[2025.03.12-22.10.56][Warning] Missing 'type' field in command
+[2025.03.12-22.10.56][Log] Successfully sent complete response (61 bytes)
+[2025.03.12-22.11.01][Log] Client connection from 127.0.0.1:64720 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.11.01][Log] Cleaning up client connection from 127.0.0.1:64720
+[2025.03.12-22.11.01][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.11.01][Verbose] Successfully destroyed client socket
+[2025.03.12-22.11.01][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.11.02][Verbose] Connection attempt from 127.0.0.1:64732
+[2025.03.12-22.11.02][Log] MCP Client connected from 127.0.0.1:64732 (Total clients: 1)
+[2025.03.12-22.11.03][Log] Processing command: execute_python
+[2025.03.12-22.11.03][Log] Executing Python code via temporary file
+[2025.03.12-22.11.03][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_C364D3B5427A334779E6FAAF3915C901.py", line 25, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3
+SyntaxError: 'return' outside function
+
+[2025.03.12-22.11.03][Log] Successfully sent complete response (483 bytes)
+[2025.03.12-22.11.08][Log] Client connection from 127.0.0.1:64732 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.11.08][Log] Cleaning up client connection from 127.0.0.1:64732
+[2025.03.12-22.11.08][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.11.08][Verbose] Successfully destroyed client socket
+[2025.03.12-22.11.08][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.11.09][Verbose] Connection attempt from 127.0.0.1:64745
+[2025.03.12-22.11.09][Log] MCP Client connected from 127.0.0.1:64745 (Total clients: 1)
+[2025.03.12-22.11.09][Warning] Unknown command: python
+[2025.03.12-22.11.09][Log] Successfully sent complete response (64 bytes)
+[2025.03.12-22.11.14][Log] Client connection from 127.0.0.1:64745 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.11.14][Log] Cleaning up client connection from 127.0.0.1:64745
+[2025.03.12-22.11.14][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.11.14][Verbose] Successfully destroyed client socket
+[2025.03.12-22.11.14][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-22.11.15][Verbose] Connection attempt from 127.0.0.1:64753
+[2025.03.12-22.11.15][Log] MCP Client connected from 127.0.0.1:64753 (Total clients: 1)
+[2025.03.12-22.11.15][Warning] Unknown command: python
+[2025.03.12-22.11.15][Log] Successfully sent complete response (64 bytes)
+[2025.03.12-22.11.21][Log] Client connection from 127.0.0.1:64753 appears to be closed (error code 0), cleaning up
+[2025.03.12-22.11.21][Log] Cleaning up client connection from 127.0.0.1:64753
+[2025.03.12-22.11.21][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-22.11.21][Verbose] Successfully destroyed client socket
+[2025.03.12-22.11.21][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.21][Verbose] Connection attempt from 127.0.0.1:55188
+[2025.03.12-23.32.21][Log] MCP Client connected from 127.0.0.1:55188 (Total clients: 1)
+[2025.03.12-23.32.21][Log] Processing command: get_scene_info
+[2025.03.12-23.32.21][Log] Handling get_scene_info command
+[2025.03.12-23.32.21][Log] Sending get_scene_info response with 6 actors
+[2025.03.12-23.32.21][Log] Successfully sent complete response (769 bytes)
+[2025.03.12-23.32.22][Log] Client connection from 127.0.0.1:55188 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.22][Log] Cleaning up client connection from 127.0.0.1:55188
+[2025.03.12-23.32.22][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.22][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.22][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.25][Verbose] Connection attempt from 127.0.0.1:55204
+[2025.03.12-23.32.25][Log] MCP Client connected from 127.0.0.1:55204 (Total clients: 1)
+[2025.03.12-23.32.25][Log] Processing command: create_object
+[2025.03.12-23.32.25][Log] Created Cube at location (0.000000, 0.000000, 0.000000)
+[2025.03.12-23.32.25][Log] Set cube mesh
+[2025.03.12-23.32.25][Log] Set custom label to Step1
+[2025.03.12-23.32.25][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.26][Log] Client connection from 127.0.0.1:55204 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.26][Log] Cleaning up client connection from 127.0.0.1:55204
+[2025.03.12-23.32.26][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.26][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.26][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.28][Verbose] Connection attempt from 127.0.0.1:55206
+[2025.03.12-23.32.28][Log] MCP Client connected from 127.0.0.1:55206 (Total clients: 1)
+[2025.03.12-23.32.28][Log] Processing command: create_object
+[2025.03.12-23.32.28][Log] Created Cube at location (0.000000, 100.000000, 100.000000)
+[2025.03.12-23.32.28][Log] Set cube mesh
+[2025.03.12-23.32.28][Log] Set custom label to Step2
+[2025.03.12-23.32.28][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.29][Log] Client connection from 127.0.0.1:55206 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.29][Log] Cleaning up client connection from 127.0.0.1:55206
+[2025.03.12-23.32.29][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.29][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.29][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.31][Verbose] Connection attempt from 127.0.0.1:55212
+[2025.03.12-23.32.31][Log] MCP Client connected from 127.0.0.1:55212 (Total clients: 1)
+[2025.03.12-23.32.32][Log] Processing command: create_object
+[2025.03.12-23.32.32][Log] Created Cube at location (0.000000, 200.000000, 200.000000)
+[2025.03.12-23.32.32][Log] Set cube mesh
+[2025.03.12-23.32.32][Log] Set custom label to Step3
+[2025.03.12-23.32.32][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.32][Log] Client connection from 127.0.0.1:55212 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.32][Log] Cleaning up client connection from 127.0.0.1:55212
+[2025.03.12-23.32.32][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.32][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.32][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.34][Verbose] Connection attempt from 127.0.0.1:55215
+[2025.03.12-23.32.34][Log] MCP Client connected from 127.0.0.1:55215 (Total clients: 1)
+[2025.03.12-23.32.34][Log] Processing command: create_object
+[2025.03.12-23.32.34][Log] Created Cube at location (0.000000, 300.000000, 300.000000)
+[2025.03.12-23.32.34][Log] Set cube mesh
+[2025.03.12-23.32.34][Log] Set custom label to Step4
+[2025.03.12-23.32.34][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.34][Log] Client connection from 127.0.0.1:55215 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.34][Log] Cleaning up client connection from 127.0.0.1:55215
+[2025.03.12-23.32.34][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.34][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.34][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.36][Verbose] Connection attempt from 127.0.0.1:55217
+[2025.03.12-23.32.36][Log] MCP Client connected from 127.0.0.1:55217 (Total clients: 1)
+[2025.03.12-23.32.37][Log] Processing command: create_object
+[2025.03.12-23.32.37][Log] Created Cube at location (0.000000, 400.000000, 400.000000)
+[2025.03.12-23.32.37][Log] Set cube mesh
+[2025.03.12-23.32.37][Log] Set custom label to Step5
+[2025.03.12-23.32.37][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.37][Log] Client connection from 127.0.0.1:55217 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.37][Log] Cleaning up client connection from 127.0.0.1:55217
+[2025.03.12-23.32.37][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.37][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.37][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.39][Verbose] Connection attempt from 127.0.0.1:55223
+[2025.03.12-23.32.39][Log] MCP Client connected from 127.0.0.1:55223 (Total clients: 1)
+[2025.03.12-23.32.39][Log] Processing command: create_object
+[2025.03.12-23.32.39][Log] Created Cube at location (0.000000, 500.000000, 500.000000)
+[2025.03.12-23.32.39][Log] Set cube mesh
+[2025.03.12-23.32.39][Log] Set custom label to Step6
+[2025.03.12-23.32.39][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.39][Log] Client connection from 127.0.0.1:55223 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.39][Log] Cleaning up client connection from 127.0.0.1:55223
+[2025.03.12-23.32.39][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.39][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.39][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.42][Verbose] Connection attempt from 127.0.0.1:55225
+[2025.03.12-23.32.42][Log] MCP Client connected from 127.0.0.1:55225 (Total clients: 1)
+[2025.03.12-23.32.42][Log] Processing command: create_object
+[2025.03.12-23.32.42][Log] Created Cube at location (0.000000, 600.000000, 600.000000)
+[2025.03.12-23.32.42][Log] Set cube mesh
+[2025.03.12-23.32.42][Log] Set custom label to Step7
+[2025.03.12-23.32.42][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.42][Log] Client connection from 127.0.0.1:55225 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.42][Log] Cleaning up client connection from 127.0.0.1:55225
+[2025.03.12-23.32.42][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.42][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.42][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.32.44][Verbose] Connection attempt from 127.0.0.1:55228
+[2025.03.12-23.32.44][Log] MCP Client connected from 127.0.0.1:55228 (Total clients: 1)
+[2025.03.12-23.32.44][Log] Processing command: create_object
+[2025.03.12-23.32.44][Log] Created Cube at location (0.000000, 700.000000, 700.000000)
+[2025.03.12-23.32.44][Log] Set cube mesh
+[2025.03.12-23.32.44][Log] Set custom label to Step8
+[2025.03.12-23.32.44][Log] Successfully sent complete response (99 bytes)
+[2025.03.12-23.32.44][Log] Client connection from 127.0.0.1:55228 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.32.44][Log] Cleaning up client connection from 127.0.0.1:55228
+[2025.03.12-23.32.44][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.32.44][Verbose] Successfully destroyed client socket
+[2025.03.12-23.32.44][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.05][Verbose] Connection attempt from 127.0.0.1:55257
+[2025.03.12-23.33.05][Log] MCP Client connected from 127.0.0.1:55257 (Total clients: 1)
+[2025.03.12-23.33.05][Log] Processing command: modify_object
+[2025.03.12-23.33.05][Log] Updated scale of StaticMeshActor_0 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.05][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.05][Log] Client connection from 127.0.0.1:55257 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.05][Log] Cleaning up client connection from 127.0.0.1:55257
+[2025.03.12-23.33.05][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.05][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.05][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.07][Verbose] Connection attempt from 127.0.0.1:55265
+[2025.03.12-23.33.07][Log] MCP Client connected from 127.0.0.1:55265 (Total clients: 1)
+[2025.03.12-23.33.07][Log] Processing command: modify_object
+[2025.03.12-23.33.07][Log] Updated scale of StaticMeshActor_1 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.07][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.08][Log] Client connection from 127.0.0.1:55265 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.08][Log] Cleaning up client connection from 127.0.0.1:55265
+[2025.03.12-23.33.08][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.08][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.08][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.10][Verbose] Connection attempt from 127.0.0.1:55268
+[2025.03.12-23.33.10][Log] MCP Client connected from 127.0.0.1:55268 (Total clients: 1)
+[2025.03.12-23.33.10][Log] Processing command: modify_object
+[2025.03.12-23.33.10][Log] Updated scale of StaticMeshActor_2 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.10][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.10][Log] Client connection from 127.0.0.1:55268 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.10][Log] Cleaning up client connection from 127.0.0.1:55268
+[2025.03.12-23.33.10][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.10][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.10][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.12][Verbose] Connection attempt from 127.0.0.1:55270
+[2025.03.12-23.33.12][Log] MCP Client connected from 127.0.0.1:55270 (Total clients: 1)
+[2025.03.12-23.33.12][Log] Processing command: modify_object
+[2025.03.12-23.33.12][Log] Updated scale of StaticMeshActor_3 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.12][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.13][Log] Client connection from 127.0.0.1:55270 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.13][Log] Cleaning up client connection from 127.0.0.1:55270
+[2025.03.12-23.33.13][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.13][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.13][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.15][Verbose] Connection attempt from 127.0.0.1:55275
+[2025.03.12-23.33.15][Log] MCP Client connected from 127.0.0.1:55275 (Total clients: 1)
+[2025.03.12-23.33.15][Log] Processing command: modify_object
+[2025.03.12-23.33.15][Log] Updated scale of StaticMeshActor_4 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.15][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.15][Log] Client connection from 127.0.0.1:55275 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.15][Log] Cleaning up client connection from 127.0.0.1:55275
+[2025.03.12-23.33.15][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.15][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.15][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.17][Verbose] Connection attempt from 127.0.0.1:55278
+[2025.03.12-23.33.17][Log] MCP Client connected from 127.0.0.1:55278 (Total clients: 1)
+[2025.03.12-23.33.17][Log] Processing command: modify_object
+[2025.03.12-23.33.17][Log] Updated scale of StaticMeshActor_5 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.17][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.17][Log] Client connection from 127.0.0.1:55278 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.17][Log] Cleaning up client connection from 127.0.0.1:55278
+[2025.03.12-23.33.17][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.17][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.17][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.19][Verbose] Connection attempt from 127.0.0.1:55280
+[2025.03.12-23.33.19][Log] MCP Client connected from 127.0.0.1:55280 (Total clients: 1)
+[2025.03.12-23.33.19][Log] Processing command: modify_object
+[2025.03.12-23.33.19][Log] Updated scale of StaticMeshActor_6 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.19][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.19][Log] Client connection from 127.0.0.1:55280 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.19][Log] Cleaning up client connection from 127.0.0.1:55280
+[2025.03.12-23.33.19][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.19][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.19][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.22][Verbose] Connection attempt from 127.0.0.1:55286
+[2025.03.12-23.33.22][Log] MCP Client connected from 127.0.0.1:55286 (Total clients: 1)
+[2025.03.12-23.33.22][Log] Processing command: modify_object
+[2025.03.12-23.33.22][Log] Updated scale of StaticMeshActor_7 to (3.000000, 3.000000, 0.500000)
+[2025.03.12-23.33.22][Log] Successfully sent complete response (78 bytes)
+[2025.03.12-23.33.22][Log] Client connection from 127.0.0.1:55286 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.22][Log] Cleaning up client connection from 127.0.0.1:55286
+[2025.03.12-23.33.22][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.22][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.22][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.33.39][Verbose] Connection attempt from 127.0.0.1:55316
+[2025.03.12-23.33.39][Log] MCP Client connected from 127.0.0.1:55316 (Total clients: 1)
+[2025.03.12-23.33.39][Log] Processing command: execute_python
+[2025.03.12-23.33.39][Log] Executing Python code via temporary file
+[2025.03.12-23.33.39][Log] Python execution successful
+[2025.03.12-23.33.39][Log] Successfully sent complete response (1016 bytes)
+[2025.03.12-23.33.39][Log] Client connection from 127.0.0.1:55316 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.33.39][Log] Cleaning up client connection from 127.0.0.1:55316
+[2025.03.12-23.33.39][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.33.39][Verbose] Successfully destroyed client socket
+[2025.03.12-23.33.39][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.34.34][Verbose] Connection attempt from 127.0.0.1:55395
+[2025.03.12-23.34.34][Log] MCP Client connected from 127.0.0.1:55395 (Total clients: 1)
+[2025.03.12-23.34.34][Log] Processing command: execute_python
+[2025.03.12-23.34.34][Log] Executing Python code via temporary file
+[2025.03.12-23.34.35][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_B7E5A05B4E24C381A9E8C889BDFD6547.py", line 185, in <module>
     exec(code_obj)
-  File "<string>", line 10, in <module>
-NameError: name 'undefined_variable' is not defined
+  File "<string>", line 157, in <module>
+TypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found
 
-[2025.03.12-21.11.53][Log] Successfully sent complete response (544 bytes)
-[2025.03.12-21.11.53][Verbose] Connection attempt from 127.0.0.1:58510
-[2025.03.12-21.11.53][Log] MCP Client connected from 127.0.0.1:58510 (Total clients: 2)
-[2025.03.12-21.11.53][Log] Client connection from 127.0.0.1:58509 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.11.53][Log] Cleaning up client connection from 127.0.0.1:58509
-[2025.03.12-21.11.53][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.11.53][Verbose] Successfully destroyed client socket
-[2025.03.12-21.11.53][Log] MCP Client disconnected (Remaining clients: 1)
-[2025.03.12-21.11.53][Log] Processing command: execute_python
-[2025.03.12-21.11.53][Log] Executing Python code via temporary file
-[2025.03.12-21.11.54][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_ADFA31C0445F55C2FB446BA56EE1ACF8.py", line 27, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 5
-    print("This will cause a syntax error"
-         ^
-SyntaxError: '(' was never closed
-
-[2025.03.12-21.11.54][Log] Successfully sent complete response (540 bytes)
-[2025.03.12-21.11.54][Log] Client connection from 127.0.0.1:58510 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.11.54][Log] Cleaning up client connection from 127.0.0.1:58510
-[2025.03.12-21.11.54][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.11.54][Verbose] Successfully destroyed client socket
-[2025.03.12-21.11.54][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.12.02][Verbose] Connection attempt from 127.0.0.1:58521
-[2025.03.12-21.12.02][Log] MCP Client connected from 127.0.0.1:58521 (Total clients: 1)
-[2025.03.12-21.12.02][Log] Processing command: execute_python
-[2025.03.12-21.12.02][Log] Executing Python code via temporary file
-[2025.03.12-21.12.02][Log] Python execution successful
-[2025.03.12-21.12.02][Log] Successfully sent complete response (325 bytes)
-[2025.03.12-21.12.03][Log] Client connection from 127.0.0.1:58521 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.12.03][Log] Cleaning up client connection from 127.0.0.1:58521
-[2025.03.12-21.12.03][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.12.03][Verbose] Successfully destroyed client socket
-[2025.03.12-21.12.03][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.14][Verbose] Connection attempt from 127.0.0.1:58644
-[2025.03.12-21.13.14][Log] MCP Client connected from 127.0.0.1:58644 (Total clients: 1)
-[2025.03.12-21.13.14][Log] Processing command: execute_python
-[2025.03.12-21.13.14][Log] Executing Python code via temporary file
-[2025.03.12-21.13.14][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_1117D77D48133F63AC1825AEC7592145.py", line 65, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 32
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 32)
-
-[2025.03.12-21.13.14][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.13.14][Log] Client connection from 127.0.0.1:58644 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.14][Log] Cleaning up client connection from 127.0.0.1:58644
-[2025.03.12-21.13.14][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.14][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.14][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.19][Verbose] Connection attempt from 127.0.0.1:58653
-[2025.03.12-21.13.19][Log] MCP Client connected from 127.0.0.1:58653 (Total clients: 1)
-[2025.03.12-21.13.19][Log] Processing command: execute_python
-[2025.03.12-21.13.19][Log] Executing Python code via temporary file
-[2025.03.12-21.13.19][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_E186CBCA4CE8182AFB790D93EF372AED.py", line 52, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 28
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 28)
-
-[2025.03.12-21.13.19][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.13.19][Log] Client connection from 127.0.0.1:58653 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.19][Log] Cleaning up client connection from 127.0.0.1:58653
-[2025.03.12-21.13.19][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.19][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.19][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.23][Verbose] Connection attempt from 127.0.0.1:58662
-[2025.03.12-21.13.23][Log] MCP Client connected from 127.0.0.1:58662 (Total clients: 1)
-[2025.03.12-21.13.23][Log] Processing command: execute_python
-[2025.03.12-21.13.23][Log] Executing Python code via temporary file
-[2025.03.12-21.13.23][Log] Python execution successful
-[2025.03.12-21.13.23][Log] Successfully sent complete response (248 bytes)
-[2025.03.12-21.13.23][Log] Client connection from 127.0.0.1:58662 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.23][Log] Cleaning up client connection from 127.0.0.1:58662
-[2025.03.12-21.13.23][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.23][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.23][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.30][Verbose] Connection attempt from 127.0.0.1:58671
-[2025.03.12-21.13.30][Log] MCP Client connected from 127.0.0.1:58671 (Total clients: 1)
-[2025.03.12-21.13.30][Log] Processing command: execute_python
-[2025.03.12-21.13.30][Log] Executing Python code via temporary file
-[2025.03.12-21.13.31][Log] Python execution successful
-[2025.03.12-21.13.31][Log] Successfully sent complete response (164 bytes)
-[2025.03.12-21.13.31][Log] Client connection from 127.0.0.1:58671 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.31][Log] Cleaning up client connection from 127.0.0.1:58671
-[2025.03.12-21.13.31][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.31][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.31][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.41][Verbose] Connection attempt from 127.0.0.1:58685
-[2025.03.12-21.13.41][Log] MCP Client connected from 127.0.0.1:58685 (Total clients: 1)
-[2025.03.12-21.13.41][Log] Processing command: execute_python
-[2025.03.12-21.13.41][Log] Executing Python code via temporary file
-[2025.03.12-21.13.41][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_C9E5469F4402CE82A83078BA07C26761.py", line 73, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 49
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 49)
-
-[2025.03.12-21.13.41][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.13.41][Log] Client connection from 127.0.0.1:58685 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.41][Log] Cleaning up client connection from 127.0.0.1:58685
-[2025.03.12-21.13.41][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.41][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.41][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.13.47][Verbose] Connection attempt from 127.0.0.1:58693
-[2025.03.12-21.13.47][Log] MCP Client connected from 127.0.0.1:58693 (Total clients: 1)
-[2025.03.12-21.13.47][Log] Processing command: execute_python
-[2025.03.12-21.13.47][Log] Executing Python code via temporary file
-[2025.03.12-21.13.47][Log] Python execution successful
-[2025.03.12-21.13.47][Log] Successfully sent complete response (252 bytes)
-[2025.03.12-21.13.48][Log] Client connection from 127.0.0.1:58693 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.13.48][Log] Cleaning up client connection from 127.0.0.1:58693
-[2025.03.12-21.13.48][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.13.48][Verbose] Successfully destroyed client socket
-[2025.03.12-21.13.48][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.14.06][Verbose] Connection attempt from 127.0.0.1:58716
-[2025.03.12-21.14.06][Log] MCP Client connected from 127.0.0.1:58716 (Total clients: 1)
-[2025.03.12-21.14.07][Log] Processing command: execute_python
-[2025.03.12-21.14.07][Log] Executing Python code via temporary file
-[2025.03.12-21.14.07][Log] Python execution successful
-[2025.03.12-21.14.07][Log] Successfully sent complete response (524 bytes)
-[2025.03.12-21.14.07][Log] Client connection from 127.0.0.1:58716 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.14.07][Log] Cleaning up client connection from 127.0.0.1:58716
-[2025.03.12-21.14.07][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.14.07][Verbose] Successfully destroyed client socket
-[2025.03.12-21.14.07][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.14.23][Verbose] Connection attempt from 127.0.0.1:58740
-[2025.03.12-21.14.23][Log] MCP Client connected from 127.0.0.1:58740 (Total clients: 1)
-[2025.03.12-21.14.24][Log] Processing command: execute_python
-[2025.03.12-21.14.24][Log] Executing Python code via temporary file
-[2025.03.12-21.14.24][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_A944CBB24AC55A31579CC39FA717E099.py", line 108, in <module>
+[2025.03.12-23.34.35][Log] Successfully sent complete response (455 bytes)
+[2025.03.12-23.34.35][Log] Client connection from 127.0.0.1:55395 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.34.35][Log] Cleaning up client connection from 127.0.0.1:55395
+[2025.03.12-23.34.35][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.34.35][Verbose] Successfully destroyed client socket
+[2025.03.12-23.34.35][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.35.07][Verbose] Connection attempt from 127.0.0.1:55442
+[2025.03.12-23.35.07][Log] MCP Client connected from 127.0.0.1:55442 (Total clients: 1)
+[2025.03.12-23.35.07][Log] Processing command: execute_python
+[2025.03.12-23.35.07][Log] Executing Python code via temporary file
+[2025.03.12-23.35.07][Log] Python execution successful
+[2025.03.12-23.35.07][Log] Successfully sent complete response (101 bytes)
+[2025.03.12-23.35.07][Log] Client connection from 127.0.0.1:55442 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.35.07][Log] Cleaning up client connection from 127.0.0.1:55442
+[2025.03.12-23.35.07][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.35.07][Verbose] Successfully destroyed client socket
+[2025.03.12-23.35.07][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.36.25][Verbose] Connection attempt from 127.0.0.1:55546
+[2025.03.12-23.36.25][Log] MCP Client connected from 127.0.0.1:55546 (Total clients: 1)
+[2025.03.12-23.36.25][Log] Processing command: execute_python
+[2025.03.12-23.36.25][Log] Executing Python code via temporary file
+[2025.03.12-23.36.25][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_E5B7194F48D9C4449DBE3EA873E7BE9D.py", line 147, in <module>
     exec(code_obj)
-  File "<string>", line 24, in <module>
-AttributeError: 'SequencerTools' object has no attribute 'create_level_sequence_asset'
+  File "<string>", line 18, in <module>
+Exception: PointLightComponent: Property 'Intensity' for attribute 'intensity' on 'PointLightComponent' is read-only and cannot be set
 
-[2025.03.12-21.14.24][Log] Successfully sent complete response (533 bytes)
-[2025.03.12-21.14.24][Log] Client connection from 127.0.0.1:58740 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.14.24][Log] Cleaning up client connection from 127.0.0.1:58740
-[2025.03.12-21.14.24][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.14.24][Verbose] Successfully destroyed client socket
-[2025.03.12-21.14.24][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.14.38][Verbose] Connection attempt from 127.0.0.1:58762
-[2025.03.12-21.14.38][Log] MCP Client connected from 127.0.0.1:58762 (Total clients: 1)
-[2025.03.12-21.14.38][Log] Processing command: execute_python
-[2025.03.12-21.14.38][Log] Executing Python code via temporary file
-[2025.03.12-21.14.38][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_21CE1E1E45D650673C7E3CA3ACE51ACA.py", line 91, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 61
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 61)
-
-[2025.03.12-21.14.38][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.14.38][Log] Client connection from 127.0.0.1:58762 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.14.38][Log] Cleaning up client connection from 127.0.0.1:58762
-[2025.03.12-21.14.38][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.14.38][Verbose] Successfully destroyed client socket
-[2025.03.12-21.14.38][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.14.45][Verbose] Connection attempt from 127.0.0.1:58772
-[2025.03.12-21.14.45][Log] MCP Client connected from 127.0.0.1:58772 (Total clients: 1)
-[2025.03.12-21.14.45][Log] Processing command: execute_python
-[2025.03.12-21.14.45][Log] Executing Python code via temporary file
-[2025.03.12-21.14.45][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_125194704B2268D927D8C4A2B44CE9DD.py", line 64, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 40
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 40)
-
-[2025.03.12-21.14.45][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.14.45][Log] Client connection from 127.0.0.1:58772 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.14.45][Log] Cleaning up client connection from 127.0.0.1:58772
-[2025.03.12-21.14.45][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.14.45][Verbose] Successfully destroyed client socket
-[2025.03.12-21.14.45][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.14.51][Verbose] Connection attempt from 127.0.0.1:58780
-[2025.03.12-21.14.51][Log] MCP Client connected from 127.0.0.1:58780 (Total clients: 1)
-[2025.03.12-21.14.52][Log] Processing command: execute_python
-[2025.03.12-21.14.52][Log] Executing Python code via temporary file
-[2025.03.12-21.14.52][Log] Python execution successful
-[2025.03.12-21.14.52][Log] Successfully sent complete response (569 bytes)
-[2025.03.12-21.14.52][Log] Client connection from 127.0.0.1:58780 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.14.52][Log] Cleaning up client connection from 127.0.0.1:58780
-[2025.03.12-21.14.52][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.14.52][Verbose] Successfully destroyed client socket
-[2025.03.12-21.14.52][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.15.10][Verbose] Connection attempt from 127.0.0.1:58807
-[2025.03.12-21.15.10][Log] MCP Client connected from 127.0.0.1:58807 (Total clients: 1)
-[2025.03.12-21.15.10][Log] Processing command: execute_python
-[2025.03.12-21.15.10][Log] Executing Python code via temporary file
-[2025.03.12-21.15.10][Log] Python execution successful
-[2025.03.12-21.15.10][Log] Successfully sent complete response (1216 bytes)
-[2025.03.12-21.15.10][Log] Client connection from 127.0.0.1:58807 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.15.10][Log] Cleaning up client connection from 127.0.0.1:58807
-[2025.03.12-21.15.10][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.15.10][Verbose] Successfully destroyed client socket
-[2025.03.12-21.15.10][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.16.32][Verbose] Connection attempt from 127.0.0.1:58912
-[2025.03.12-21.16.32][Log] MCP Client connected from 127.0.0.1:58912 (Total clients: 1)
-[2025.03.12-21.16.32][Log] Processing command: execute_python
-[2025.03.12-21.16.32][Log] Executing Python code via temporary file
-[2025.03.12-21.16.32][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_7BBB87684D2B2EC0C93F90A18BB98FD0.py", line 161, in <module>
+[2025.03.12-23.36.25][Log] Successfully sent complete response (502 bytes)
+[2025.03.12-23.36.25][Log] Client connection from 127.0.0.1:55546 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.36.25][Log] Cleaning up client connection from 127.0.0.1:55546
+[2025.03.12-23.36.25][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.36.25][Verbose] Successfully destroyed client socket
+[2025.03.12-23.36.25][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.36.51][Verbose] Connection attempt from 127.0.0.1:55580
+[2025.03.12-23.36.51][Log] MCP Client connected from 127.0.0.1:55580 (Total clients: 1)
+[2025.03.12-23.36.51][Log] Processing command: execute_python
+[2025.03.12-23.36.51][Log] Executing Python code via temporary file
+[2025.03.12-23.36.51][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_13483BE645AE05915330F6B202D1B101.py", line 148, in <module>
     exec(code_obj)
-  File "<string>", line 15, in <module>
-AttributeError: 'SkyLight' object has no attribute 'sky_light_component'
+  File "<string>", line 22, in <module>
+AttributeError: 'PointLightComponent' object has no attribute 'set_attenuate_radius'
 
-[2025.03.12-21.16.32][Log] Successfully sent complete response (496 bytes)
-[2025.03.12-21.16.32][Log] Client connection from 127.0.0.1:58912 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.16.32][Log] Cleaning up client connection from 127.0.0.1:58912
-[2025.03.12-21.16.32][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.16.32][Verbose] Successfully destroyed client socket
-[2025.03.12-21.16.32][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.16.55][Verbose] Connection attempt from 127.0.0.1:58945
-[2025.03.12-21.16.55][Log] MCP Client connected from 127.0.0.1:58945 (Total clients: 1)
-[2025.03.12-21.16.55][Log] Processing command: execute_python
-[2025.03.12-21.16.55][Log] Executing Python code via temporary file
-[2025.03.12-21.16.55][Log] Python execution successful
-[2025.03.12-21.16.55][Log] Successfully sent complete response (714 bytes)
-[2025.03.12-21.16.55][Log] Client connection from 127.0.0.1:58945 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.16.55][Log] Cleaning up client connection from 127.0.0.1:58945
-[2025.03.12-21.16.55][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.16.55][Verbose] Successfully destroyed client socket
-[2025.03.12-21.16.55][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.17.34][Verbose] Connection attempt from 127.0.0.1:58997
-[2025.03.12-21.17.34][Log] MCP Client connected from 127.0.0.1:58997 (Total clients: 1)
-[2025.03.12-21.17.34][Log] Processing command: execute_python
-[2025.03.12-21.17.34][Log] Executing Python code via temporary file
-[2025.03.12-21.17.34][Log] Python execution successful
-[2025.03.12-21.17.34][Log] Successfully sent complete response (668 bytes)
-[2025.03.12-21.17.34][Log] Client connection from 127.0.0.1:58997 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.17.34][Log] Cleaning up client connection from 127.0.0.1:58997
-[2025.03.12-21.17.34][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.17.34][Verbose] Successfully destroyed client socket
-[2025.03.12-21.17.34][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.17.54][Verbose] Connection attempt from 127.0.0.1:59028
-[2025.03.12-21.17.54][Log] MCP Client connected from 127.0.0.1:59028 (Total clients: 1)
-[2025.03.12-21.17.54][Log] Processing command: execute_python
-[2025.03.12-21.17.54][Log] Executing Python code via temporary file
-[2025.03.12-21.17.54][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_2D3261574619B80283292C94253A4326.py", line 119, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 62
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 62)
+[2025.03.12-23.36.51][Log] Successfully sent complete response (452 bytes)
+[2025.03.12-23.36.52][Log] Client connection from 127.0.0.1:55580 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.36.52][Log] Cleaning up client connection from 127.0.0.1:55580
+[2025.03.12-23.36.52][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.36.52][Verbose] Successfully destroyed client socket
+[2025.03.12-23.36.52][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.36.58][Verbose] Connection attempt from 127.0.0.1:55590
+[2025.03.12-23.36.58][Log] MCP Client connected from 127.0.0.1:55590 (Total clients: 1)
+[2025.03.12-23.36.58][Log] Processing command: execute_python
+[2025.03.12-23.36.58][Log] Executing Python code via temporary file
+[2025.03.12-23.36.58][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_F8B42909482E3279E1A19A8A4D958FCB.py", line 43, in <module>
+    exec(code_obj)
+  File "<string>", line 9, in <module>
+AttributeError: module 'unreal' has no attribute 'EditorPropertyLibrary'
 
-[2025.03.12-21.17.54][Log] Successfully sent complete response (540 bytes)
-[2025.03.12-21.17.54][Log] Client connection from 127.0.0.1:59028 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.17.54][Log] Cleaning up client connection from 127.0.0.1:59028
-[2025.03.12-21.17.54][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.17.54][Verbose] Successfully destroyed client socket
-[2025.03.12-21.17.54][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.18.41][Verbose] Connection attempt from 127.0.0.1:59101
-[2025.03.12-21.18.41][Log] MCP Client connected from 127.0.0.1:59101 (Total clients: 1)
-[2025.03.12-21.18.41][Log] Processing command: execute_python
-[2025.03.12-21.18.41][Log] Executing Python code via temporary file
-[2025.03.12-21.18.41][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_5CD9AE324FB13958C82DA6BEC3C89B70.py", line 116, in <module>
+[2025.03.12-23.36.58][Log] Successfully sent complete response (438 bytes)
+[2025.03.12-23.36.59][Log] Client connection from 127.0.0.1:55590 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.36.59][Log] Cleaning up client connection from 127.0.0.1:55590
+[2025.03.12-23.36.59][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.36.59][Verbose] Successfully destroyed client socket
+[2025.03.12-23.36.59][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.37.12][Verbose] Connection attempt from 127.0.0.1:55613
+[2025.03.12-23.37.12][Log] MCP Client connected from 127.0.0.1:55613 (Total clients: 1)
+[2025.03.12-23.37.12][Log] Processing command: execute_python
+[2025.03.12-23.37.12][Log] Executing Python code via temporary file
+[2025.03.12-23.37.12][Log] Python execution successful
+[2025.03.12-23.37.12][Log] Successfully sent complete response (157 bytes)
+[2025.03.12-23.37.12][Log] Client connection from 127.0.0.1:55613 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.37.12][Log] Cleaning up client connection from 127.0.0.1:55613
+[2025.03.12-23.37.12][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.37.12][Verbose] Successfully destroyed client socket
+[2025.03.12-23.37.12][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.41.46][Verbose] Connection attempt from 127.0.0.1:55964
+[2025.03.12-23.41.46][Log] MCP Client connected from 127.0.0.1:55964 (Total clients: 1)
+[2025.03.12-23.41.46][Log] Processing command: execute_python
+[2025.03.12-23.41.46][Log] Executing Python code via temporary file
+[2025.03.12-23.41.46][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_1E4CEAB046569768327603906F109D72.py", line 58, in <module>
     exec(code_obj)
   File "<string>", line 21, in <module>
-TypeError: get_game_time_in_seconds() required argument 'world_context_object' (pos 1) not found
+AttributeError: module 'unreal' has no attribute 'KismetSystemLibrary'
 
-[2025.03.12-21.18.41][Log] Successfully sent complete response (524 bytes)
-[2025.03.12-21.18.41][Log] Client connection from 127.0.0.1:59101 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.18.41][Log] Cleaning up client connection from 127.0.0.1:59101
-[2025.03.12-21.18.41][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.18.41][Verbose] Successfully destroyed client socket
-[2025.03.12-21.18.41][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.18.55][Verbose] Connection attempt from 127.0.0.1:59116
-[2025.03.12-21.18.55][Log] MCP Client connected from 127.0.0.1:59116 (Total clients: 1)
-[2025.03.12-21.18.55][Log] Processing command: execute_python
-[2025.03.12-21.18.55][Log] Executing Python code via temporary file
-[2025.03.12-21.18.55][Log] Python execution successful
-[2025.03.12-21.18.55][Log] Successfully sent complete response (881 bytes)
-[2025.03.12-21.18.55][Log] Client connection from 127.0.0.1:59116 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.18.55][Log] Cleaning up client connection from 127.0.0.1:59116
-[2025.03.12-21.18.55][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.18.55][Verbose] Successfully destroyed client socket
-[2025.03.12-21.18.55][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.19.10][Verbose] Connection attempt from 127.0.0.1:59137
-[2025.03.12-21.19.10][Log] MCP Client connected from 127.0.0.1:59137 (Total clients: 1)
-[2025.03.12-21.19.10][Log] Processing command: execute_python
-[2025.03.12-21.19.10][Log] Executing Python code via temporary file
-[2025.03.12-21.19.10][Log] Python execution successful
-[2025.03.12-21.19.10][Log] Successfully sent complete response (918 bytes)
-[2025.03.12-21.19.10][Log] Client connection from 127.0.0.1:59137 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.19.10][Log] Cleaning up client connection from 127.0.0.1:59137
-[2025.03.12-21.19.10][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.19.10][Verbose] Successfully destroyed client socket
-[2025.03.12-21.19.10][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.19.34][Verbose] Connection attempt from 127.0.0.1:59167
-[2025.03.12-21.19.34][Log] MCP Client connected from 127.0.0.1:59167 (Total clients: 1)
-[2025.03.12-21.19.34][Log] Processing command: execute_python
-[2025.03.12-21.19.34][Log] Executing Python code via temporary file
-[2025.03.12-21.19.34][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_B5CDDD5E4A511A096CD45F8142DFD761.py", line 170, in <module>
+[2025.03.12-23.41.46][Log] Successfully sent complete response (511 bytes)
+[2025.03.12-23.41.47][Log] Client connection from 127.0.0.1:55964 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.41.47][Log] Cleaning up client connection from 127.0.0.1:55964
+[2025.03.12-23.41.47][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.41.47][Verbose] Successfully destroyed client socket
+[2025.03.12-23.41.47][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.41.51][Verbose] Connection attempt from 127.0.0.1:55967
+[2025.03.12-23.41.51][Log] MCP Client connected from 127.0.0.1:55967 (Total clients: 1)
+[2025.03.12-23.41.51][Log] Processing command: execute_python
+[2025.03.12-23.41.51][Log] Executing Python code via temporary file
+[2025.03.12-23.41.51][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_28D48AA84751A61B15B1BC83B27272E9.py", line 36, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 12
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 12)
+
+[2025.03.12-23.41.51][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.41.51][Log] Client connection from 127.0.0.1:55967 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.41.51][Log] Cleaning up client connection from 127.0.0.1:55967
+[2025.03.12-23.41.51][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.41.51][Verbose] Successfully destroyed client socket
+[2025.03.12-23.41.51][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.41.54][Verbose] Connection attempt from 127.0.0.1:55974
+[2025.03.12-23.41.54][Log] MCP Client connected from 127.0.0.1:55974 (Total clients: 1)
+[2025.03.12-23.41.54][Log] Processing command: execute_python
+[2025.03.12-23.41.54][Log] Executing Python code via temporary file
+[2025.03.12-23.41.54][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_9119566A48762F782DD97D8F47E7314E.py", line 36, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 12
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 12)
+
+[2025.03.12-23.41.54][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.41.55][Log] Client connection from 127.0.0.1:55974 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.41.55][Log] Cleaning up client connection from 127.0.0.1:55974
+[2025.03.12-23.41.55][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.41.55][Verbose] Successfully destroyed client socket
+[2025.03.12-23.41.55][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.41.57][Verbose] Connection attempt from 127.0.0.1:55976
+[2025.03.12-23.41.57][Log] MCP Client connected from 127.0.0.1:55976 (Total clients: 1)
+[2025.03.12-23.41.57][Log] Processing command: execute_python
+[2025.03.12-23.41.57][Log] Executing Python code via temporary file
+[2025.03.12-23.41.57][Log] Python execution successful
+[2025.03.12-23.41.57][Log] Successfully sent complete response (238417 bytes)
+[2025.03.12-23.41.57][Log] Client connection from 127.0.0.1:55976 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.41.57][Log] Cleaning up client connection from 127.0.0.1:55976
+[2025.03.12-23.41.57][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.41.57][Verbose] Successfully destroyed client socket
+[2025.03.12-23.41.57][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.42.09][Verbose] Connection attempt from 127.0.0.1:55993
+[2025.03.12-23.42.09][Log] MCP Client connected from 127.0.0.1:55993 (Total clients: 1)
+[2025.03.12-23.42.09][Log] Processing command: execute_python
+[2025.03.12-23.42.09][Log] Executing Python code via temporary file
+[2025.03.12-23.42.09][Log] Python execution successful
+[2025.03.12-23.42.09][Log] Successfully sent complete response (199 bytes)
+[2025.03.12-23.42.09][Log] Client connection from 127.0.0.1:55993 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.42.09][Log] Cleaning up client connection from 127.0.0.1:55993
+[2025.03.12-23.42.09][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.42.09][Verbose] Successfully destroyed client socket
+[2025.03.12-23.42.09][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.42.24][Verbose] Connection attempt from 127.0.0.1:56017
+[2025.03.12-23.42.24][Log] MCP Client connected from 127.0.0.1:56017 (Total clients: 1)
+[2025.03.12-23.42.24][Log] Processing command: execute_python
+[2025.03.12-23.42.24][Log] Executing Python code via temporary file
+[2025.03.12-23.42.24][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_09A5A0384DFEE8C749E778A27523363B.py", line 84, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 54
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 54)
+
+[2025.03.12-23.42.24][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.42.24][Log] Client connection from 127.0.0.1:56017 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.42.24][Log] Cleaning up client connection from 127.0.0.1:56017
+[2025.03.12-23.42.24][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.42.24][Verbose] Successfully destroyed client socket
+[2025.03.12-23.42.24][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.42.42][Verbose] Connection attempt from 127.0.0.1:56044
+[2025.03.12-23.42.42][Log] MCP Client connected from 127.0.0.1:56044 (Total clients: 1)
+[2025.03.12-23.42.42][Log] Processing command: execute_python
+[2025.03.12-23.42.42][Log] Executing Python code via temporary file
+[2025.03.12-23.42.42][Log] Python execution successful
+[2025.03.12-23.42.42][Log] Successfully sent complete response (1149 bytes)
+[2025.03.12-23.42.42][Log] Client connection from 127.0.0.1:56044 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.42.42][Log] Cleaning up client connection from 127.0.0.1:56044
+[2025.03.12-23.42.42][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.42.42][Verbose] Successfully destroyed client socket
+[2025.03.12-23.42.42][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.45.48][Verbose] Connection attempt from 127.0.0.1:56310
+[2025.03.12-23.45.48][Log] MCP Client connected from 127.0.0.1:56310 (Total clients: 1)
+[2025.03.12-23.45.49][Log] Processing command: execute_python
+[2025.03.12-23.45.49][Log] Executing Python code via temporary file
+[2025.03.12-23.45.49][Log] Python execution successful
+[2025.03.12-23.45.49][Log] Successfully sent complete response (404 bytes)
+[2025.03.12-23.45.49][Log] Client connection from 127.0.0.1:56310 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.45.49][Log] Cleaning up client connection from 127.0.0.1:56310
+[2025.03.12-23.45.49][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.45.49][Verbose] Successfully destroyed client socket
+[2025.03.12-23.45.49][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.45.59][Verbose] Connection attempt from 127.0.0.1:56320
+[2025.03.12-23.45.59][Log] MCP Client connected from 127.0.0.1:56320 (Total clients: 1)
+[2025.03.12-23.45.59][Log] Processing command: execute_python
+[2025.03.12-23.45.59][Log] Executing Python code via temporary file
+[2025.03.12-23.45.59][Log] Python execution successful
+[2025.03.12-23.45.59][Log] Successfully sent complete response (354 bytes)
+[2025.03.12-23.45.59][Log] Client connection from 127.0.0.1:56320 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.45.59][Log] Cleaning up client connection from 127.0.0.1:56320
+[2025.03.12-23.45.59][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.45.59][Verbose] Successfully destroyed client socket
+[2025.03.12-23.45.59][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.46.11][Verbose] Connection attempt from 127.0.0.1:56333
+[2025.03.12-23.46.11][Log] MCP Client connected from 127.0.0.1:56333 (Total clients: 1)
+[2025.03.12-23.46.11][Log] Processing command: execute_python
+[2025.03.12-23.46.11][Log] Executing Python code via temporary file
+[2025.03.12-23.46.11][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_726B60584C802328E67A78A67F35E7C1.py", line 88, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 22
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 22)
+
+[2025.03.12-23.46.11][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.46.11][Log] Client connection from 127.0.0.1:56333 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.46.11][Log] Cleaning up client connection from 127.0.0.1:56333
+[2025.03.12-23.46.11][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.46.11][Verbose] Successfully destroyed client socket
+[2025.03.12-23.46.11][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.46.30][Verbose] Connection attempt from 127.0.0.1:56357
+[2025.03.12-23.46.30][Log] MCP Client connected from 127.0.0.1:56357 (Total clients: 1)
+[2025.03.12-23.46.30][Log] Processing command: execute_python
+[2025.03.12-23.46.30][Log] Executing Python code via temporary file
+[2025.03.12-23.46.30][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_420EEC7944B912F9C75A57B388A059A4.py", line 98, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 20
+    print(f"
+          ^
+SyntaxError: unterminated string literal (detected at line 20)
+
+[2025.03.12-23.46.30][Log] Successfully sent complete response (540 bytes)
+[2025.03.12-23.46.31][Log] Client connection from 127.0.0.1:56357 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.46.31][Log] Cleaning up client connection from 127.0.0.1:56357
+[2025.03.12-23.46.31][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.46.31][Verbose] Successfully destroyed client socket
+[2025.03.12-23.46.31][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.46.40][Verbose] Connection attempt from 127.0.0.1:56371
+[2025.03.12-23.46.40][Log] MCP Client connected from 127.0.0.1:56371 (Total clients: 1)
+[2025.03.12-23.46.40][Log] Processing command: execute_python
+[2025.03.12-23.46.40][Log] Executing Python code via temporary file
+[2025.03.12-23.46.40][Log] Python execution successful
+[2025.03.12-23.46.40][Log] Successfully sent complete response (6214 bytes)
+[2025.03.12-23.46.40][Log] Client connection from 127.0.0.1:56371 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.46.40][Log] Cleaning up client connection from 127.0.0.1:56371
+[2025.03.12-23.46.40][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.46.40][Verbose] Successfully destroyed client socket
+[2025.03.12-23.46.40][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.46.52][Verbose] Connection attempt from 127.0.0.1:56384
+[2025.03.12-23.46.52][Log] MCP Client connected from 127.0.0.1:56384 (Total clients: 1)
+[2025.03.12-23.46.52][Log] Processing command: execute_python
+[2025.03.12-23.46.52][Log] Executing Python code via temporary file
+[2025.03.12-23.46.52][Log] Python execution successful
+[2025.03.12-23.46.52][Log] Successfully sent complete response (327 bytes)
+[2025.03.12-23.46.53][Log] Client connection from 127.0.0.1:56384 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.46.53][Log] Cleaning up client connection from 127.0.0.1:56384
+[2025.03.12-23.46.53][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.46.53][Verbose] Successfully destroyed client socket
+[2025.03.12-23.46.53][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.09][Verbose] Connection attempt from 127.0.0.1:56567
+[2025.03.12-23.49.09][Log] MCP Client connected from 127.0.0.1:56567 (Total clients: 1)
+[2025.03.12-23.49.09][Log] Processing command: execute_python
+[2025.03.12-23.49.09][Log] Executing Python code via temporary file
+[2025.03.12-23.49.10][Log] Python execution successful
+[2025.03.12-23.49.10][Log] Successfully sent complete response (113 bytes)
+[2025.03.12-23.49.10][Log] Client connection from 127.0.0.1:56567 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.10][Log] Cleaning up client connection from 127.0.0.1:56567
+[2025.03.12-23.49.10][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.10][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.10][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.15][Verbose] Connection attempt from 127.0.0.1:56575
+[2025.03.12-23.49.15][Log] MCP Client connected from 127.0.0.1:56575 (Total clients: 1)
+[2025.03.12-23.49.15][Log] Processing command: execute_python
+[2025.03.12-23.49.15][Log] Executing Python code via temporary file
+[2025.03.12-23.49.15][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_FFECC43941F7135882477584E0AFB454.py", line 44, in <module>
+    exec(code_obj)
+  File "<string>", line 17, in <module>
+TypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found
+
+[2025.03.12-23.49.15][Log] Successfully sent complete response (453 bytes)
+[2025.03.12-23.49.15][Log] Client connection from 127.0.0.1:56575 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.15][Log] Cleaning up client connection from 127.0.0.1:56575
+[2025.03.12-23.49.15][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.15][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.15][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.21][Verbose] Connection attempt from 127.0.0.1:56580
+[2025.03.12-23.49.21][Log] MCP Client connected from 127.0.0.1:56580 (Total clients: 1)
+[2025.03.12-23.49.21][Log] Processing command: execute_python
+[2025.03.12-23.49.21][Log] Executing Python code via temporary file
+[2025.03.12-23.49.21][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_13E322084574C412F901809E8573D51A.py", line 49, in <module>
+    exec(code_obj)
+  File "<string>", line 21, in <module>
+TypeError: set_actor_transform() required argument 'sweep' (pos 2) not found
+
+[2025.03.12-23.49.21][Log] Successfully sent complete response (443 bytes)
+[2025.03.12-23.49.21][Log] Client connection from 127.0.0.1:56580 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.21][Log] Cleaning up client connection from 127.0.0.1:56580
+[2025.03.12-23.49.21][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.21][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.21][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.27][Verbose] Connection attempt from 127.0.0.1:56591
+[2025.03.12-23.49.27][Log] MCP Client connected from 127.0.0.1:56591 (Total clients: 1)
+[2025.03.12-23.49.27][Log] Processing command: execute_python
+[2025.03.12-23.49.27][Log] Executing Python code via temporary file
+[2025.03.12-23.49.27][Log] Python execution successful
+[2025.03.12-23.49.27][Log] Successfully sent complete response (108 bytes)
+[2025.03.12-23.49.27][Log] Client connection from 127.0.0.1:56591 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.27][Log] Cleaning up client connection from 127.0.0.1:56591
+[2025.03.12-23.49.27][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.27][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.27][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.35][Verbose] Connection attempt from 127.0.0.1:56606
+[2025.03.12-23.49.35][Log] MCP Client connected from 127.0.0.1:56606 (Total clients: 1)
+[2025.03.12-23.49.35][Log] Processing command: execute_python
+[2025.03.12-23.49.35][Log] Executing Python code via temporary file
+[2025.03.12-23.49.35][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_8DD36F5A4C805D23F05A56B117483E84.py", line 64, in <module>
+    exec(code_obj)
+  File "<string>", line 15, in <module>
+AttributeError: 'CineCameraActor' object has no attribute 'cine_camera_component'
+
+[2025.03.12-23.49.35][Log] Successfully sent complete response (448 bytes)
+[2025.03.12-23.49.36][Log] Client connection from 127.0.0.1:56606 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.36][Log] Cleaning up client connection from 127.0.0.1:56606
+[2025.03.12-23.49.36][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.36][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.36][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.41][Verbose] Connection attempt from 127.0.0.1:56614
+[2025.03.12-23.49.41][Log] MCP Client connected from 127.0.0.1:56614 (Total clients: 1)
+[2025.03.12-23.49.42][Log] Processing command: execute_python
+[2025.03.12-23.49.42][Log] Executing Python code via temporary file
+[2025.03.12-23.49.42][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_0C88984E496AB993CD9485878F796586.py", line 51, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 23
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 23)
+
+[2025.03.12-23.49.42][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.49.42][Log] Client connection from 127.0.0.1:56614 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.42][Log] Cleaning up client connection from 127.0.0.1:56614
+[2025.03.12-23.49.42][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.42][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.42][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.49.48][Verbose] Connection attempt from 127.0.0.1:56624
+[2025.03.12-23.49.48][Log] MCP Client connected from 127.0.0.1:56624 (Total clients: 1)
+[2025.03.12-23.49.48][Log] Processing command: execute_python
+[2025.03.12-23.49.48][Log] Executing Python code via temporary file
+[2025.03.12-23.49.48][Log] Python execution successful
+[2025.03.12-23.49.48][Log] Successfully sent complete response (152 bytes)
+[2025.03.12-23.49.48][Log] Client connection from 127.0.0.1:56624 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.49.48][Log] Cleaning up client connection from 127.0.0.1:56624
+[2025.03.12-23.49.48][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.49.48][Verbose] Successfully destroyed client socket
+[2025.03.12-23.49.48][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.19][Verbose] Connection attempt from 127.0.0.1:56749
+[2025.03.12-23.51.19][Log] MCP Client connected from 127.0.0.1:56749 (Total clients: 1)
+[2025.03.12-23.51.19][Log] Processing command: execute_python
+[2025.03.12-23.51.19][Log] Executing Python code via temporary file
+[2025.03.12-23.51.19][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_276829C74577457AE0F1C1847214CC75.py", line 77, in <module>
+    exec(code_obj)
+  File "<string>", line 28, in <module>
+AttributeError: module 'unreal' has no attribute 'MovieSceneSequenceEditor'
+
+[2025.03.12-23.51.19][Log] Successfully sent complete response (542 bytes)
+[2025.03.12-23.51.19][Log] Client connection from 127.0.0.1:56749 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.19][Log] Cleaning up client connection from 127.0.0.1:56749
+[2025.03.12-23.51.19][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.19][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.19][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.28][Verbose] Connection attempt from 127.0.0.1:56762
+[2025.03.12-23.51.28][Log] MCP Client connected from 127.0.0.1:56762 (Total clients: 1)
+[2025.03.12-23.51.28][Log] Processing command: execute_python
+[2025.03.12-23.51.28][Log] Executing Python code via temporary file
+[2025.03.12-23.51.28][Log] Python execution successful
+[2025.03.12-23.51.28][Log] Successfully sent complete response (294 bytes)
+[2025.03.12-23.51.29][Log] Client connection from 127.0.0.1:56762 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.29][Log] Cleaning up client connection from 127.0.0.1:56762
+[2025.03.12-23.51.29][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.29][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.29][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.34][Verbose] Connection attempt from 127.0.0.1:56778
+[2025.03.12-23.51.34][Log] MCP Client connected from 127.0.0.1:56778 (Total clients: 1)
+[2025.03.12-23.51.34][Log] Processing command: execute_python
+[2025.03.12-23.51.34][Log] Executing Python code via temporary file
+[2025.03.12-23.51.34][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_EB72C85E4A7E80EA5888359A20111AF9.py", line 51, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 16
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 16)
+
+[2025.03.12-23.51.34][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.51.35][Log] Client connection from 127.0.0.1:56778 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.35][Log] Cleaning up client connection from 127.0.0.1:56778
+[2025.03.12-23.51.35][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.35][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.35][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.39][Verbose] Connection attempt from 127.0.0.1:56783
+[2025.03.12-23.51.39][Log] MCP Client connected from 127.0.0.1:56783 (Total clients: 1)
+[2025.03.12-23.51.40][Log] Processing command: execute_python
+[2025.03.12-23.51.40][Log] Executing Python code via temporary file
+[2025.03.12-23.51.40][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_84263E304D19F6631078F79491C67EB3.py", line 48, in <module>
+    code_obj = compile(user_code, '<string>', 'exec')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 18
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 18)
+
+[2025.03.12-23.51.40][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.51.40][Log] Client connection from 127.0.0.1:56783 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.40][Log] Cleaning up client connection from 127.0.0.1:56783
+[2025.03.12-23.51.40][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.40][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.40][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.43][Verbose] Connection attempt from 127.0.0.1:56789
+[2025.03.12-23.51.43][Log] MCP Client connected from 127.0.0.1:56789 (Total clients: 1)
+[2025.03.12-23.51.43][Log] Processing command: execute_python
+[2025.03.12-23.51.43][Log] Executing Python code via temporary file
+[2025.03.12-23.51.43][Log] Python execution successful
+[2025.03.12-23.51.43][Log] Successfully sent complete response (1280 bytes)
+[2025.03.12-23.51.43][Log] Client connection from 127.0.0.1:56789 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.43][Log] Cleaning up client connection from 127.0.0.1:56789
+[2025.03.12-23.51.43][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.43][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.43][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.51.55][Verbose] Connection attempt from 127.0.0.1:56806
+[2025.03.12-23.51.55][Log] MCP Client connected from 127.0.0.1:56806 (Total clients: 1)
+[2025.03.12-23.51.55][Log] Processing command: execute_python
+[2025.03.12-23.51.55][Log] Executing Python code via temporary file
+[2025.03.12-23.51.56][Log] Python execution successful
+[2025.03.12-23.51.56][Log] Successfully sent complete response (322 bytes)
+[2025.03.12-23.51.56][Log] Client connection from 127.0.0.1:56806 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.51.56][Log] Cleaning up client connection from 127.0.0.1:56806
+[2025.03.12-23.51.56][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.51.56][Verbose] Successfully destroyed client socket
+[2025.03.12-23.51.56][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.52.36][Verbose] Connection attempt from 127.0.0.1:56857
+[2025.03.12-23.52.36][Log] MCP Client connected from 127.0.0.1:56857 (Total clients: 1)
+[2025.03.12-23.52.37][Log] Processing command: execute_python
+[2025.03.12-23.52.37][Log] Executing Python code via temporary file
+[2025.03.12-23.52.37][Log] Python execution successful
+[2025.03.12-23.52.37][Log] Successfully sent complete response (190 bytes)
+[2025.03.12-23.52.37][Log] Client connection from 127.0.0.1:56857 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.52.37][Log] Cleaning up client connection from 127.0.0.1:56857
+[2025.03.12-23.52.37][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.52.37][Verbose] Successfully destroyed client socket
+[2025.03.12-23.52.37][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.52.57][Verbose] Connection attempt from 127.0.0.1:56890
+[2025.03.12-23.52.57][Log] MCP Client connected from 127.0.0.1:56890 (Total clients: 1)
+[2025.03.12-23.52.57][Log] Processing command: execute_python
+[2025.03.12-23.52.57][Log] Executing Python code via temporary file
+[2025.03.12-23.52.57][Log] Python execution successful
+[2025.03.12-23.52.57][Log] Successfully sent complete response (292 bytes)
+[2025.03.12-23.52.57][Log] Client connection from 127.0.0.1:56890 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.52.57][Log] Cleaning up client connection from 127.0.0.1:56890
+[2025.03.12-23.52.57][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.52.57][Verbose] Successfully destroyed client socket
+[2025.03.12-23.52.57][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.53.11][Verbose] Connection attempt from 127.0.0.1:56911
+[2025.03.12-23.53.11][Log] MCP Client connected from 127.0.0.1:56911 (Total clients: 1)
+[2025.03.12-23.53.11][Log] Processing command: execute_python
+[2025.03.12-23.53.11][Log] Executing Python code via temporary file
+[2025.03.12-23.53.11][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_32D741324B81F15B61CFC0897B99BD4C.py", line 106, in <module>
+  File "<string>", line 74
+    print("
+          ^
+SyntaxError: unterminated string literal (detected at line 74)
+
+[2025.03.12-23.53.11][Log] Successfully sent complete response (426 bytes)
+[2025.03.12-23.53.12][Log] Client connection from 127.0.0.1:56911 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.53.12][Log] Cleaning up client connection from 127.0.0.1:56911
+[2025.03.12-23.53.12][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.53.12][Verbose] Successfully destroyed client socket
+[2025.03.12-23.53.12][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.53.22][Verbose] Connection attempt from 127.0.0.1:56923
+[2025.03.12-23.53.22][Log] MCP Client connected from 127.0.0.1:56923 (Total clients: 1)
+[2025.03.12-23.53.23][Log] Processing command: execute_python
+[2025.03.12-23.53.23][Log] Executing Python code via temporary file
+[2025.03.12-23.53.23][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_F9991E1F4FD434F831C189B4F8B5C830.py", line 95, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 69
-    print(f"
+    print("
           ^
 SyntaxError: unterminated string literal (detected at line 69)
 
-[2025.03.12-21.19.34][Log] Successfully sent complete response (541 bytes)
-[2025.03.12-21.19.34][Log] Client connection from 127.0.0.1:59167 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.19.34][Log] Cleaning up client connection from 127.0.0.1:59167
-[2025.03.12-21.19.34][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.19.34][Verbose] Successfully destroyed client socket
-[2025.03.12-21.19.34][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.19.57][Verbose] Connection attempt from 127.0.0.1:59197
-[2025.03.12-21.19.57][Log] MCP Client connected from 127.0.0.1:59197 (Total clients: 1)
-[2025.03.12-21.19.57][Log] Processing command: execute_python
-[2025.03.12-21.19.57][Log] Executing Python code via temporary file
-[2025.03.12-21.19.57][Log] Python execution successful
-[2025.03.12-21.19.57][Log] Successfully sent complete response (1161 bytes)
-[2025.03.12-21.19.57][Log] Client connection from 127.0.0.1:59197 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.19.57][Log] Cleaning up client connection from 127.0.0.1:59197
-[2025.03.12-21.19.57][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.19.57][Verbose] Successfully destroyed client socket
-[2025.03.12-21.19.57][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.20.59][Verbose] Connection attempt from 127.0.0.1:59277
-[2025.03.12-21.20.59][Log] MCP Client connected from 127.0.0.1:59277 (Total clients: 1)
-[2025.03.12-21.20.59][Log] Processing command: execute_python
-[2025.03.12-21.20.59][Log] Executing Python code via temporary file
-[2025.03.12-21.20.59][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_24ADB5514BF1E530B24BA49CD1E71DD5.py", line 260, in <module>
+[2025.03.12-23.53.23][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.53.23][Log] Client connection from 127.0.0.1:56923 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.53.23][Log] Cleaning up client connection from 127.0.0.1:56923
+[2025.03.12-23.53.23][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.53.23][Verbose] Successfully destroyed client socket
+[2025.03.12-23.53.23][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.53.38][Verbose] Connection attempt from 127.0.0.1:56945
+[2025.03.12-23.53.38][Log] MCP Client connected from 127.0.0.1:56945 (Total clients: 1)
+[2025.03.12-23.53.38][Log] Processing command: execute_python
+[2025.03.12-23.53.38][Log] Executing Python code via temporary file
+[2025.03.12-23.53.38][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_A868F9004C3346306351B79BF493136B.py", line 115, in <module>
+    exec(code_obj)
+  File "<string>", line 51, in <module>
+AttributeError: 'Vector' object has no attribute 'rotation'
+
+[2025.03.12-23.53.38][Log] Successfully sent complete response (522 bytes)
+[2025.03.12-23.53.38][Log] Client connection from 127.0.0.1:56945 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.53.38][Log] Cleaning up client connection from 127.0.0.1:56945
+[2025.03.12-23.53.38][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.53.38][Verbose] Successfully destroyed client socket
+[2025.03.12-23.53.38][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.53.57][Verbose] Connection attempt from 127.0.0.1:56980
+[2025.03.12-23.53.57][Log] MCP Client connected from 127.0.0.1:56980 (Total clients: 1)
+[2025.03.12-23.53.57][Log] Processing command: execute_python
+[2025.03.12-23.53.57][Log] Executing Python code via temporary file
+[2025.03.12-23.53.57][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_45AB23C04702E57313F4658916E83C7C.py", line 141, in <module>
+    exec(code_obj)
+  File "<string>", line 51, in <module>
+AttributeError: 'Vector' object has no attribute 'get_safe_normal'
+
+[2025.03.12-23.53.57][Log] Successfully sent complete response (481 bytes)
+[2025.03.12-23.53.57][Log] Client connection from 127.0.0.1:56980 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.53.57][Log] Cleaning up client connection from 127.0.0.1:56980
+[2025.03.12-23.53.57][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.53.57][Verbose] Successfully destroyed client socket
+[2025.03.12-23.53.57][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.54.13][Verbose] Connection attempt from 127.0.0.1:57001
+[2025.03.12-23.54.13][Log] MCP Client connected from 127.0.0.1:57001 (Total clients: 1)
+[2025.03.12-23.54.13][Log] Processing command: execute_python
+[2025.03.12-23.54.13][Log] Executing Python code via temporary file
+[2025.03.12-23.54.13][Log] Python execution successful
+[2025.03.12-23.54.13][Log] Successfully sent complete response (287 bytes)
+[2025.03.12-23.54.14][Log] Client connection from 127.0.0.1:57001 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.54.14][Log] Cleaning up client connection from 127.0.0.1:57001
+[2025.03.12-23.54.14][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.54.14][Verbose] Successfully destroyed client socket
+[2025.03.12-23.54.14][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.54.22][Verbose] Connection attempt from 127.0.0.1:57014
+[2025.03.12-23.54.22][Log] MCP Client connected from 127.0.0.1:57014 (Total clients: 1)
+[2025.03.12-23.54.22][Log] Processing command: execute_python
+[2025.03.12-23.54.22][Log] Executing Python code via temporary file
+[2025.03.12-23.54.22][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_AF72689D4C9350B7A04ACAAA632EB03F.py", line 45, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 230
+  File "<string>", line 14
     print("
           ^
-SyntaxError: unterminated string literal (detected at line 230)
+SyntaxError: unterminated string literal (detected at line 14)
 
-[2025.03.12-21.20.59][Log] Successfully sent complete response (542 bytes)
-[2025.03.12-21.20.59][Log] Client connection from 127.0.0.1:59277 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.20.59][Log] Cleaning up client connection from 127.0.0.1:59277
-[2025.03.12-21.20.59][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.20.59][Verbose] Successfully destroyed client socket
-[2025.03.12-21.20.59][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.21.20][Verbose] Connection attempt from 127.0.0.1:59307
-[2025.03.12-21.21.20][Log] MCP Client connected from 127.0.0.1:59307 (Total clients: 1)
-[2025.03.12-21.21.20][Log] Processing command: execute_python
-[2025.03.12-21.21.20][Log] Executing Python code via temporary file
-[2025.03.12-21.21.20][Log] Python execution successful
-[2025.03.12-21.21.20][Log] Successfully sent complete response (976 bytes)
-[2025.03.12-21.21.20][Log] Client connection from 127.0.0.1:59307 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.21.20][Log] Cleaning up client connection from 127.0.0.1:59307
-[2025.03.12-21.21.20][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.21.20][Verbose] Successfully destroyed client socket
-[2025.03.12-21.21.20][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.21.53][Verbose] Connection attempt from 127.0.0.1:59352
-[2025.03.12-21.21.53][Log] MCP Client connected from 127.0.0.1:59352 (Total clients: 1)
-[2025.03.12-21.21.53][Log] Processing command: execute_python
-[2025.03.12-21.21.53][Log] Executing Python code via temporary file
-[2025.03.12-21.21.53][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_7403095648B2F4FC0560F4AE4F664147.py", line 270, in <module>
+[2025.03.12-23.54.22][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.54.22][Log] Client connection from 127.0.0.1:57014 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.54.22][Log] Cleaning up client connection from 127.0.0.1:57014
+[2025.03.12-23.54.22][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.54.22][Verbose] Successfully destroyed client socket
+[2025.03.12-23.54.22][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.54.31][Verbose] Connection attempt from 127.0.0.1:57028
+[2025.03.12-23.54.31][Log] MCP Client connected from 127.0.0.1:57028 (Total clients: 1)
+[2025.03.12-23.54.31][Log] Processing command: execute_python
+[2025.03.12-23.54.31][Log] Executing Python code via temporary file
+[2025.03.12-23.54.31][Log] Python execution successful
+[2025.03.12-23.54.31][Log] Successfully sent complete response (218 bytes)
+[2025.03.12-23.54.32][Log] Client connection from 127.0.0.1:57028 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.54.32][Log] Cleaning up client connection from 127.0.0.1:57028
+[2025.03.12-23.54.32][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.54.32][Verbose] Successfully destroyed client socket
+[2025.03.12-23.54.32][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.54.40][Verbose] Connection attempt from 127.0.0.1:57042
+[2025.03.12-23.54.40][Log] MCP Client connected from 127.0.0.1:57042 (Total clients: 1)
+[2025.03.12-23.54.40][Log] Processing command: execute_python
+[2025.03.12-23.54.40][Log] Executing Python code via temporary file
+[2025.03.12-23.54.40][Log] Python execution successful
+[2025.03.12-23.54.40][Log] Successfully sent complete response (218 bytes)
+[2025.03.12-23.54.40][Log] Client connection from 127.0.0.1:57042 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.54.40][Log] Cleaning up client connection from 127.0.0.1:57042
+[2025.03.12-23.54.40][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.54.40][Verbose] Successfully destroyed client socket
+[2025.03.12-23.54.40][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.54.48][Verbose] Connection attempt from 127.0.0.1:57051
+[2025.03.12-23.54.48][Log] MCP Client connected from 127.0.0.1:57051 (Total clients: 1)
+[2025.03.12-23.54.48][Log] Processing command: execute_python
+[2025.03.12-23.54.48][Log] Executing Python code via temporary file
+[2025.03.12-23.54.48][Log] Python execution successful
+[2025.03.12-23.54.48][Log] Successfully sent complete response (219 bytes)
+[2025.03.12-23.54.49][Log] Client connection from 127.0.0.1:57051 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.54.49][Log] Cleaning up client connection from 127.0.0.1:57051
+[2025.03.12-23.54.49][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.54.49][Verbose] Successfully destroyed client socket
+[2025.03.12-23.54.49][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.55.21][Verbose] Connection attempt from 127.0.0.1:57092
+[2025.03.12-23.55.21][Log] MCP Client connected from 127.0.0.1:57092 (Total clients: 1)
+[2025.03.12-23.55.21][Log] Processing command: execute_python
+[2025.03.12-23.55.21][Log] Executing Python code via temporary file
+[2025.03.12-23.55.21][Log] Python execution successful
+[2025.03.12-23.55.21][Log] Successfully sent complete response (219 bytes)
+[2025.03.12-23.55.22][Log] Client connection from 127.0.0.1:57092 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.55.22][Log] Cleaning up client connection from 127.0.0.1:57092
+[2025.03.12-23.55.22][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.55.22][Verbose] Successfully destroyed client socket
+[2025.03.12-23.55.22][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.55.30][Verbose] Connection attempt from 127.0.0.1:57105
+[2025.03.12-23.55.30][Log] MCP Client connected from 127.0.0.1:57105 (Total clients: 1)
+[2025.03.12-23.55.30][Log] Processing command: execute_python
+[2025.03.12-23.55.30][Log] Executing Python code via temporary file
+[2025.03.12-23.55.30][Log] Python execution successful
+[2025.03.12-23.55.30][Log] Successfully sent complete response (293 bytes)
+[2025.03.12-23.55.31][Log] Client connection from 127.0.0.1:57105 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.55.31][Log] Cleaning up client connection from 127.0.0.1:57105
+[2025.03.12-23.55.31][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.55.31][Verbose] Successfully destroyed client socket
+[2025.03.12-23.55.31][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.57.47][Verbose] Connection attempt from 127.0.0.1:57294
+[2025.03.12-23.57.47][Log] MCP Client connected from 127.0.0.1:57294 (Total clients: 1)
+[2025.03.12-23.57.47][Log] Processing command: execute_python
+[2025.03.12-23.57.47][Log] Executing Python code via temporary file
+[2025.03.12-23.57.47][Log] Python execution successful
+[2025.03.12-23.57.47][Log] Successfully sent complete response (10229 bytes)
+[2025.03.12-23.57.47][Log] Client connection from 127.0.0.1:57294 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.57.47][Log] Cleaning up client connection from 127.0.0.1:57294
+[2025.03.12-23.57.47][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.57.47][Verbose] Successfully destroyed client socket
+[2025.03.12-23.57.47][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.57.56][Verbose] Connection attempt from 127.0.0.1:57308
+[2025.03.12-23.57.56][Log] MCP Client connected from 127.0.0.1:57308 (Total clients: 1)
+[2025.03.12-23.57.56][Log] Processing command: execute_python
+[2025.03.12-23.57.56][Log] Executing Python code via temporary file
+[2025.03.12-23.57.56][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_293D5B0D404A1F7C16FE7B8674396BF3.py", line 61, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 27
+  File "<string>", line 31
     print("
           ^
-SyntaxError: unterminated string literal (detected at line 27)
+SyntaxError: unterminated string literal (detected at line 31)
 
-[2025.03.12-21.21.53][Log] Successfully sent complete response (540 bytes)
-[2025.03.12-21.21.54][Log] Client connection from 127.0.0.1:59352 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.21.54][Log] Cleaning up client connection from 127.0.0.1:59352
-[2025.03.12-21.21.54][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.21.54][Verbose] Successfully destroyed client socket
-[2025.03.12-21.21.54][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.22.46][Verbose] Connection attempt from 127.0.0.1:59435
-[2025.03.12-21.22.46][Log] MCP Client connected from 127.0.0.1:59435 (Total clients: 1)
-[2025.03.12-21.22.46][Log] Processing command: execute_python
-[2025.03.12-21.22.46][Log] Executing Python code via temporary file
-[2025.03.12-21.22.46][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_E8C4DF5E4826C4436DC1F88124C27FD9.py", line 168, in <module>
+[2025.03.12-23.57.56][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.57.56][Log] Client connection from 127.0.0.1:57308 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.57.56][Log] Cleaning up client connection from 127.0.0.1:57308
+[2025.03.12-23.57.56][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.57.56][Verbose] Successfully destroyed client socket
+[2025.03.12-23.57.56][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.04][Verbose] Connection attempt from 127.0.0.1:57318
+[2025.03.12-23.58.04][Log] MCP Client connected from 127.0.0.1:57318 (Total clients: 1)
+[2025.03.12-23.58.04][Log] Processing command: execute_python
+[2025.03.12-23.58.04][Log] Executing Python code via temporary file
+[2025.03.12-23.58.04][Log] Python execution successful
+[2025.03.12-23.58.04][Log] Successfully sent complete response (424 bytes)
+[2025.03.12-23.58.04][Log] Client connection from 127.0.0.1:57318 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.58.04][Log] Cleaning up client connection from 127.0.0.1:57318
+[2025.03.12-23.58.04][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.58.04][Verbose] Successfully destroyed client socket
+[2025.03.12-23.58.04][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.11][Verbose] Connection attempt from 127.0.0.1:57331
+[2025.03.12-23.58.11][Log] MCP Client connected from 127.0.0.1:57331 (Total clients: 1)
+[2025.03.12-23.58.11][Log] Processing command: execute_python
+[2025.03.12-23.58.11][Log] Executing Python code via temporary file
+[2025.03.12-23.58.11][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_D5DC3E8D4DE020455D27FDB5D2F28D8F.py", line 53, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 130
+  File "<string>", line 16
     print("
           ^
-SyntaxError: unterminated string literal (detected at line 130)
+SyntaxError: unterminated string literal (detected at line 16)
 
-[2025.03.12-21.22.46][Log] Successfully sent complete response (542 bytes)
-[2025.03.12-21.22.47][Log] Client connection from 127.0.0.1:59435 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.22.47][Log] Cleaning up client connection from 127.0.0.1:59435
-[2025.03.12-21.22.47][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.22.47][Verbose] Successfully destroyed client socket
-[2025.03.12-21.22.47][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.23.05][Verbose] Connection attempt from 127.0.0.1:59464
-[2025.03.12-21.23.05][Log] MCP Client connected from 127.0.0.1:59464 (Total clients: 1)
-[2025.03.12-21.23.05][Log] Processing command: execute_python
-[2025.03.12-21.23.05][Log] Executing Python code via temporary file
-[2025.03.12-21.23.05][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_D7730E1B4D716918FCF71BB0EDA034BC.py", line 163, in <module>
+[2025.03.12-23.58.11][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.58.11][Log] Client connection from 127.0.0.1:57331 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.58.11][Log] Cleaning up client connection from 127.0.0.1:57331
+[2025.03.12-23.58.11][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.58.11][Verbose] Successfully destroyed client socket
+[2025.03.12-23.58.11][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.18][Verbose] Connection attempt from 127.0.0.1:57343
+[2025.03.12-23.58.18][Log] MCP Client connected from 127.0.0.1:57343 (Total clients: 1)
+[2025.03.12-23.58.18][Log] Processing command: execute_python
+[2025.03.12-23.58.18][Log] Executing Python code via temporary file
+[2025.03.12-23.58.18][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_476393B94F2E00B6514FDDA3829A581A.py", line 55, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 129
+  File "<string>", line 16
     print("
           ^
-SyntaxError: unterminated string literal (detected at line 129)
+SyntaxError: unterminated string literal (detected at line 16)
 
-[2025.03.12-21.23.05][Log] Successfully sent complete response (542 bytes)
-[2025.03.12-21.23.06][Log] Client connection from 127.0.0.1:59464 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.23.06][Log] Cleaning up client connection from 127.0.0.1:59464
-[2025.03.12-21.23.06][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.23.06][Verbose] Successfully destroyed client socket
-[2025.03.12-21.23.06][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.23.21][Verbose] Connection attempt from 127.0.0.1:59488
-[2025.03.12-21.23.21][Log] MCP Client connected from 127.0.0.1:59488 (Total clients: 1)
-[2025.03.12-21.23.21][Log] Processing command: execute_python
-[2025.03.12-21.23.21][Log] Executing Python code via temporary file
-[2025.03.12-21.23.21][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_F512F34B4BC479A93E601B96546AE56F.py", line 125, in <module>
+[2025.03.12-23.58.18][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.58.18][Log] Client connection from 127.0.0.1:57343 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.58.18][Log] Cleaning up client connection from 127.0.0.1:57343
+[2025.03.12-23.58.18][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.58.18][Verbose] Successfully destroyed client socket
+[2025.03.12-23.58.18][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.24][Verbose] Connection attempt from 127.0.0.1:57352
+[2025.03.12-23.58.24][Log] MCP Client connected from 127.0.0.1:57352 (Total clients: 1)
+[2025.03.12-23.58.24][Log] Processing command: execute_python
+[2025.03.12-23.58.24][Log] Executing Python code via temporary file
+[2025.03.12-23.58.24][Error] Python execution failed: Traceback (most recent call last):
+  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_A0F1928941647A8E9B3E37999349C00C.py", line 46, in <module>
     code_obj = compile(user_code, '<string>', 'exec')
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 41
+  File "<string>", line 21
     print("
           ^
-SyntaxError: unterminated string literal (detected at line 41)
+SyntaxError: unterminated string literal (detected at line 21)
 
-[2025.03.12-21.23.21][Log] Successfully sent complete response (540 bytes)
-[2025.03.12-21.23.22][Log] Client connection from 127.0.0.1:59488 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.23.22][Log] Cleaning up client connection from 127.0.0.1:59488
-[2025.03.12-21.23.22][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.23.22][Verbose] Successfully destroyed client socket
-[2025.03.12-21.23.22][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.23.36][Verbose] Connection attempt from 127.0.0.1:59508
-[2025.03.12-21.23.36][Log] MCP Client connected from 127.0.0.1:59508 (Total clients: 1)
-[2025.03.12-21.23.36][Log] Processing command: execute_python
-[2025.03.12-21.23.36][Log] Executing Python code via temporary file
-[2025.03.12-21.23.36][Log] Python execution successful
-[2025.03.12-21.23.36][Log] Successfully sent complete response (867 bytes)
-[2025.03.12-21.23.36][Log] Client connection from 127.0.0.1:59508 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.23.36][Log] Cleaning up client connection from 127.0.0.1:59508
-[2025.03.12-21.23.36][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.23.36][Verbose] Successfully destroyed client socket
-[2025.03.12-21.23.36][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.23.49][Verbose] Connection attempt from 127.0.0.1:59522
-[2025.03.12-21.23.49][Log] MCP Client connected from 127.0.0.1:59522 (Total clients: 1)
-[2025.03.12-21.23.49][Log] Processing command: execute_python
-[2025.03.12-21.23.49][Log] Executing Python code via temporary file
-[2025.03.12-21.23.49][Error] Python execution failed: Traceback (most recent call last):
-  File "D:/AISlop/UnrealMCP_Dev/Saved/PythonTemp/mcp_temp_script_2928E90F48C7568FAB8660BF31F6D04F.py", line 85, in <module>
-    code_obj = compile(user_code, '<string>', 'exec')
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 44
-    print("
-          ^
-SyntaxError: unterminated string literal (detected at line 44)
-
-[2025.03.12-21.23.49][Log] Successfully sent complete response (539 bytes)
-[2025.03.12-21.23.49][Log] Client connection from 127.0.0.1:59522 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.23.49][Log] Cleaning up client connection from 127.0.0.1:59522
-[2025.03.12-21.23.49][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.23.49][Verbose] Successfully destroyed client socket
-[2025.03.12-21.23.49][Log] MCP Client disconnected (Remaining clients: 0)
-[2025.03.12-21.23.56][Verbose] Connection attempt from 127.0.0.1:59533
-[2025.03.12-21.23.56][Log] MCP Client connected from 127.0.0.1:59533 (Total clients: 1)
-[2025.03.12-21.23.56][Log] Processing command: execute_python
-[2025.03.12-21.23.56][Log] Executing Python code via temporary file
-[2025.03.12-21.23.56][Log] Python execution successful
-[2025.03.12-21.23.56][Log] Successfully sent complete response (631 bytes)
-[2025.03.12-21.23.56][Log] Client connection from 127.0.0.1:59533 appears to be closed (error code 0), cleaning up
-[2025.03.12-21.23.56][Log] Cleaning up client connection from 127.0.0.1:59533
-[2025.03.12-21.23.56][Verbose] Closing client socket with description: FTcpListener client
-[2025.03.12-21.23.56][Verbose] Successfully destroyed client socket
-[2025.03.12-21.23.56][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.24][Log] Successfully sent complete response (539 bytes)
+[2025.03.12-23.58.24][Log] Client connection from 127.0.0.1:57352 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.58.24][Log] Cleaning up client connection from 127.0.0.1:57352
+[2025.03.12-23.58.24][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.58.24][Verbose] Successfully destroyed client socket
+[2025.03.12-23.58.24][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.12-23.58.31][Verbose] Connection attempt from 127.0.0.1:57359
+[2025.03.12-23.58.31][Log] MCP Client connected from 127.0.0.1:57359 (Total clients: 1)
+[2025.03.12-23.58.31][Log] Processing command: execute_python
+[2025.03.12-23.58.31][Log] Executing Python code via temporary file
+[2025.03.12-23.58.31][Log] Python execution successful
+[2025.03.12-23.58.31][Log] Successfully sent complete response (245 bytes)
+[2025.03.12-23.58.31][Log] Client connection from 127.0.0.1:57359 appears to be closed (error code 0), cleaning up
+[2025.03.12-23.58.31][Log] Cleaning up client connection from 127.0.0.1:57359
+[2025.03.12-23.58.31][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-23.58.31][Verbose] Successfully destroyed client socket
+[2025.03.12-23.58.31][Log] MCP Client disconnected (Remaining clients: 0)
+[2025.03.13-00.26.53][Log] Cleaning up all client connections (0 total)
+[2025.03.13-00.26.54][Log] MCP Server stopped
+[2025.03.13-00.26.54][Log] Cleaning up all client connections (0 total)
+[2025.03.13-00.26.54][Log] MCP Server stopped
+[2025.03.13-00.26.54][Log] MCP Server stopped

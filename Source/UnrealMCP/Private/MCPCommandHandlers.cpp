@@ -396,6 +396,17 @@ TSharedPtr<FJsonObject> FMCPExecutePythonHandler::HandleCommand(const TSharedPtr
     bool hasCode = Params->TryGetStringField(FStringView(TEXT("code")), PythonCode);
     bool hasFile = Params->TryGetStringField(FStringView(TEXT("file")), PythonFile);
 
+    // If code/file not found directly, check if they're in a 'data' object
+    if (!hasCode && !hasFile)
+    {
+        const TSharedPtr<FJsonObject> *DataObject;
+        if (Params->TryGetObjectField(FStringView(TEXT("data")), DataObject))
+        {
+            hasCode = (*DataObject)->TryGetStringField(FStringView(TEXT("code")), PythonCode);
+            hasFile = (*DataObject)->TryGetStringField(FStringView(TEXT("file")), PythonFile);
+        }
+    }
+
     if (!hasCode && !hasFile)
     {
         MCP_LOG_WARNING("Missing 'code' or 'file' field in execute_python command");

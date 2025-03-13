@@ -112,6 +112,12 @@ Refer to the documentation in the `Docs` directory for a complete command refere
 - Limit server exposure to localhost for development
 - Validate all incoming commands to prevent injection attacks
 
+## Troubleshooting
+- Ensure Unreal Engine is running with the MCP plugin.
+- Check logs in Claude for Desktop for stderr output.
+- Reach out on the discord, I just made it, but I will check it periodically
+  Discord (Dreamatron Studios): https://discord.gg/abRftdSe
+  
 ### Project Structure
 - `Source/UnrealMCP/`: Core plugin implementation
   - `Private/`: Internal implementation files
@@ -146,13 +152,14 @@ SOFTWARE.
 ## Credits
 - Created by: kvick
 - X: [@kvickart](https://x.com/kvickart)
-
+- Discord: https://discord.gg/abRftdSe
+  
 ### Thank you to testers!!!
 - https://github.com/TheMurphinatur
   
 - [@sidahuj](https://x.com/sidahuj) for the inspriation
 
-- Discord: https://discord.gg/abRftdSe
+
 
 ## Contributing
 Contributions are welcome, but I will need some time to wrap my head around things and cleanup first, lol

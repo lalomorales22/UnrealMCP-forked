@@ -131,6 +131,10 @@ SOFTWARE.
 ## Credits
 - Created by: kvick
 - X: [@kvickart](https://x.com/kvickart)
+
+### Thank you to testers!!!
+- https://github.com/TheMurphinatur
+  
 - [@sidahuj](https://x.com/sidahuj) for the inspriation
 
 - Discord: https://discord.gg/abRftdSe

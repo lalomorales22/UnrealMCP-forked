@@ -35,24 +35,38 @@ Working on getting some installation instructions now.
    ```
 2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
 3. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
-4. Open your project and enable the plugin in Edit > Plugins > Integration > UnrealMCP
+4. Open your project and enable the plugin in Edit > Plugins > UnrealMCP
 5. Enable Python plugins in Unreal
 
 ## With Claude for Desktop
-You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry like so:
-"unreal": {
-            "command": "Path to plugin \\UnrealMCP\\MCP\\run_unreal_mcp_miniconda.bat",
+You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry and make it look like so:
+```
+{
+    "mcpServers": {
+        "unreal": {
+            "command": "D:\\AISlop\\UnrealMCP_Dev\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
             "args": []
         }
+    }
+}
+```
 
+You can refer to this link for more info:
+https://modelcontextprotocol.io/quickstart/user
+
+To find the path to your claude for desktop install you can go into settings and click 'Edit Config'
 On my Windows PC the path is:
 C:\Users\USERNAME\AppData\Roaming\Claude
 
 ## Usage
 ### In Unreal Editor
-Once the plugin is enabled, you'll find MCP controls in the editor toolbar. 
+Once the plugin is enabled, you'll find MCP controls in the editor toolbar button. 
+![image](https://github.com/user-attachments/assets/68338e7a-090d-4fd9-acc9-37c0c1b63227)
+
+![image](https://github.com/user-attachments/assets/34f734ee-65a4-448a-a6db-9e941a588e93)
+
 The TCP server can be started/stopped from here.
-Check the output log under log filter LogMCP
+Check the output log under log filter LogMCP for extra information.
 
 Once the server is confirmed up and running from the editor.
 Open Claude for Desktop, ensure that the tools have successfully enabled, ask Claude to work in unreal.

@@ -26,6 +26,7 @@ Working on getting some installation instructions now.
 - Unreal Engine 5.x
 - C++ development environment configured for Unreal Engine
 - Python 3.7+ for client-side scripting
+- Model to run the commands, in testing I've been using Claude for Desktop https://claude.ai/download
 
 ## Installation
 1. Clone this repository into your Unreal project's `Plugins` directory:

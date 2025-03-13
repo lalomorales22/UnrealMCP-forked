@@ -3,6 +3,7 @@ Binaries/
 Intermediate/
 DerivedDataCache/
 Saved/
+Logs/
 *.sln
 *.vcxproj
 *.vcxproj.filters

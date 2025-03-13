@@ -4,16 +4,21 @@ import json
 import sys
 import os
 
+# Constants
+DEFAULT_PORT = 1337
+DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
+DEFAULT_TIMEOUT = 10  # 10 second timeout
+
 def main():
     """Test the execute_python command."""
     try:
         # Create socket
-        print("Connecting to localhost:1337...")
+        print(f"Connecting to localhost:{DEFAULT_PORT}...")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(10)  # 10 second timeout
+        s.settimeout(DEFAULT_TIMEOUT)  # timeout
         
         # Connect to server
-        s.connect(("localhost", 1337))
+        s.connect(("localhost", DEFAULT_PORT))
         print("Connected successfully")
         
         # Test executing Python code
@@ -52,7 +57,7 @@ print("I'm not saying Unreal is better than Unity... but have you seen these gra
         print("Waiting for response...")
         response_data = b''
         while True:
-            chunk = s.recv(8192)
+            chunk = s.recv(DEFAULT_BUFFER_SIZE)
             if not chunk:
                 break
             response_data += chunk
@@ -68,8 +73,20 @@ print("I'm not saying Unreal is better than Unity... but have you seen these gra
             try:
                 response = json.loads(response_data.decode('utf-8'))
                 print(f"Response status: {response.get('status', 'unknown')}")
+                
                 if response.get('status') == 'success':
                     print(f"Output:\n{response.get('result', {}).get('output', 'No output')}")
+                elif response.get('status') == 'error':
+                    # Handle the new error response format
+                    result = response.get('result', {})
+                    output = result.get('output', '')
+                    error = result.get('error', '')
+                    
+                    if output:
+                        print(f"Output:\n{output}")
+                    
+                    if error:
+                        print(f"Error:\n{error}")
                 else:
                     print(f"Error: {response.get('message', 'Unknown error')}")
             except json.JSONDecodeError:

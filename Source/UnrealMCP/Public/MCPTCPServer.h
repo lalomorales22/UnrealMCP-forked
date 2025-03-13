@@ -6,6 +6,7 @@
 #include "Common/TcpListener.h"
 #include "Sockets.h"
 #include "SocketSubsystem.h"
+#include "MCPConstants.h"
 
 /**
  * Configuration struct for the TCP server
@@ -14,19 +15,19 @@
 struct FMCPTCPServerConfig
 {
     /** Port to listen on */
-    int32 Port = 1337;
+    int32 Port = MCPConstants::DEFAULT_PORT;
     
     /** Client timeout in seconds */
-    float ClientTimeoutSeconds = 30.0f;
+    float ClientTimeoutSeconds = MCPConstants::DEFAULT_CLIENT_TIMEOUT_SECONDS;
     
     /** Size of the receive buffer in bytes */
-    int32 ReceiveBufferSize = 8192;
+    int32 ReceiveBufferSize = MCPConstants::DEFAULT_RECEIVE_BUFFER_SIZE;
     
     /** Tick interval in seconds */
-    float TickIntervalSeconds = 0.1f;
+    float TickIntervalSeconds = MCPConstants::DEFAULT_TICK_INTERVAL_SECONDS;
     
     /** Whether to log verbose messages */
-    bool bEnableVerboseLogging = false;
+    bool bEnableVerboseLogging = MCPConstants::DEFAULT_VERBOSE_LOGGING;
 };
 
 /**
@@ -52,7 +53,7 @@ struct FMCPClientConnection
      * @param InEndpoint - The client endpoint
      * @param BufferSize - Size of the receive buffer
      */
-    FMCPClientConnection(FSocket* InSocket, const FIPv4Endpoint& InEndpoint, int32 BufferSize = 8192)
+    FMCPClientConnection(FSocket* InSocket, const FIPv4Endpoint& InEndpoint, int32 BufferSize = MCPConstants::DEFAULT_RECEIVE_BUFFER_SIZE)
         : Socket(InSocket)
         , Endpoint(InEndpoint)
         , TimeSinceLastActivity(0.0f)

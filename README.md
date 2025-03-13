@@ -35,7 +35,7 @@ Working on getting some installation instructions now.
 2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
 3. Open your project and enable the plugin in Edit > Plugins > Integration > UnrealMCP
 
-#With Claude for Desktop
+# With Claude for Desktop
 You will need to find your installation directory for claude for desktop.
 
 "unreal": {

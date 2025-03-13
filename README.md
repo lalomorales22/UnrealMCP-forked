@@ -23,7 +23,7 @@ Working on getting some installation instructions now.
 - Python companion scripts for client-side interaction
 
 ## Requirements
-- Unreal Engine 5.x
+- Unreal Engine 5.5 (I have only tested on this version, may work with earlier, but no official support)
 - C++ development environment configured for Unreal Engine
 - Python 3.7+ for client-side scripting
 - Model to run the commands, in testing I've been using Claude for Desktop https://claude.ai/download

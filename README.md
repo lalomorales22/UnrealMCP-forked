@@ -94,7 +94,7 @@ Refer to the documentation in the `Docs` directory for a complete command refere
 ## License
 MIT License
 
-Copyright (c) 2023 kvick
+Copyright (c) 2025 kvick
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -12,6 +12,17 @@
 #include "ISettingsModule.h"
 #include "ToolMenus.h"
 #include "ToolMenuSection.h"
+#include "MCPFileLogger.h"
+
+// Define the log category
+DEFINE_LOG_CATEGORY(LogMCP);
+
+// Shorthand for logger
+#define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))
+#define MCP_LOG_INFO(Format, ...) FMCPFileLogger::Get().Info(FString::Printf(TEXT(Format), ##__VA_ARGS__))
+#define MCP_LOG_ERROR(Format, ...) FMCPFileLogger::Get().Error(FString::Printf(TEXT(Format), ##__VA_ARGS__))
+#define MCP_LOG_WARNING(Format, ...) FMCPFileLogger::Get().Warning(FString::Printf(TEXT(Format), ##__VA_ARGS__))
+#define MCP_LOG_VERBOSE(Format, ...) FMCPFileLogger::Get().Verbose(FString::Printf(TEXT(Format), ##__VA_ARGS__))
 
 #define LOCTEXT_NAMESPACE "FUnrealMCPModule"
 
@@ -68,14 +79,20 @@ TSharedPtr<FMCPPluginStyle> FMCPPluginStyle::Instance = nullptr;
 
 void FUnrealMCPModule::StartupModule()
 {
-	UE_LOG(LogTemp, Warning, TEXT("UnrealMCP Plugin is starting up"));
+	// Initialize our custom log category
+	MCP_LOG_WARNING("UnrealMCP Plugin is starting up");
+	
+	// Initialize file logger
+	FString PluginDir = IPluginManager::Get().FindPlugin("UnrealMCP")->GetBaseDir();
+	FString LogFilePath = FPaths::Combine(PluginDir, TEXT("Logs"), TEXT("MCPServer.log"));
+	FMCPFileLogger::Get().Initialize(LogFilePath);
 	
 	// Register style set
 	FMCPPluginStyle::Initialize();
 	FSlateStyleRegistry::RegisterSlateStyle(*FMCPPluginStyle::Get());
 	
 	// More debug logging
-	UE_LOG(LogTemp, Warning, TEXT("UnrealMCP Style registered"));
+	MCP_LOG_WARNING("UnrealMCP Style registered");
 
 	// Register settings
 	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
@@ -87,19 +104,15 @@ void FUnrealMCPModule::StartupModule()
 		);
 	}
 
-	// Make sure UToolMenus is initialized
-	/*
-	if (!UToolMenus::IsToolMenuUIEnabled())
-	{
-		UToolMenus::Initialize();
-		UE_LOG(LogTemp, Warning, TEXT("Initialized UToolMenus"));
-	}
-	*/
-
 	// Register for post engine init to add toolbar button
+	// First, make sure we're not already registered
+	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
+	
+	MCP_LOG_WARNING("Registering OnPostEngineInit delegate");
 	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
 	
 	// Also try the legacy approach as a fallback
+	/*
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 	TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender);
 	ToolbarExtender->AddToolBarExtension(
@@ -110,6 +123,7 @@ void FUnrealMCPModule::StartupModule()
 	);
 	LevelEditorModule.GetToolBarExtensibilityManager()->AddExtender(ToolbarExtender);
 	UE_LOG(LogTemp, Warning, TEXT("Added legacy toolbar extender"));
+	 */
 }
 
 void FUnrealMCPModule::ShutdownModule()
@@ -135,6 +149,16 @@ void FUnrealMCPModule::ShutdownModule()
 
 void FUnrealMCPModule::ExtendLevelEditorToolbar()
 {
+	static bool bToolbarExtended = false;
+	
+	if (bToolbarExtended)
+	{
+		MCP_LOG_WARNING("ExtendLevelEditorToolbar called but toolbar already extended, skipping");
+		return;
+	}
+	
+	MCP_LOG_WARNING("ExtendLevelEditorToolbar called - first time");
+	
 	// Register the main menu
 	UToolMenus::Get()->RegisterMenu("LevelEditor.MainMenu", "MainFrame.MainMenu");
 	
@@ -156,7 +180,7 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon")
 		));
 		
-		UE_LOG(LogTemp, Warning, TEXT("MCP Server button added to main toolbar"));
+		MCP_LOG_WARNING("MCP Server button added to main toolbar");
 	}
 	
 	// Add to Window menu
@@ -176,8 +200,10 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 			),
 			EUserInterfaceActionType::ToggleButton
 		);
-		UE_LOG(LogTemp, Warning, TEXT("MCP Server entry added to Window menu"));
+		MCP_LOG_WARNING("MCP Server entry added to Window menu");
 	}
+	
+	bToolbarExtended = true;
 }
 
 // Legacy toolbar extension method - no longer used
@@ -199,27 +225,42 @@ void FUnrealMCPModule::AddToolbarButton(FToolBarBuilder& Builder)
 
 void FUnrealMCPModule::ToggleServer()
 {
+	MCP_LOG_WARNING("ToggleServer called - Server state: %s", (Server && Server->IsRunning()) ? TEXT("Running") : TEXT("Not Running"));
+	
 	if (Server && Server->IsRunning())
 	{
+		MCP_LOG_WARNING("Stopping server...");
 		StopServer();
 	}
 	else
 	{
+		MCP_LOG_WARNING("Starting server...");
 		StartServer();
 	}
+	
+	MCP_LOG_WARNING("ToggleServer completed - Server state: %s", (Server && Server->IsRunning()) ? TEXT("Running") : TEXT("Not Running"));
 }
 
 void FUnrealMCPModule::StartServer()
 {
+	// Check if server is already running to prevent double-start
+	if (Server && Server->IsRunning())
+	{
+		MCP_LOG_WARNING("Server is already running, ignoring start request");
+		return;
+	}
+
+	MCP_LOG_WARNING("Creating new server instance");
 	const UMCPSettings* Settings = GetDefault<UMCPSettings>();
 	Server = MakeUnique<FMCPTCPServer>(Settings->Port);
 	if (Server->Start())
 	{
-		UE_LOG(LogTemp, Log, TEXT("MCP Server started on port %d"), Settings->Port);
+		// The server already logs this message, so we don't need to log it here
+		// MCP_LOG_INFO("MCP Server started on port %d", Settings->Port);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to start MCP Server"));
+		MCP_LOG_ERROR("Failed to start MCP Server");
 	}
 }
 
@@ -229,7 +270,7 @@ void FUnrealMCPModule::StopServer()
 	{
 		Server->Stop();
 		Server.Reset();
-		UE_LOG(LogTemp, Log, TEXT("MCP Server stopped"));
+		MCP_LOG_INFO("MCP Server stopped");
 	}
 }
 

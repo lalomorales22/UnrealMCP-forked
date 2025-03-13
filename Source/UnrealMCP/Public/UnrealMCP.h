@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
+// Declare custom log category
+UNREALMCP_API DECLARE_LOG_CATEGORY_EXTERN(LogMCP, Log, All);
+
 class FMCPTCPServer;
 
 class FUnrealMCPModule : public IModuleInterface

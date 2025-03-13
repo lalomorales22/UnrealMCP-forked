@@ -1,0 +1,20 @@
+MCP Server Log - Started at 2025.03.12-18.09.19
+[2025.03.12-18.09.19][Warning] UnrealMCP Style registered
+[2025.03.12-18.09.19][Warning] Registering OnPostEngineInit delegate
+[2025.03.12-18.09.21][Warning] ExtendLevelEditorToolbar called - first time
+[2025.03.12-18.09.21][Warning] MCP Server button added to main toolbar
+[2025.03.12-18.09.21][Warning] MCP Server entry added to Window menu
+[2025.03.12-18.09.51][Warning] ToggleServer called - Server state: Not Running
+[2025.03.12-18.09.51][Warning] Starting server...
+[2025.03.12-18.09.51][Warning] Creating new server instance
+[2025.03.12-18.09.51][Warning] Starting MCP server on port 9876
+[2025.03.12-18.09.51][Log] MCP Server started on port 9876
+[2025.03.12-18.09.51][Warning] ToggleServer completed - Server state: Running
+[2025.03.12-18.09.56][Verbose] Connection attempt from 127.0.0.1:56538
+[2025.03.12-18.09.56][Log] MCP Client connected from 127.0.0.1:56538
+[2025.03.12-18.09.57][Verbose] Connection attempt from 127.0.0.1:56548
+[2025.03.12-18.09.57][Warning] Rejecting connection from 127.0.0.1:56548 - already have an active client
+[2025.03.12-18.10.43][Warning] Client timed out after 30.2 seconds of inactivity, disconnecting
+[2025.03.12-18.10.43][Log] Cleaning up client connection
+[2025.03.12-18.10.43][Verbose] Closing client socket with description: FTcpListener client
+[2025.03.12-18.10.43][Log] MCP Client disconnected

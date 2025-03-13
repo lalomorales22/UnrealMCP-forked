@@ -23,6 +23,9 @@ private:
     void ProcessClientData();
     void ProcessCommand(const FString& CommandJson);
     void SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>& Response);
+    void CheckClientTimeout(float DeltaTime);
+    void CleanupClientConnection();
+    FString GetSafeSocketDescription(FSocket* Socket);
     
     // Connection handler
     bool HandleConnectionAccepted(FSocket* InSocket, const FIPv4Endpoint& Endpoint);
@@ -39,6 +42,8 @@ private:
     int32 Port;
     bool bRunning;
     FTSTicker::FDelegateHandle TickerHandle;
+    float ClientTimeoutSeconds;
+    float TimeSinceLastClientActivity;
 
     TMap<FString, TFunction<void(const TSharedPtr<FJsonObject>&)>> CommandHandlers;
 }; 

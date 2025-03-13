@@ -19,18 +19,52 @@ def send_command(command_type, params=None):
     """Send a command to the C++ MCP server and return the response."""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(10)  # Set a 10-second timeout
             s.connect(("localhost", 9876))  # Connect to Unreal C++ server
             command = {
                 "type": command_type,
                 "params": params or {}
             }
             s.sendall(json.dumps(command).encode('utf-8'))
-            response_data = s.recv(8192)  # Buffer size matches your test script
+            
+            # Read response with a buffer
+            chunks = []
+            response_data = b''
+            
+            # Wait for data with timeout
+            while True:
+                try:
+                    chunk = s.recv(8192)
+                    if not chunk:  # Connection closed
+                        break
+                    chunks.append(chunk)
+                    
+                    # Try to parse what we have so far
+                    response_data = b''.join(chunks)
+                    try:
+                        # If we can parse it as JSON, we have a complete response
+                        json.loads(response_data.decode('utf-8'))
+                        break
+                    except json.JSONDecodeError:
+                        # Incomplete JSON, continue receiving
+                        continue
+                except socket.timeout:
+                    # If we have some data but timed out, try to use what we have
+                    if response_data:
+                        break
+                    raise
+            
+            if not response_data:
+                raise Exception("No data received from server")
+                
             return json.loads(response_data.decode('utf-8'))
     except ConnectionRefusedError:
         print("Error: Could not connect to Unreal MCP server on localhost:9876.", file=sys.stderr)
         print("Make sure your Unreal Engine with MCP plugin is running.", file=sys.stderr)
         raise Exception("Failed to connect to Unreal MCP server: Connection refused")
+    except socket.timeout:
+        print("Error: Connection timed out while communicating with Unreal MCP server.", file=sys.stderr)
+        raise Exception("Failed to communicate with Unreal MCP server: Connection timed out")
     except Exception as e:
         print(f"Error communicating with Unreal MCP server: {str(e)}", file=sys.stderr)
         raise Exception(f"Failed to communicate with Unreal MCP server: {str(e)}")

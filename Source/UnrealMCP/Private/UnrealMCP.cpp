@@ -252,7 +252,14 @@ void FUnrealMCPModule::StartServer()
 
 	MCP_LOG_WARNING("Creating new server instance");
 	const UMCPSettings* Settings = GetDefault<UMCPSettings>();
-	Server = MakeUnique<FMCPTCPServer>(Settings->Port);
+	
+	// Create a config object and set the port from settings
+	FMCPTCPServerConfig Config;
+	Config.Port = Settings->Port;
+	
+	// Create the server with the config
+	Server = MakeUnique<FMCPTCPServer>(Config);
+	
 	if (Server->Start())
 	{
 		// The server already logs this message, so we don't need to log it here

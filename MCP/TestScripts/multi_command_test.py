@@ -48,8 +48,8 @@ def main():
         s.settimeout(10)  # 10 second timeout
         
         # Connect to server
-        print("Connecting to localhost:9876...")
-        s.connect(("localhost", 9876))
+        print("Connecting to localhost:1337...")
+        s.connect(("localhost", 1337))
         print("Connected successfully")
         
         # Test 1: Get scene info

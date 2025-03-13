@@ -26,7 +26,7 @@ def main():
         print(f"Socket timeout: {s.gettimeout()}")
         
         # Connect to server
-        server_address = ("localhost", 9876)
+        server_address = ("localhost", 1337)
         print(f"\n=== Connecting to {server_address} ===")
         try:
             s.connect(server_address)

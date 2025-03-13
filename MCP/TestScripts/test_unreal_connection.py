@@ -4,12 +4,12 @@ import sys
 
 def test_connection():
     """Test the connection to the Unreal Engine C++ MCP server."""
-    print("Testing connection to Unreal Engine MCP server on localhost:9876...")
+    print("Testing connection to Unreal Engine MCP server on localhost:1337...")
     
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(5)  # Set a timeout of 5 seconds
-            s.connect(("localhost", 9876))
+            s.connect(("localhost", 1337))
             print("✓ Successfully connected to the server!")
             
             # Try to send a simple command
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         print("\nTroubleshooting tips:")
         print("1. Make sure your Unreal Engine is running")
         print("2. Verify that the MCP plugin is enabled in your Unreal project")
-        print("3. Check that the plugin is configured to listen on port 9876")
+        print("3. Check that the plugin is configured to listen on port 1337")
         print("4. Look for any error messages in the Unreal Engine log")
         sys.exit(1)
     else:

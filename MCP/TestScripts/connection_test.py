@@ -5,7 +5,7 @@ import time
 import sys
 import argparse
 
-def connect_to_server(host="localhost", port=9876, timeout=5, delay_before_connect=0):
+def connect_to_server(host="localhost", port=1337, timeout=5, delay_before_connect=0):
     """Connect to the server with optional delay and timeout."""
     if delay_before_connect > 0:
         print(f"Waiting {delay_before_connect} seconds before connecting...")
@@ -81,7 +81,7 @@ def close_connection(sock):
         except Exception as e:
             print(f"Error closing socket: {e}")
 
-def run_single_test(host="localhost", port=9876, delay=0):
+def run_single_test(host="localhost", port=1337, delay=0):
     """Run a single connection test."""
     sock = connect_to_server(host, port, delay_before_connect=delay)
     if not sock:
@@ -91,7 +91,7 @@ def run_single_test(host="localhost", port=9876, delay=0):
     close_connection(sock)
     return success
 
-def run_multiple_tests(count=5, delay_between=5, host="localhost", port=9876):
+def run_multiple_tests(count=5, delay_between=5, host="localhost", port=1337):
     """Run multiple connection tests with delay between them."""
     print(f"Running {count} connection tests with {delay_between}s delay between tests")
     
@@ -115,7 +115,7 @@ def run_multiple_tests(count=5, delay_between=5, host="localhost", port=9876):
 def main():
     parser = argparse.ArgumentParser(description="Test connection to Unreal MCP server")
     parser.add_argument("--host", default="localhost", help="Server hostname")
-    parser.add_argument("--port", type=int, default=9876, help="Server port")
+    parser.add_argument("--port", type=int, default=1337, help="Server port")
     parser.add_argument("--count", type=int, default=3, help="Number of connection tests to run")
     parser.add_argument("--delay", type=float, default=5.0, help="Delay between connection tests (seconds)")
     args = parser.parse_args()

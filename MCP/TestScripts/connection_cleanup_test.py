@@ -13,8 +13,8 @@ def connect_and_send_command():
         s.settimeout(5)  # 5 second timeout
         
         # Connect to server
-        print("Connecting to localhost:9876...")
-        s.connect(("localhost", 9876))
+        print("Connecting to localhost:1337...")
+        s.connect(("localhost", 1337))
         print("Connected successfully")
         
         # Send a simple command

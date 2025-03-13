@@ -70,7 +70,7 @@ Before configuring Claude Desktop, verify that your Unreal Engine MCP server is 
 python Plugins\UnrealMCP\test_unreal_connection.py
 ```
 
-This will test if your Unreal Engine C++ MCP server is running on port 9876 and responding to commands.
+This will test if your Unreal Engine C++ MCP server is running on port 1337 and responding to commands.
 
 ### 3. Configure Claude Desktop
 
@@ -96,7 +96,7 @@ Make sure the path points to the wrapper batch file created by the setup script.
 ### 4. Verify Your Unreal C++ MCP Server
 
 Ensure your Unreal Engine C++ MCP server is:
-- Running and listening on port 9876
+- Running and listening on port 1337
 - Accepting the commands defined in the Python script:
   - `get_scene_info`
   - `create_object`
@@ -128,7 +128,7 @@ Ensure your Unreal Engine C++ MCP server is:
    - Make sure the path in the Claude Desktop configuration matches the actual location of the file
 
 3. **Connection refused errors**
-   - The Unreal Engine C++ MCP server is not running or not listening on port 9876
+   - The Unreal Engine C++ MCP server is not running or not listening on port 1337
    - Solution: Make sure your Unreal Engine is running with the MCP plugin enabled
 
 4. **Claude Desktop can't start the MCP server**

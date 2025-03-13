@@ -4,7 +4,7 @@ import json
 import time
 import sys
 
-def simple_test(host="localhost", port=9876):
+def simple_test(host="localhost", port=1337):
     """Connect to the server, send a command, and disconnect."""
     try:
         # Create socket
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         port = int(sys.argv[2])
     else:
-        port = 9876
+        port = 1337
         
     print(f"Host: {host}")
     print(f"Port: {port}")

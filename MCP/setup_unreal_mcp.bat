@@ -56,7 +56,7 @@ echo.
 echo Setup complete!
 echo.
 echo To use the Unreal MCP server with Claude Desktop:
-echo 1. Make sure your Unreal Engine with MCP plugin is running on port 9876
+echo 1. Make sure your Unreal Engine with MCP plugin is running on port 1337
 echo 2. Update the claude_desktop_config.json file to use the wrapper script:
 echo.
 

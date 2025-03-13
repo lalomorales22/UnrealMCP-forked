@@ -15,6 +15,7 @@
 #include "Containers/Ticker.h"
 #include "UnrealMCP.h"
 #include "MCPFileLogger.h"
+#include "MCPCommandHandlers.h"
 
 // Shorthand for logger
 #define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))
@@ -23,22 +24,52 @@
 #define MCP_LOG_WARNING(Format, ...) FMCPFileLogger::Get().Warning(FString::Printf(TEXT(Format), ##__VA_ARGS__))
 #define MCP_LOG_VERBOSE(Format, ...) FMCPFileLogger::Get().Verbose(FString::Printf(TEXT(Format), ##__VA_ARGS__))
 
-FMCPTCPServer::FMCPTCPServer(int32 InPort) 
-    : Port(InPort)
+FMCPTCPServer::FMCPTCPServer(const FMCPTCPServerConfig& InConfig) 
+    : Config(InConfig)
     , Listener(nullptr)
     , bRunning(false)
-    , ClientTimeoutSeconds(30.0f)
 {
-    // Initialize command handlers with the new signature that includes the client socket
-    CommandHandlers.Add("get_scene_info", [this](const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) { HandleGetSceneInfo(Params, ClientSocket); });
-    CommandHandlers.Add("create_object", [this](const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) { HandleCreateObject(Params, ClientSocket); });
-    CommandHandlers.Add("modify_object", [this](const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) { HandleModifyObject(Params, ClientSocket); });
-    CommandHandlers.Add("delete_object", [this](const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) { HandleDeleteObject(Params, ClientSocket); });
+    // Register default command handlers
+    RegisterCommandHandler(MakeShared<FMCPGetSceneInfoHandler>());
+    RegisterCommandHandler(MakeShared<FMCPCreateObjectHandler>());
+    RegisterCommandHandler(MakeShared<FMCPModifyObjectHandler>());
+    RegisterCommandHandler(MakeShared<FMCPDeleteObjectHandler>());
 }
 
 FMCPTCPServer::~FMCPTCPServer()
 {
     Stop();
+}
+
+void FMCPTCPServer::RegisterCommandHandler(TSharedPtr<IMCPCommandHandler> Handler)
+{
+    if (!Handler.IsValid())
+    {
+        MCP_LOG_ERROR("Attempted to register null command handler");
+        return;
+    }
+
+    FString CommandName = Handler->GetCommandName();
+    if (CommandName.IsEmpty())
+    {
+        MCP_LOG_ERROR("Attempted to register command handler with empty command name");
+        return;
+    }
+
+    CommandHandlers.Add(CommandName, Handler);
+    MCP_LOG_INFO("Registered command handler for '%s'", *CommandName);
+}
+
+void FMCPTCPServer::UnregisterCommandHandler(const FString& CommandName)
+{
+    if (CommandHandlers.Remove(CommandName) > 0)
+    {
+        MCP_LOG_INFO("Unregistered command handler for '%s'", *CommandName);
+    }
+    else
+    {
+        MCP_LOG_WARNING("Attempted to unregister non-existent command handler for '%s'", *CommandName);
+    }
 }
 
 bool FMCPTCPServer::Start()
@@ -49,13 +80,13 @@ bool FMCPTCPServer::Start()
         return true;
     }
     
-    MCP_LOG_WARNING("Starting MCP server on port %d", Port);
+    MCP_LOG_WARNING("Starting MCP server on port %d", Config.Port);
     
     // Use a simple ASCII string for the socket description to avoid encoding issues
-    Listener = new FTcpListener(FIPv4Endpoint(FIPv4Address::Any, Port));
+    Listener = new FTcpListener(FIPv4Endpoint(FIPv4Address::Any, Config.Port));
     if (!Listener || !Listener->IsActive())
     {
-        MCP_LOG_ERROR("Failed to start MCP server on port %d", Port);
+        MCP_LOG_ERROR("Failed to start MCP server on port %d", Config.Port);
         Stop();
         return false;
     }
@@ -63,9 +94,9 @@ bool FMCPTCPServer::Start()
     // Clear any existing client connections
     ClientConnections.Empty();
 
-    TickerHandle = FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateRaw(this, &FMCPTCPServer::Tick), 0.1f);
+    TickerHandle = FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateRaw(this, &FMCPTCPServer::Tick), Config.TickIntervalSeconds);
     bRunning = true;
-    MCP_LOG_INFO("MCP Server started on port %d", Port);
+    MCP_LOG_INFO("MCP Server started on port %d", Config.Port);
     return true;
 }
 
@@ -126,7 +157,7 @@ bool FMCPTCPServer::HandleConnectionAccepted(FSocket* InSocket, const FIPv4Endpo
     InSocket->SetNonBlocking(true);
     
     // Add to our list of client connections
-    ClientConnections.Add(FMCPClientConnection(InSocket, Endpoint));
+    ClientConnections.Add(FMCPClientConnection(InSocket, Endpoint, Config.ReceiveBufferSize));
     
     MCP_LOG_INFO("MCP Client connected from %s (Total clients: %d)", *Endpoint.ToString(), ClientConnections.Num());
     return true;
@@ -184,8 +215,11 @@ void FMCPTCPServer::ProcessClientData()
         PendingDataSize = 0;
         if (ClientConnection.Socket->HasPendingData(PendingDataSize))
         {
-            MCP_LOG_VERBOSE("Client from %s has %u bytes of pending data", 
-                *ClientConnection.Endpoint.ToString(), PendingDataSize);
+            if (Config.bEnableVerboseLogging)
+            {
+                MCP_LOG_VERBOSE("Client from %s has %u bytes of pending data", 
+                    *ClientConnection.Endpoint.ToString(), PendingDataSize);
+            }
             
             // Reset timeout timer since we're receiving data
             ClientConnection.TimeSinceLastActivity = 0.0f;
@@ -195,7 +229,10 @@ void FMCPTCPServer::ProcessClientData()
             {
                 if (BytesRead > 0)
                 {
-                    MCP_LOG_VERBOSE("Read %d bytes from client %s", BytesRead, *ClientConnection.Endpoint.ToString());
+                    if (Config.bEnableVerboseLogging)
+                    {
+                        MCP_LOG_VERBOSE("Read %d bytes from client %s", BytesRead, *ClientConnection.Endpoint.ToString());
+                    }
                     
                     // Null-terminate the buffer to ensure it's a valid string
                     ClientConnection.ReceiveBuffer[BytesRead] = 0;
@@ -232,7 +269,7 @@ void FMCPTCPServer::CheckClientTimeouts(float DeltaTime)
         ClientConnection.TimeSinceLastActivity += DeltaTime;
         
         // Check if client has timed out
-        if (ClientConnection.TimeSinceLastActivity > ClientTimeoutSeconds)
+        if (ClientConnection.TimeSinceLastActivity > Config.ClientTimeoutSeconds)
         {
             MCP_LOG_WARNING("Client from %s timed out after %.1f seconds of inactivity, disconnecting", 
                 *ClientConnection.Endpoint.ToString(), ClientConnection.TimeSinceLastActivity);
@@ -322,35 +359,54 @@ void FMCPTCPServer::CleanupClientConnection(FMCPClientConnection& ClientConnecti
 
 void FMCPTCPServer::ProcessCommand(const FString& CommandJson, FSocket* ClientSocket)
 {
-    MCP_LOG_VERBOSE("Processing command: %s", *CommandJson);
+    if (Config.bEnableVerboseLogging)
+    {
+        MCP_LOG_VERBOSE("Processing command: %s", *CommandJson);
+    }
     
     TSharedPtr<FJsonObject> Command;
     TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(CommandJson);
     if (FJsonSerializer::Deserialize(Reader, Command) && Command.IsValid())
     {
         FString Type;
-        if (Command->TryGetStringField(FStringView(TEXT("type")), Type) && CommandHandlers.Contains(Type))
+        if (Command->TryGetStringField(FStringView(TEXT("type")), Type))
         {
-            MCP_LOG_INFO("Processing command: %s", *Type);
-            
-            const TSharedPtr<FJsonObject>* ParamsPtr = nullptr;
-            if (Command->TryGetObjectField(FStringView(TEXT("params")), ParamsPtr) && ParamsPtr != nullptr)
+            TSharedPtr<IMCPCommandHandler> Handler = CommandHandlers.FindRef(Type);
+            if (Handler.IsValid())
             {
-                CommandHandlers[Type](*ParamsPtr, ClientSocket);
+                MCP_LOG_INFO("Processing command: %s", *Type);
+                
+                const TSharedPtr<FJsonObject>* ParamsPtr = nullptr;
+                TSharedPtr<FJsonObject> Params = MakeShared<FJsonObject>();
+                
+                if (Command->TryGetObjectField(FStringView(TEXT("params")), ParamsPtr) && ParamsPtr != nullptr)
+                {
+                    Params = *ParamsPtr;
+                }
+                
+                // Handle the command and get the response
+                TSharedPtr<FJsonObject> Response = Handler->HandleCommand(Params, ClientSocket);
+                
+                // Send the response
+                SendResponse(ClientSocket, Response);
             }
             else
             {
-                // Empty params
-                CommandHandlers[Type](MakeShared<FJsonObject>(), ClientSocket);
+                MCP_LOG_WARNING("Unknown command: %s", *Type);
+                
+                TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
+                Response->SetStringField("status", "error");
+                Response->SetStringField("message", FString::Printf(TEXT("Unknown command: %s"), *Type));
+                SendResponse(ClientSocket, Response);
             }
         }
         else
         {
-            MCP_LOG_WARNING("Unknown command: %s", *Type);
+            MCP_LOG_WARNING("Missing 'type' field in command");
             
             TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
             Response->SetStringField("status", "error");
-            Response->SetStringField("message", FString::Printf(TEXT("Unknown command: %s"), *Type));
+            Response->SetStringField("message", TEXT("Missing 'type' field"));
             SendResponse(ClientSocket, Response);
         }
     }
@@ -376,7 +432,10 @@ void FMCPTCPServer::SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>&
     TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&ResponseStr);
     FJsonSerializer::Serialize(Response.ToSharedRef(), Writer);
     
-    MCP_LOG_VERBOSE("Preparing to send response: %s", *ResponseStr);
+    if (Config.bEnableVerboseLogging)
+    {
+        MCP_LOG_VERBOSE("Preparing to send response: %s", *ResponseStr);
+    }
     
     FTCHARToUTF8 Converter(*ResponseStr);
     int32 BytesSent = 0;
@@ -401,7 +460,11 @@ void FMCPTCPServer::SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>&
         }
         
         BytesSent += SentThisTime;
-        MCP_LOG_VERBOSE("Sent %d/%d bytes", BytesSent, TotalBytes);
+        
+        if (Config.bEnableVerboseLogging)
+        {
+            MCP_LOG_VERBOSE("Sent %d/%d bytes", BytesSent, TotalBytes);
+        }
     }
     
     if (BytesSent == TotalBytes)
@@ -412,349 +475,6 @@ void FMCPTCPServer::SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>&
     {
         MCP_LOG_WARNING("Only sent %d/%d bytes of response", BytesSent, TotalBytes);
     }
-}
-
-void FMCPTCPServer::HandleGetSceneInfo(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket)
-{
-    MCP_LOG_INFO("Handling get_scene_info command");
-    
-    UWorld* World = GEditor->GetEditorWorldContext().World();
-    TSharedPtr<FJsonObject> Result = MakeShared<FJsonObject>();
-    TArray<TSharedPtr<FJsonValue>> ActorsArray;
-
-    int32 ActorCount = 0;
-    for (TActorIterator<AActor> It(World); It; ++It)
-    {
-        AActor* Actor = *It;
-        TSharedPtr<FJsonObject> ActorInfo = MakeShared<FJsonObject>();
-        ActorInfo->SetStringField("name", Actor->GetName());
-        ActorInfo->SetStringField("type", Actor->GetClass()->GetName());
-        
-        // Add location
-        FVector Location = Actor->GetActorLocation();
-        TArray<TSharedPtr<FJsonValue>> LocationArray;
-        LocationArray.Add(MakeShared<FJsonValueNumber>(Location.X));
-        LocationArray.Add(MakeShared<FJsonValueNumber>(Location.Y));
-        LocationArray.Add(MakeShared<FJsonValueNumber>(Location.Z));
-        ActorInfo->SetArrayField("location", LocationArray);
-        
-        ActorsArray.Add(MakeShared<FJsonValueObject>(ActorInfo));
-        ActorCount++;
-        if (ActorCount >= 100) break; // Limit for performance
-    }
-
-    Result->SetStringField("level", World->GetName());
-    Result->SetNumberField("actor_count", ActorCount);
-    Result->SetArrayField("actors", ActorsArray);
-
-    TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
-    Response->SetStringField("status", "success");
-    Response->SetObjectField("result", Result);
-    
-    MCP_LOG_INFO("Sending get_scene_info response with %d actors", ActorCount);
-    
-    SendResponse(ClientSocket, Response);
-    
-    MCP_LOG_INFO("get_scene_info response sent");
-}
-
-void FMCPTCPServer::HandleCreateObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket)
-{
-    UWorld* World = GEditor->GetEditorWorldContext().World();
-    TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
-    
-    FString Type;
-    if (!Params->TryGetStringField(FStringView(TEXT("type")), Type))
-    {
-        MCP_LOG_WARNING("Missing 'type' field in create_object command");
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", "Missing 'type' field");
-        SendResponse(ClientSocket, Response);
-        return;
-    }
-    
-    // Convert type to lowercase for case-insensitive comparison
-    FString TypeLower = Type.ToLower();
-    
-    if (Type == "StaticMeshActor")
-    {
-        // Get location
-        const TArray<TSharedPtr<FJsonValue>>* LocationArrayPtr = nullptr;
-        if (!Params->TryGetArrayField(FStringView(TEXT("location")), LocationArrayPtr) || !LocationArrayPtr || LocationArrayPtr->Num() != 3)
-        {
-            MCP_LOG_WARNING("Invalid 'location' field in create_object command");
-            Response->SetStringField("status", "error");
-            Response->SetStringField("message", "Invalid 'location' field");
-            SendResponse(ClientSocket, Response);
-            return;
-        }
-        
-        FVector Location(
-            (*LocationArrayPtr)[0]->AsNumber(),
-            (*LocationArrayPtr)[1]->AsNumber(),
-            (*LocationArrayPtr)[2]->AsNumber()
-        );
-        
-        // Create the actor
-        FActorSpawnParameters SpawnParams;
-        SpawnParams.Name = NAME_None; // Auto-generate a name
-        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-        
-        AStaticMeshActor* NewActor = World->SpawnActor<AStaticMeshActor>(Location, FRotator::ZeroRotator, SpawnParams);
-        if (NewActor)
-        {
-            MCP_LOG_INFO("Created StaticMeshActor at location (%f, %f, %f)", Location.X, Location.Y, Location.Z);
-            
-            // Set mesh if specified
-            FString MeshPath;
-            if (Params->TryGetStringField(FStringView(TEXT("mesh")), MeshPath))
-            {
-                UStaticMesh* Mesh = LoadObject<UStaticMesh>(nullptr, *MeshPath);
-                if (Mesh)
-                {
-                    NewActor->GetStaticMeshComponent()->SetStaticMesh(Mesh);
-                    MCP_LOG_INFO("Set mesh to %s", *MeshPath);
-                }
-                else
-                {
-                    MCP_LOG_WARNING("Failed to load mesh %s", *MeshPath);
-                }
-            }
-            
-            Response->SetStringField("status", "success");
-            Response->SetStringField("actor_name", NewActor->GetName());
-        }
-        else
-        {
-            MCP_LOG_ERROR("Failed to create StaticMeshActor");
-            Response->SetStringField("status", "error");
-            Response->SetStringField("message", "Failed to create actor");
-        }
-    }
-    else if (TypeLower == "cube")
-    {
-        // Get location
-        const TArray<TSharedPtr<FJsonValue>>* LocationArrayPtr = nullptr;
-        if (!Params->TryGetArrayField(FStringView(TEXT("location")), LocationArrayPtr) || !LocationArrayPtr || LocationArrayPtr->Num() != 3)
-        {
-            MCP_LOG_WARNING("Invalid 'location' field in create_object command");
-            Response->SetStringField("status", "error");
-            Response->SetStringField("message", "Invalid 'location' field");
-            SendResponse(ClientSocket, Response);
-            return;
-        }
-        
-        FVector Location(
-            (*LocationArrayPtr)[0]->AsNumber(),
-            (*LocationArrayPtr)[1]->AsNumber(),
-            (*LocationArrayPtr)[2]->AsNumber()
-        );
-        
-        // Create a StaticMeshActor with a cube mesh
-        FActorSpawnParameters SpawnParams;
-        SpawnParams.Name = NAME_None;
-        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-        
-        AStaticMeshActor* NewActor = World->SpawnActor<AStaticMeshActor>(Location, FRotator::ZeroRotator, SpawnParams);
-        if (NewActor)
-        {
-            MCP_LOG_INFO("Created Cube at location (%f, %f, %f)", Location.X, Location.Y, Location.Z);
-            
-            // Set cube mesh
-            UStaticMesh* CubeMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
-            if (CubeMesh)
-            {
-                NewActor->GetStaticMeshComponent()->SetStaticMesh(CubeMesh);
-                MCP_LOG_INFO("Set cube mesh");
-                
-                // Set a descriptive label
-                NewActor->SetActorLabel(FString::Printf(TEXT("MCP_Cube_%d"), FMath::RandRange(1000, 9999)));
-                
-                // Create a result object with the actor information
-                TSharedPtr<FJsonObject> Result = MakeShared<FJsonObject>();
-                Result->SetStringField("name", NewActor->GetName());
-                Result->SetStringField("label", NewActor->GetActorLabel());
-                
-                Response->SetStringField("status", "success");
-                Response->SetObjectField("result", Result);
-            }
-            else
-            {
-                MCP_LOG_WARNING("Failed to load cube mesh");
-                Response->SetStringField("status", "error");
-                Response->SetStringField("message", "Failed to load cube mesh");
-            }
-        }
-        else
-        {
-            MCP_LOG_ERROR("Failed to create Cube");
-            Response->SetStringField("status", "error");
-            Response->SetStringField("message", "Failed to create cube");
-        }
-    }
-    else
-    {
-        MCP_LOG_WARNING("Unsupported actor type: %s", *Type);
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", FString::Printf(TEXT("Unsupported actor type: %s"), *Type));
-    }
-    
-    SendResponse(ClientSocket, Response);
-}
-
-void FMCPTCPServer::HandleModifyObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket)
-{
-    UWorld* World = GEditor->GetEditorWorldContext().World();
-    TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
-    
-    FString ActorName;
-    if (!Params->TryGetStringField(FStringView(TEXT("name")), ActorName))
-    {
-        MCP_LOG_WARNING("Missing 'name' field in modify_object command");
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", "Missing 'name' field");
-        SendResponse(ClientSocket, Response);
-        return;
-    }
-    
-    AActor* Actor = nullptr;
-    for (TActorIterator<AActor> It(World); It; ++It)
-    {
-        if (It->GetName() == ActorName)
-        {
-            Actor = *It;
-            break;
-        }
-    }
-    
-    if (!Actor)
-    {
-        MCP_LOG_WARNING("Actor not found: %s", *ActorName);
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", FString::Printf(TEXT("Actor not found: %s"), *ActorName));
-        SendResponse(ClientSocket, Response);
-        return;
-    }
-    
-    bool bModified = false;
-    
-    // Check for location update
-    const TArray<TSharedPtr<FJsonValue>>* LocationArrayPtr = nullptr;
-    if (Params->TryGetArrayField(FStringView(TEXT("location")), LocationArrayPtr) && LocationArrayPtr && LocationArrayPtr->Num() == 3)
-    {
-        FVector NewLocation(
-            (*LocationArrayPtr)[0]->AsNumber(),
-            (*LocationArrayPtr)[1]->AsNumber(),
-            (*LocationArrayPtr)[2]->AsNumber()
-        );
-        
-        Actor->SetActorLocation(NewLocation);
-        MCP_LOG_INFO("Updated location of %s to (%f, %f, %f)", *ActorName, NewLocation.X, NewLocation.Y, NewLocation.Z);
-        bModified = true;
-    }
-    
-    // Check for rotation update
-    const TArray<TSharedPtr<FJsonValue>>* RotationArrayPtr = nullptr;
-    if (Params->TryGetArrayField(FStringView(TEXT("rotation")), RotationArrayPtr) && RotationArrayPtr && RotationArrayPtr->Num() == 3)
-    {
-        FRotator NewRotation(
-            (*RotationArrayPtr)[0]->AsNumber(),
-            (*RotationArrayPtr)[1]->AsNumber(),
-            (*RotationArrayPtr)[2]->AsNumber()
-        );
-        
-        Actor->SetActorRotation(NewRotation);
-        MCP_LOG_INFO("Updated rotation of %s to (%f, %f, %f)", *ActorName, NewRotation.Pitch, NewRotation.Yaw, NewRotation.Roll);
-        bModified = true;
-    }
-    
-    // Check for scale update
-    const TArray<TSharedPtr<FJsonValue>>* ScaleArrayPtr = nullptr;
-    if (Params->TryGetArrayField(FStringView(TEXT("scale")), ScaleArrayPtr) && ScaleArrayPtr && ScaleArrayPtr->Num() == 3)
-    {
-        FVector NewScale(
-            (*ScaleArrayPtr)[0]->AsNumber(),
-            (*ScaleArrayPtr)[1]->AsNumber(),
-            (*ScaleArrayPtr)[2]->AsNumber()
-        );
-        
-        Actor->SetActorScale3D(NewScale);
-        MCP_LOG_INFO("Updated scale of %s to (%f, %f, %f)", *ActorName, NewScale.X, NewScale.Y, NewScale.Z);
-        bModified = true;
-    }
-    
-    if (bModified)
-    {
-        Response->SetStringField("status", "success");
-    }
-    else
-    {
-        MCP_LOG_WARNING("No modifications specified for %s", *ActorName);
-        Response->SetStringField("status", "warning");
-        Response->SetStringField("message", "No modifications specified");
-    }
-    
-    SendResponse(ClientSocket, Response);
-}
-
-void FMCPTCPServer::HandleDeleteObject(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket)
-{
-    UWorld* World = GEditor->GetEditorWorldContext().World();
-    TSharedPtr<FJsonObject> Response = MakeShared<FJsonObject>();
-    
-    FString ActorName;
-    if (!Params->TryGetStringField(FStringView(TEXT("name")), ActorName))
-    {
-        MCP_LOG_WARNING("Missing 'name' field in delete_object command");
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", "Missing 'name' field");
-        SendResponse(ClientSocket, Response);
-        return;
-    }
-    
-    AActor* Actor = nullptr;
-    for (TActorIterator<AActor> It(World); It; ++It)
-    {
-        if (It->GetName() == ActorName)
-        {
-            Actor = *It;
-            break;
-        }
-    }
-    
-    if (!Actor)
-    {
-        MCP_LOG_WARNING("Actor not found: %s", *ActorName);
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", FString::Printf(TEXT("Actor not found: %s"), *ActorName));
-        SendResponse(ClientSocket, Response);
-        return;
-    }
-    
-    // Check if the actor can be deleted
-    if (!FActorEditorUtils::IsABuilderBrush(Actor))
-    {
-        bool bDestroyed = World->DestroyActor(Actor);
-        if (bDestroyed)
-        {
-            MCP_LOG_INFO("Deleted actor: %s", *ActorName);
-            Response->SetStringField("status", "success");
-        }
-        else
-        {
-            MCP_LOG_ERROR("Failed to delete actor: %s", *ActorName);
-            Response->SetStringField("status", "error");
-            Response->SetStringField("message", FString::Printf(TEXT("Failed to delete actor: %s"), *ActorName));
-        }
-    }
-    else
-    {
-        MCP_LOG_WARNING("Cannot delete special actor: %s", *ActorName);
-        Response->SetStringField("status", "error");
-        Response->SetStringField("message", FString::Printf(TEXT("Cannot delete special actor: %s"), *ActorName));
-    }
-    
-    SendResponse(ClientSocket, Response);
 }
 
 FString FMCPTCPServer::GetSafeSocketDescription(FSocket* Socket)

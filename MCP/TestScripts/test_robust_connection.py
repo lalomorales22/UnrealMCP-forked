@@ -9,8 +9,8 @@ def send_command(command_type, params=None):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(10)  # Set a 10-second timeout
-            print(f"Connecting to localhost:9876...")
-            s.connect(("localhost", 9876))
+            print(f"Connecting to localhost:1337...")
+            s.connect(("localhost", 1337))
             print("Connected successfully")
             
             command = {
@@ -62,7 +62,7 @@ def send_command(command_type, params=None):
             return response
             
     except ConnectionRefusedError:
-        print("Error: Could not connect to Unreal MCP server on localhost:9876.")
+        print("Error: Could not connect to Unreal MCP server on localhost:1337.")
         print("Make sure your Unreal Engine with MCP plugin is running.")
         return None
     except socket.timeout:

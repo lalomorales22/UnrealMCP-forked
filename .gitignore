@@ -9,3 +9,6 @@ Logs/
 *.vcxproj.filters
 *.vcxproj.user
 *.pdb
+
+# Python modules
+MCP/python_modules/

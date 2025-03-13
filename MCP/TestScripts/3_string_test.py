@@ -15,7 +15,7 @@ def main():
     """Connect to the MCP Server and test string handling."""
     try:
         # Create socket
-        print("Connecting to MCP Server on localhost:1337...")
+        print("Connecting to MCP Server on localhost:13377...")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(10)  # 10 second timeout
         

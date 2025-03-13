@@ -8,7 +8,7 @@
 namespace MCPConstants
 {
     // Network constants
-    constexpr int32 DEFAULT_PORT = 1337;
+    constexpr int32 DEFAULT_PORT = 13377;
     constexpr int32 DEFAULT_RECEIVE_BUFFER_SIZE = 32768; // 32KB buffer size
     constexpr int32 DEFAULT_SEND_BUFFER_SIZE = 32768;    // 32KB buffer size
     constexpr float DEFAULT_CLIENT_TIMEOUT_SECONDS = 30.0f;

@@ -9,5 +9,5 @@ class UNREALMCP_API UMCPSettings : public UDeveloperSettings
     GENERATED_BODY()
 public:
     UPROPERTY(config, EditAnywhere, Category = "MCP", meta = (ClampMin = "1024", ClampMax = "65535"))
-    int32 Port = 1337; // Default port for UnrealMCP
+    int32 Port = 13377; // Default port for UnrealMCP
 }; 

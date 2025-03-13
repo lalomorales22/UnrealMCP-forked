@@ -6,6 +6,8 @@ I plan to allow for easy tool extension outside the main plugin
 
 This is very much a work in progress, and I need to clean up a lot of stuff!!!!!
 
+Also, I only use windows, so I don't know how this would be setup for mac/unix
+
 ## Overview
 UnrealMCP is an Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
 
@@ -32,6 +34,14 @@ Working on getting some installation instructions now.
    ```
 2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
 3. Open your project and enable the plugin in Edit > Plugins > Integration > UnrealMCP
+
+#With Claude for Desktop
+You will need to find your installation directory for claude for desktop.
+
+"unreal": {
+            "command": "Path to plugin \\UnrealMCP\\MCP\\run_unreal_mcp_miniconda.bat",
+            "args": []
+        }
 
 ## Usage
 ### In Unreal Editor

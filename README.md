@@ -49,13 +49,14 @@ You will need to find your installation directory for claude for desktop. Find c
 {
     "mcpServers": {
         "unreal": {
-            "command": "D:\\UnrealMCP_Project\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
+            "command": "C:\\UnrealMCP_Project\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
             "args": []
         }
     }
 }
 ```
 IN THE COMMAND FIELD PUT YOUR PATH TO YOUR PLUGIN DIRECTORY POINTED TO THE SCRIPT: "run_unreal_mcp.bat"
+This script is located within ../plugin_root_directory/MCP/run_unreal_mcp.bat
 
 You can refer to this link for more info:
 https://modelcontextprotocol.io/quickstart/user

@@ -1,5 +1,5 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal EnableDelayedExpansion
 
 echo ========================================================
 echo Unreal MCP - Python Environment Setup
@@ -31,7 +31,7 @@ for /f "tokens=*" %%i in ('where python') do set SYSTEM_PYTHON=%%i
 echo Detected %PYTHON_VERSION% at %SYSTEM_PYTHON%
 echo.
 
-REM Create directories if they don't exist
+REM Create directories if they don’t exist
 if not exist "%ENV_DIR%" (
     echo Creating Python environment directory...
     mkdir "%ENV_DIR%"
@@ -49,7 +49,7 @@ if %ERRORLEVEL% neq 0 (
     python -m pip install virtualenv
 )
 
-REM Create virtual environment if it doesn't exist
+REM Create virtual environment if it doesn’t exist
 if not exist "%ENV_DIR%\Scripts\python.exe" (
     echo Creating virtual environment...
     python -m virtualenv "%ENV_DIR%"
@@ -81,36 +81,18 @@ echo.
 echo Verifying MCP installation...
 python -c "import mcp; print(f'MCP package installed successfully. Version: {getattr(mcp, \"__version__\", \"unknown\")}')"
 
-REM Create a configuration file for Claude Desktop
+REM Set configuration file path
 set "CLAUDE_CONFIG_DIR=%APPDATA%\Claude"
 set "CLAUDE_CONFIG_FILE=%CLAUDE_CONFIG_DIR%\claude_desktop_config.json"
 
-REM Create Claude config directory if it doesn't exist
+REM Create Claude config directory if it doesn’t exist
 if not exist "%CLAUDE_CONFIG_DIR%" (
     mkdir "%CLAUDE_CONFIG_DIR%"
     echo Created Claude configuration directory.
 )
 
-echo.
-echo Creating Claude Desktop configuration...
-set "PYTHON_PATH=%ENV_DIR%\Scripts\python.exe"
-set "PYTHON_PATH_JSON=%PYTHON_PATH:\=\\%"
-
-echo {> "%CLAUDE_CONFIG_FILE%"
-echo   "tools": {>> "%CLAUDE_CONFIG_FILE%"
-echo     "unreal": {>> "%CLAUDE_CONFIG_FILE%"
-echo       "pythonPath": "%PYTHON_PATH_JSON%",>> "%CLAUDE_CONFIG_FILE%"
-echo       "connection": {>> "%CLAUDE_CONFIG_FILE%"
-echo         "type": "local",>> "%CLAUDE_CONFIG_FILE%"
-echo         "port": 13377>> "%CLAUDE_CONFIG_FILE%"
-echo       }>> "%CLAUDE_CONFIG_FILE%"
-echo     }>> "%CLAUDE_CONFIG_FILE%"
-echo   }>> "%CLAUDE_CONFIG_FILE%"
-echo }>> "%CLAUDE_CONFIG_FILE%"
-
-echo Claude Desktop configuration created at: %CLAUDE_CONFIG_FILE%
-
 REM Create the run script
+echo.
 echo Creating run script...
 (
 echo @echo off
@@ -142,6 +124,16 @@ echo.
 echo :end
 ) > "%SCRIPT_DIR%\run_unreal_mcp.bat"
 
+REM Update Claude Desktop configuration using Python
+echo.
+echo Updating Claude Desktop configuration...
+python temp_update_config.py "%CLAUDE_CONFIG_FILE%" "%SCRIPT_DIR%\run_unreal_mcp.bat"
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: Failed to update Claude Desktop configuration.
+    goto :end
+)
+echo Claude Desktop configuration updated at: %CLAUDE_CONFIG_FILE%
+
 echo.
 echo ========================================================
 echo Setup complete!
@@ -152,7 +144,6 @@ echo 2. Open Claude Desktop and it should automatically use the correct configur
 echo ========================================================
 echo.
 echo Press any key to exit...
-pause > nul
+pause >nul
 
 :end
-deactivate 

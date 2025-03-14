@@ -49,7 +49,7 @@ You will need to find your installation directory for claude for desktop. Find c
 {
     "mcpServers": {
         "unreal": {
-            "command": "D:\\AISlop\\UnrealMCP_Dev\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
+            "command": "D:\\UnrealMCP_Project\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
             "args": []
         }
     }
@@ -77,7 +77,7 @@ Check the output log under log filter LogMCP for extra information.
 Once the server is confirmed up and running from the editor.
 Open Claude for Desktop, ensure that the tools have successfully enabled, ask Claude to work in unreal.
 
-Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python.
+Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python scripts.
 Claude makes a lot of errors with unreal python as I believe there aren't a ton of examples for it, but let it run and it will usually figure things out.
 I would really like to improve this aspect of how it works but it's low hanging fruit for adding functionality into unreal.
 
@@ -88,7 +88,7 @@ Use the provided Python scripts in the `MCP` directory to connect to and control
 from unreal_mcp_client import UnrealMCPClient
 
 # Connect to the Unreal MCP server
-client = UnrealMCPClient("localhost", 1337)
+client = UnrealMCPClient("localhost", 13377)
 
 # Example: Create a cube in the scene
 client.create_object(

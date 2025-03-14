@@ -33,12 +33,15 @@ Working on getting some installation instructions now.
    ```
    git clone https://github.com/kvick-games/UnrealMCP.git Plugins/UnrealMCP
    ```
-2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
-3. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
-4. Open your project and enable the plugin in Edit > Plugins > UnrealMCP
-5. Enable Python plugins in Unreal
-6. Run setup_unreal_mcp.bat (I probably need to make some fixes to this file as more people try it out)
-7. Currently I've only tested with Claude for Desktop so follow the instructions below to continue
+   The project path should match this pattern like so:
+...\UNREAL_PROJECT\Plugins\UnrealMCP\
+
+3. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
+4. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
+5. Open your project and enable the plugin in Edit > Plugins > UnrealMCP
+6. Enable Python plugins in Unreal
+7. Run setup_unreal_mcp.bat (I probably need to make some fixes to this file as more people try it out)
+8. Currently I've only tested with Claude for Desktop so follow the instructions below to continue
 
 ## With Claude for Desktop
 You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry and make it look like so:

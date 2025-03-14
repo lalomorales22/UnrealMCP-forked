@@ -9,7 +9,7 @@ This is very much a work in progress, and I need to clean up a lot of stuff!!!!!
 Also, I only use windows, so I don't know how this would be setup for mac/unix
 
 ## Overview
-UnrealMCP is an Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
+UnrealMCP is an Unofficial Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
 
 I only just learned about MCP a few days ago, so I'm not that familiar with it, I'm still learning so things might be initially pretty rough.
 I've implemented this using https://github.com/ahujasid/blender-mcp as a reference, which relies on claude for desktop. It may or may not work with other models.
@@ -33,31 +33,52 @@ Working on getting some installation instructions now.
    ```
    git clone https://github.com/kvick-games/UnrealMCP.git Plugins/UnrealMCP
    ```
-2. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
-3. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
-4. Open your project and enable the plugin in Edit > Plugins > Integration > UnrealMCP
-5. Enable Python plugins in Unreal
+   The project path should match this pattern like so:
+...\UNREAL_PROJECT\Plugins\UnrealMCP\
+
+3. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
+4. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
+5. Open your project and enable the plugin in Edit > Plugins > UnrealMCP
+6. Enable Python plugins in Unreal
+7. Run setup_unreal_mcp.bat (I probably need to make some fixes to this file as more people try it out)
+8. Currently I've only tested with Claude for Desktop so follow the instructions below to continue
 
 ## With Claude for Desktop
-You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry like so:
-"unreal": {
-            "command": "Path to plugin \\UnrealMCP\\MCP\\run_unreal_mcp_miniconda.bat",
+You will need to find your installation directory for claude for desktop. Find claude_desktop_config.json and add an entry and make it look like so:
+```json
+{
+    "mcpServers": {
+        "unreal": {
+            "command": "C:\\UnrealMCP_Project\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
             "args": []
         }
+    }
+}
+```
+IN THE COMMAND FIELD PUT YOUR PATH TO YOUR PLUGIN DIRECTORY POINTED TO THE SCRIPT: "run_unreal_mcp.bat"
+This script is located within ../plugin_root_directory/MCP/run_unreal_mcp.bat
 
+You can refer to this link for more info:
+https://modelcontextprotocol.io/quickstart/user
+
+To find the path to your claude for desktop install you can go into settings and click 'Edit Config'
 On my Windows PC the path is:
 C:\Users\USERNAME\AppData\Roaming\Claude
 
 ## Usage
 ### In Unreal Editor
-Once the plugin is enabled, you'll find MCP controls in the editor toolbar. 
+Once the plugin is enabled, you'll find MCP controls in the editor toolbar button. 
+![image](https://github.com/user-attachments/assets/68338e7a-090d-4fd9-acc9-37c0c1b63227)
+
+![image](https://github.com/user-attachments/assets/34f734ee-65a4-448a-a6db-9e941a588e93)
+
 The TCP server can be started/stopped from here.
-Check the output log under log filter LogMCP
+Check the output log under log filter LogMCP for extra information.
 
 Once the server is confirmed up and running from the editor.
 Open Claude for Desktop, ensure that the tools have successfully enabled, ask Claude to work in unreal.
 
-Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python.
+Currently only basic operations are supported, creating objects, modfiying their transforms, getting scene info, and running python scripts.
 Claude makes a lot of errors with unreal python as I believe there aren't a ton of examples for it, but let it run and it will usually figure things out.
 I would really like to improve this aspect of how it works but it's low hanging fruit for adding functionality into unreal.
 
@@ -68,7 +89,7 @@ Use the provided Python scripts in the `MCP` directory to connect to and control
 from unreal_mcp_client import UnrealMCPClient
 
 # Connect to the Unreal MCP server
-client = UnrealMCPClient("localhost", 1337)
+client = UnrealMCPClient("localhost", 13377)
 
 # Example: Create a cube in the scene
 client.create_object(
@@ -97,6 +118,12 @@ Refer to the documentation in the `Docs` directory for a complete command refere
 - Limit server exposure to localhost for development
 - Validate all incoming commands to prevent injection attacks
 
+## Troubleshooting
+- Ensure Unreal Engine is running with the MCP plugin.
+- Check logs in Claude for Desktop for stderr output.
+- Reach out on the discord, I just made it, but I will check it periodically
+  Discord (Dreamatron Studios): https://discord.gg/abRftdSe
+  
 ### Project Structure
 - `Source/UnrealMCP/`: Core plugin implementation
   - `Private/`: Internal implementation files
@@ -131,9 +158,14 @@ SOFTWARE.
 ## Credits
 - Created by: kvick
 - X: [@kvickart](https://x.com/kvickart)
+- Discord: https://discord.gg/abRftdSe
+  
+### Thank you to testers!!!
+- https://github.com/TheMurphinatur
+  
 - [@sidahuj](https://x.com/sidahuj) for the inspriation
 
-- Discord: https://discord.gg/abRftdSe
+
 
 ## Contributing
 Contributions are welcome, but I will need some time to wrap my head around things and cleanup first, lol

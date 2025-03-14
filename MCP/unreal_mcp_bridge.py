@@ -22,11 +22,10 @@ import os
 import importlib.util
 
 # Try to get the port from MCPConstants
+DEFAULT_PORT = 13377
+DEFAULT_BUFFER_SIZE = 65536
+
 try:
-    # Default values in case we can't read from MCPConstants
-    DEFAULT_PORT = 13377
-    DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
-    
     # Try to read the port from the C++ constants
     plugin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     constants_path = os.path.join(plugin_dir, "Source", "UnrealMCP", "Public", "MCPConstants.h")
@@ -47,10 +46,9 @@ try:
                 buffer_line = constants_content[buffer_match:].split(';')[0]
                 DEFAULT_BUFFER_SIZE = int(buffer_line.split('=')[1].strip())
 except Exception as e:
-    # If anything goes wrong, use the defaults
+    # If anything goes wrong, use the defaults (which are already defined)
     print(f"Warning: Could not read constants from MCPConstants.h: {e}", file=sys.stderr)
-    DEFAULT_PORT = 13377
-    DEFAULT_BUFFER_SIZE = 32768  # 32KB buffer size
+    # No need to redefine DEFAULT_PORT and DEFAULT_BUFFER_SIZE here
 
 DEFAULT_TIMEOUT = 10  # 10 second timeout
 

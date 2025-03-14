@@ -17,7 +17,7 @@
 //
 // FMCPGetSceneInfoHandler
 //
-TSharedPtr<FJsonObject> FMCPGetSceneInfoHandler::HandleCommand(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
+TSharedPtr<FJsonObject> FMCPGetSceneInfoHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
     MCP_LOG_INFO("Handling get_scene_info command");
 
@@ -26,12 +26,25 @@ TSharedPtr<FJsonObject> FMCPGetSceneInfoHandler::HandleCommand(const TSharedPtr<
     TArray<TSharedPtr<FJsonValue>> ActorsArray;
 
     int32 ActorCount = 0;
+    int32 TotalActorCount = 0;
+    bool bLimitReached = false;
+    
+    // First count the total number of actors
+    for (TActorIterator<AActor> CountIt(World); CountIt; ++CountIt)
+    {
+        TotalActorCount++;
+    }
+    
+    // Then collect actor info up to the limit
     for (TActorIterator<AActor> It(World); It; ++It)
     {
         AActor *Actor = *It;
         TSharedPtr<FJsonObject> ActorInfo = MakeShared<FJsonObject>();
         ActorInfo->SetStringField("name", Actor->GetName());
         ActorInfo->SetStringField("type", Actor->GetClass()->GetName());
+        
+        // Add the actor label (user-facing friendly name)
+        ActorInfo->SetStringField("label", Actor->GetActorLabel());
 
         // Add location
         FVector Location = Actor->GetActorLocation();
@@ -44,14 +57,21 @@ TSharedPtr<FJsonObject> FMCPGetSceneInfoHandler::HandleCommand(const TSharedPtr<
         ActorsArray.Add(MakeShared<FJsonValueObject>(ActorInfo));
         ActorCount++;
         if (ActorCount >= MCPConstants::MAX_ACTORS_IN_SCENE_INFO)
+        {
+            bLimitReached = true;
+            MCP_LOG_WARNING("Actor limit reached (%d). Only returning %d of %d actors.", 
+                MCPConstants::MAX_ACTORS_IN_SCENE_INFO, ActorCount, TotalActorCount);
             break; // Limit for performance
+        }
     }
 
     Result->SetStringField("level", World->GetName());
-    Result->SetNumberField("actor_count", ActorCount);
+    Result->SetNumberField("actor_count", TotalActorCount);
+    Result->SetNumberField("returned_actor_count", ActorCount);
+    Result->SetBoolField("limit_reached", bLimitReached);
     Result->SetArrayField("actors", ActorsArray);
 
-    MCP_LOG_INFO("Sending get_scene_info response with %d actors", ActorCount);
+    MCP_LOG_INFO("Sending get_scene_info response with %d/%d actors", ActorCount, TotalActorCount);
 
     return CreateSuccessResponse(Result);
 }
@@ -59,7 +79,7 @@ TSharedPtr<FJsonObject> FMCPGetSceneInfoHandler::HandleCommand(const TSharedPtr<
 //
 // FMCPCreateObjectHandler
 //
-TSharedPtr<FJsonObject> FMCPCreateObjectHandler::HandleCommand(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
+TSharedPtr<FJsonObject> FMCPCreateObjectHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
     UWorld *World = GEditor->GetEditorWorldContext().World();
 
@@ -243,7 +263,7 @@ TPair<AStaticMeshActor *, bool> FMCPCreateObjectHandler::CreateCubeActor(UWorld 
 //
 // FMCPModifyObjectHandler
 //
-TSharedPtr<FJsonObject> FMCPModifyObjectHandler::HandleCommand(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
+TSharedPtr<FJsonObject> FMCPModifyObjectHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
     UWorld *World = GEditor->GetEditorWorldContext().World();
 
@@ -336,7 +356,7 @@ TSharedPtr<FJsonObject> FMCPModifyObjectHandler::HandleCommand(const TSharedPtr<
 //
 // FMCPDeleteObjectHandler
 //
-TSharedPtr<FJsonObject> FMCPDeleteObjectHandler::HandleCommand(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
+TSharedPtr<FJsonObject> FMCPDeleteObjectHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
     UWorld *World = GEditor->GetEditorWorldContext().World();
 
@@ -388,7 +408,7 @@ TSharedPtr<FJsonObject> FMCPDeleteObjectHandler::HandleCommand(const TSharedPtr<
 //
 // FMCPExecutePythonHandler
 //
-TSharedPtr<FJsonObject> FMCPExecutePythonHandler::HandleCommand(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
+TSharedPtr<FJsonObject> FMCPExecutePythonHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
     // Check if we have code or file parameter
     FString PythonCode;

@@ -73,6 +73,55 @@ void FMCPTCPServer::UnregisterCommandHandler(const FString& CommandName)
     }
 }
 
+bool FMCPTCPServer::RegisterExternalCommandHandler(TSharedPtr<IMCPCommandHandler> Handler)
+{
+    if (!Handler.IsValid())
+    {
+        MCP_LOG_ERROR("Attempted to register null external command handler");
+        return false;
+    }
+
+    FString CommandName = Handler->GetCommandName();
+    if (CommandName.IsEmpty())
+    {
+        MCP_LOG_ERROR("Attempted to register external command handler with empty command name");
+        return false;
+    }
+
+    // Check if there's a conflict with an existing handler
+    if (CommandHandlers.Contains(CommandName))
+    {
+        MCP_LOG_WARNING("External command handler for '%s' conflicts with an existing handler", *CommandName);
+        return false;
+    }
+
+    // Register the handler
+    CommandHandlers.Add(CommandName, Handler);
+    MCP_LOG_INFO("Registered external command handler for '%s'", *CommandName);
+    return true;
+}
+
+bool FMCPTCPServer::UnregisterExternalCommandHandler(const FString& CommandName)
+{
+    if (CommandName.IsEmpty())
+    {
+        MCP_LOG_ERROR("Attempted to unregister external command handler with empty command name");
+        return false;
+    }
+
+    // Check if the handler exists
+    if (!CommandHandlers.Contains(CommandName))
+    {
+        MCP_LOG_WARNING("Attempted to unregister non-existent external command handler for '%s'", *CommandName);
+        return false;
+    }
+
+    // Unregister the handler
+    CommandHandlers.Remove(CommandName);
+    MCP_LOG_INFO("Unregistered external command handler for '%s'", *CommandName);
+    return true;
+}
+
 bool FMCPTCPServer::Start()
 {
     if (bRunning)
@@ -386,7 +435,7 @@ void FMCPTCPServer::ProcessCommand(const FString& CommandJson, FSocket* ClientSo
                 }
                 
                 // Handle the command and get the response
-                TSharedPtr<FJsonObject> Response = Handler->HandleCommand(Params, ClientSocket);
+                TSharedPtr<FJsonObject> Response = Handler->Execute(Params, ClientSocket);
                 
                 // Send the response
                 SendResponse(ClientSocket, Response);

@@ -78,12 +78,12 @@ public:
     }
 
     /**
-     * Handle the get_scene_info command
+     * Execute the get_scene_info command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
 };
 
 /**
@@ -98,12 +98,12 @@ public:
     }
 
     /**
-     * Handle the create_object command
+     * Execute the create_object command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
 
 protected:
     /**
@@ -138,12 +138,12 @@ public:
     }
 
     /**
-     * Handle the modify_object command
+     * Execute the modify_object command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
 };
 
 /**
@@ -158,12 +158,12 @@ public:
     }
 
     /**
-     * Handle the delete_object command
+     * Execute the delete_object command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
 };
 
 /**
@@ -178,10 +178,10 @@ public:
     }
 
     /**
-     * Handle the execute_python command
+     * Execute the execute_python command
      * @param Params - The command parameters
      * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
 }; 

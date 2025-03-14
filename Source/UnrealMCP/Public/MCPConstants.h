@@ -9,8 +9,8 @@ namespace MCPConstants
 {
     // Network constants
     constexpr int32 DEFAULT_PORT = 13377;
-    constexpr int32 DEFAULT_RECEIVE_BUFFER_SIZE = 32768; // 32KB buffer size
-    constexpr int32 DEFAULT_SEND_BUFFER_SIZE = 32768;    // 32KB buffer size
+    constexpr int32 DEFAULT_RECEIVE_BUFFER_SIZE = 65536; // 64KB buffer size
+    constexpr int32 DEFAULT_SEND_BUFFER_SIZE = DEFAULT_RECEIVE_BUFFER_SIZE;
     constexpr float DEFAULT_CLIENT_TIMEOUT_SECONDS = 30.0f;
     constexpr float DEFAULT_TICK_INTERVAL_SECONDS = 0.1f;
     
@@ -22,7 +22,7 @@ namespace MCPConstants
     constexpr bool DEFAULT_VERBOSE_LOGGING = false;
     
     // Performance constants
-    constexpr int32 MAX_ACTORS_IN_SCENE_INFO = 100;
+    constexpr int32 MAX_ACTORS_IN_SCENE_INFO = 1000;
     
     // Path constants - use these instead of hardcoded paths
     // These will be initialized at runtime in the module startup

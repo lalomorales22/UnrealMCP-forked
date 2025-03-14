@@ -18,6 +18,13 @@ public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
+	/**
+	 * Get the MCP server instance
+	 * External modules can use this to register custom handlers
+	 * @return The MCP server instance, or nullptr if not available
+	 */
+	UNREALMCP_API FMCPTCPServer* GetServer() const { return Server.Get(); }
+
 private:
 	void ExtendLevelEditorToolbar();
 	void AddToolbarButton(FToolBarBuilder& Builder);

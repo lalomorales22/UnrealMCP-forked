@@ -78,32 +78,32 @@ public:
     virtual FString GetCommandName() const = 0;
     
     /**
-     * Handle a command
+     * Handle the command
      * @param Params - The command parameters
-     * @param ClientSocket - The client socket to respond to
+     * @param ClientSocket - The client socket
      * @return JSON response object
      */
-    virtual TSharedPtr<FJsonObject> HandleCommand(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) = 0;
+    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) = 0;
 };
 
 /**
- * TCP Server for the Unreal MCP system
- * Handles client connections and command processing
+ * MCP TCP Server
+ * Manages connections and command routing
  */
 class UNREALMCP_API FMCPTCPServer
 {
 public:
     /**
      * Constructor
-     * @param Config - Server configuration
+     * @param InConfig - Configuration for the server
      */
-    explicit FMCPTCPServer(const FMCPTCPServerConfig& Config = FMCPTCPServerConfig());
+    FMCPTCPServer(const FMCPTCPServerConfig& InConfig);
     
     /**
      * Destructor
      */
     virtual ~FMCPTCPServer();
-
+    
     /**
      * Start the server
      * @return True if started successfully
@@ -123,22 +123,43 @@ public:
     
     /**
      * Register a command handler
-     * @param Handler - The command handler to register
+     * @param Handler - The handler to register
      */
     void RegisterCommandHandler(TSharedPtr<IMCPCommandHandler> Handler);
     
     /**
      * Unregister a command handler
-     * @param CommandName - The name of the command to unregister
+     * @param CommandName - The command name to unregister
      */
     void UnregisterCommandHandler(const FString& CommandName);
-    
+
+    /**
+     * Register an external command handler
+     * This is a public API that allows external code to extend the MCP plugin with custom functionality
+     * @param Handler - The handler to register
+     * @return True if registration was successful
+     */
+    bool RegisterExternalCommandHandler(TSharedPtr<IMCPCommandHandler> Handler);
+
+    /**
+     * Unregister an external command handler
+     * @param CommandName - The command name to unregister
+     * @return True if unregistration was successful
+     */
+    bool UnregisterExternalCommandHandler(const FString& CommandName);
+
     /**
      * Send a response to a client
      * @param Client - The client socket
      * @param Response - The response to send
      */
     void SendResponse(FSocket* Client, const TSharedPtr<FJsonObject>& Response);
+
+    /**
+     * Get the command handlers map (for testing purposes)
+     * @return The map of command handlers
+     */
+    const TMap<FString, TSharedPtr<IMCPCommandHandler>>& GetCommandHandlers() const { return CommandHandlers; }
 
 protected:
     /**

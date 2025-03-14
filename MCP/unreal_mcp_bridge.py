@@ -277,6 +277,35 @@ def execute_python(ctx: Context, code: str = None, file: str = None) -> str:
     except Exception as e:
         return f"Error executing Python: {str(e)}"
 
+#=================================================================================
+# Define utilities for user tools
+utils = {
+    'send_command': send_command,
+    # Add other utilities as needed in the future
+}
+
+# Load user tools at module level
+user_tools_dir = os.path.join(os.path.dirname(__file__), 'UserTools')
+if os.path.exists(user_tools_dir):
+    print(f"Checking user tools directory: {user_tools_dir}", file=sys.stderr)
+    for filename in os.listdir(user_tools_dir):
+        if filename.endswith('.py') and filename != '__init__.py':
+            module_name = filename[:-3]
+            try:
+                spec = importlib.util.spec_from_file_location(module_name, os.path.join(user_tools_dir, filename))
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                if hasattr(module, 'register_tools'):
+                    module.register_tools(mcp, utils)
+                    print(f"Loaded user tool: {module_name}", file=sys.stderr)
+                else:
+                    print(f"Warning: {filename} has no register_tools function", file=sys.stderr)
+            except Exception as e:
+                print(f"Error loading user tool {filename}: {str(e)}", file=sys.stderr)
+else:
+    print(f"User tools directory not found at: {user_tools_dir}", file=sys.stderr)
+#=================================================================================
+
 def main():
     """Main entry point for the Unreal MCP bridge to the MCP server.
     

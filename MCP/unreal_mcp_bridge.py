@@ -20,6 +20,7 @@ import socket
 import sys
 import os
 import importlib.util
+import importlib
 
 # Try to get the port from MCPConstants
 DEFAULT_PORT = 13377
@@ -141,244 +142,52 @@ def send_command(command_type, params=None):
         print(f"Error communicating with Unreal MCP server: {str(e)}", file=sys.stderr)
         raise Exception(f"Failed to communicate with Unreal MCP server: {str(e)}")
 
-@mcp.tool()
-def get_scene_info(ctx: Context) -> str:
-    """Get detailed information about the current Unreal scene."""
-    try:
-        response = send_command("get_scene_info")
-        if response["status"] == "success":
-            return json.dumps(response["result"], indent=2)
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error getting scene info: {str(e)}"
+# All commands have been moved to separate modules in the Commands directory
 
-@mcp.tool()
-def create_object(ctx: Context, type: str, location: list = None, label: str = None) -> str:
-    """Create a new object in the Unreal scene."""
-    try:
-        params = {"type": type}
-        if location:
-            params["location"] = location
-        if label:
-            params["label"] = label
-        response = send_command("create_object", params)
-        if response["status"] == "success":
-            return f"Created object: {response['result']['name']} with label: {response['result']['label']}"
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error creating object: {str(e)}"
+def load_commands():
+    """Load all commands from the Commands directory structure."""
+    commands_dir = os.path.join(os.path.dirname(__file__), 'Commands')
+    if not os.path.exists(commands_dir):
+        print(f"Commands directory not found at: {commands_dir}", file=sys.stderr)
+        return
 
-@mcp.tool()
-def modify_object(ctx: Context, name: str, location: list = None, rotation: list = None, scale: list = None) -> str:
-    """Modify an existing object in the Unreal scene."""
-    try:
-        params = {"name": name}
-        if location:
-            params["location"] = location
-        if rotation:
-            params["rotation"] = rotation
-        if scale:
-            params["scale"] = scale
-        response = send_command("modify_object", params)
-        if response["status"] == "success":
-            return f"Modified object: {response['result']['name']}"
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error modifying object: {str(e)}"
+    # First, load Python files directly in the Commands directory
+    for filename in os.listdir(commands_dir):
+        if filename.endswith('.py') and not filename.startswith('__'):
+            try:
+                module_name = f"Commands.{filename[:-3]}"  # Remove .py extension
+                module = importlib.import_module(module_name)
+                if hasattr(module, 'register_all'):
+                    module.register_all(mcp)
+                    print(f"Registered commands from module: {filename}", file=sys.stderr)
+                else:
+                    print(f"Warning: {filename} has no register_all function", file=sys.stderr)
+            except Exception as e:
+                print(f"Error loading module {filename}: {e}", file=sys.stderr)
 
-@mcp.tool()
-def delete_object(ctx: Context, name: str) -> str:
-    """Delete an object from the Unreal scene."""
-    try:
-        response = send_command("delete_object", {"name": name})
-        if response["status"] == "success":
-            return f"Deleted object: {name}"
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error deleting object: {str(e)}"
+    # Then, load command categories from subdirectories
+    for category in os.listdir(commands_dir):
+        category_path = os.path.join(commands_dir, category)
+        if os.path.isdir(category_path) and not category.startswith('__'):
+            try:
+                # Try to load the category's __init__.py which should have register_all
+                module_name = f"Commands.{category}"
+                module = importlib.import_module(module_name)
+                if hasattr(module, 'register_all'):
+                    module.register_all(mcp)
+                    print(f"Registered commands from category: {category}", file=sys.stderr)
+                else:
+                    print(f"Warning: {category} has no register_all function", file=sys.stderr)
+            except Exception as e:
+                print(f"Error loading category {category}: {e}", file=sys.stderr)
 
-@mcp.tool()
-def execute_python(ctx: Context, code: str = None, file: str = None) -> str:
-    """Execute Python code or a Python script file in Unreal Engine.
-    
-    This function allows you to execute arbitrary Python code directly in the Unreal Engine
-    environment. You can either provide Python code as a string or specify a path to a Python
-    script file to execute.
-    
-    The Python code will have access to the full Unreal Engine Python API, including the 'unreal'
-    module, allowing you to interact with and manipulate the Unreal Engine editor and its assets.
-    
-    Args:
-        code: Python code to execute as a string. Can be multiple lines.
-        file: Path to a Python script file to execute.
-        
-    Note: 
-        - You must provide either code or file, but not both.
-        - The output of the Python code will be visible in the Unreal Engine log.
-        - The Python code runs in the Unreal Engine process, so it has full access to the engine.
-        - Be careful with destructive operations as they can affect your project.
-        
-    Examples:
-        # Execute simple Python code
-        execute_python(code="print('Hello from Unreal Engine!')")
-        
-        # Get information about the current level
-        execute_python(code='''
-        import unreal
-        level = unreal.EditorLevelLibrary.get_editor_world()
-        print(f"Current level: {level.get_name()}")
-        actors = unreal.EditorLevelLibrary.get_all_level_actors()
-        print(f"Number of actors: {len(actors)}")
-        ''')
-        
-        # Execute a Python script file
-        execute_python(file="D:/my_scripts/create_assets.py")
-    """
-    try:
-        if not code and not file:
-            return "Error: You must provide either 'code' or 'file' parameter"
-        
-        if code and file:
-            return "Error: You can only provide either 'code' or 'file', not both"
-        
-        params = {}
-        if code:
-            params["code"] = code
-        if file:
-            params["file"] = file
-            
-        response = send_command("execute_python", params)
-        
-        # Handle the response
-        if response["status"] == "success":
-            return f"Python execution successful:\n{response['result']['output']}"
-        elif response["status"] == "error":
-            # New format with detailed error information
-            result = response.get("result", {})
-            output = result.get("output", "")
-            error = result.get("error", "")
-            
-            # Format the response with both output and error information
-            response_text = "Python execution failed with errors:\n\n"
-            
-            if output:
-                response_text += f"--- Output ---\n{output}\n\n"
-                
-            if error:
-                response_text += f"--- Error ---\n{error}"
-                
-            return response_text
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error executing Python: {str(e)}"
+def load_user_tools():
+    """Load user-defined tools from the UserTools directory."""
+    user_tools_dir = os.path.join(os.path.dirname(__file__), 'UserTools')
+    if not os.path.exists(user_tools_dir):
+        print(f"User tools directory not found at: {user_tools_dir}", file=sys.stderr)
+        return
 
-@mcp.tool()
-def create_material(ctx: Context, package_path: str, name: str, properties: dict = None) -> str:
-    """Create a new material in the Unreal project.
-    
-    Args:
-        package_path: The path where the material should be created (e.g., '/Game/Materials')
-        name: The name of the material
-        properties: Optional dictionary of material properties to set. Can include:
-            - shading_model: str (e.g., "DefaultLit", "Unlit", "Subsurface", etc.)
-            - blend_mode: str (e.g., "Opaque", "Masked", "Translucent", etc.)
-            - two_sided: bool
-            - dithered_lod_transition: bool
-            - cast_contact_shadow: bool
-            - base_color: list[float] (RGBA values 0-1)
-            - metallic: float (0-1)
-            - roughness: float (0-1)
-    """
-    try:
-        params = {
-            "package_path": package_path,
-            "name": name
-        }
-        if properties:
-            params["properties"] = properties
-        response = send_command("create_material", params)
-        if response["status"] == "success":
-            return f"Created material: {response['result']['name']} at path: {response['result']['path']}"
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error creating material: {str(e)}"
-
-@mcp.tool()
-def modify_material(ctx: Context, path: str, properties: dict) -> str:
-    """Modify an existing material's properties.
-    
-    Args:
-        path: The full path to the material (e.g., '/Game/Materials/MyMaterial')
-        properties: Dictionary of material properties to set. Can include:
-            - shading_model: str (e.g., "DefaultLit", "Unlit", "Subsurface", etc.)
-            - blend_mode: str (e.g., "Opaque", "Masked", "Translucent", etc.)
-            - two_sided: bool
-            - dithered_lod_transition: bool
-            - cast_contact_shadow: bool
-            - base_color: list[float] (RGBA values 0-1)
-            - metallic: float (0-1)
-            - roughness: float (0-1)
-    """
-    try:
-        params = {
-            "path": path,
-            "properties": properties
-        }
-        response = send_command("modify_material", params)
-        if response["status"] == "success":
-            return f"Modified material: {response['result']['name']} at path: {response['result']['path']}"
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        return f"Error modifying material: {str(e)}"
-
-@mcp.tool()
-def get_material_info(ctx: Context, path: str) -> dict:
-    """Get information about a material.
-    
-    Args:
-        path: The full path to the material (e.g., '/Game/Materials/MyMaterial')
-        
-    Returns:
-        Dictionary containing material information including:
-            - name: str
-            - path: str
-            - shading_model: str
-            - blend_mode: str
-            - two_sided: bool
-            - dithered_lod_transition: bool
-            - cast_contact_shadow: bool
-            - base_color: list[float]
-            - metallic: float
-            - roughness: float
-    """
-    try:
-        params = {"path": path}
-        response = send_command("get_material_info", params)
-        if response["status"] == "success":
-            return response["result"]
-        else:
-            return {"error": response["message"]}
-    except Exception as e:
-        return {"error": str(e)}
-
-#=================================================================================
-# Define utilities for user tools
-utils = {
-    'send_command': send_command,
-    # Add other utilities as needed in the future
-}
-
-# Load user tools at module level
-user_tools_dir = os.path.join(os.path.dirname(__file__), 'UserTools')
-if os.path.exists(user_tools_dir):
-    print(f"Checking user tools directory: {user_tools_dir}", file=sys.stderr)
     for filename in os.listdir(user_tools_dir):
         if filename.endswith('.py') and filename != '__init__.py':
             module_name = filename[:-3]
@@ -387,26 +196,21 @@ if os.path.exists(user_tools_dir):
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
                 if hasattr(module, 'register_tools'):
-                    module.register_tools(mcp, utils)
+                    from utils import send_command
+                    module.register_tools(mcp, {'send_command': send_command})
                     print(f"Loaded user tool: {module_name}", file=sys.stderr)
                 else:
                     print(f"Warning: {filename} has no register_tools function", file=sys.stderr)
             except Exception as e:
                 print(f"Error loading user tool {filename}: {str(e)}", file=sys.stderr)
-else:
-    print(f"User tools directory not found at: {user_tools_dir}", file=sys.stderr)
-#=================================================================================
 
 def main():
-    """Main entry point for the Unreal MCP bridge to the MCP server.
-    
-    This script acts as a bridge between Unreal Engine and the MCP server.
-    It connects to the Unreal Engine plugin and forwards commands to the
-    actual MCP server, which is provided by the 'mcp' Python package.
-    """
+    """Main entry point for the Unreal MCP bridge."""
     print("Starting Unreal MCP bridge...", file=sys.stderr)
     try:
-        mcp.run()  # Start the MCP bridge to connect to the server
+        load_commands()  # Load built-in commands
+        load_user_tools()  # Load user-defined tools
+        mcp.run()  # Start the MCP bridge
     except Exception as e:
         print(f"Error starting MCP bridge: {str(e)}", file=sys.stderr)
         sys.exit(1)

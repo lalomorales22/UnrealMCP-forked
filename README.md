@@ -28,6 +28,7 @@ good the integrated LLM is at utilizing these tools.
 - [X] Basic operations working
 - [X] Python working
 - [ ] User Extensions (in progress)
+- [ ] Asset tools
 - [ ] Blueprints
 - [ ] Materials
 - [ ] Niagara VFX

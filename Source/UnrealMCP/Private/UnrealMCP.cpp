@@ -28,13 +28,6 @@
 // Define the log category
 DEFINE_LOG_CATEGORY(LogMCP);
 
-// Shorthand for logger
-#define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_INFO(Format, ...) FMCPFileLogger::Get().Info(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_ERROR(Format, ...) FMCPFileLogger::Get().Error(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_WARNING(Format, ...) FMCPFileLogger::Get().Warning(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_VERBOSE(Format, ...) FMCPFileLogger::Get().Verbose(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-
 #define LOCTEXT_NAMESPACE "FUnrealMCPModule"
 
 // Define a style set for our plugin
@@ -46,6 +39,7 @@ public:
 		const FVector2D Icon16x16(16.0f, 16.0f);
 		const FVector2D Icon20x20(20.0f, 20.0f);
 		const FVector2D Icon40x40(40.0f, 40.0f);
+		const FVector2D StatusSize(6.0f, 6.0f);
 
 		// Use path constants instead of finding the plugin each time
 		SetContentRoot(MCPConstants::PluginResourcesPath);
@@ -53,6 +47,13 @@ public:
 		// Register icon
 		FSlateImageBrush* MCPIconBrush = new FSlateImageBrush(RootToContentDir(TEXT("Icon128.png")), Icon16x16);
 		Set("MCPPlugin.ServerIcon", MCPIconBrush);
+
+		// Create status indicator brushes
+		const FLinearColor RunningColor(0.0f, 0.8f, 0.0f);  // Green
+		const FLinearColor StoppedColor(0.8f, 0.0f, 0.0f);  // Red
+		
+		Set("MCPPlugin.StatusRunning", new FSlateRoundedBoxBrush(RunningColor, 3.0f, FVector2f(StatusSize)));
+		Set("MCPPlugin.StatusStopped", new FSlateRoundedBoxBrush(StoppedColor, 3.0f, FVector2f(StatusSize)));
 	}
 
 	static TSharedRef<FMCPPluginStyle> Create()
@@ -95,7 +96,7 @@ void FUnrealMCPModule::StartupModule()
 	MCPConstants::InitializePathConstants();
 	
 	// Initialize our custom log category
-	MCP_LOG_WARNING("UnrealMCP Plugin is starting up");
+	MCP_LOG_INFO("UnrealMCP Plugin is starting up");
 	
 	// Initialize file logger - now using path constants
 	FString LogFilePath = FPaths::Combine(MCPConstants::PluginLogsPath, TEXT("MCPServer.log"));
@@ -106,7 +107,7 @@ void FUnrealMCPModule::StartupModule()
 	FSlateStyleRegistry::RegisterSlateStyle(*FMCPPluginStyle::Get());
 	
 	// More debug logging
-	MCP_LOG_WARNING("UnrealMCP Style registered");
+	MCP_LOG_INFO("UnrealMCP Style registered");
 
 	// Register settings
 	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
@@ -122,7 +123,7 @@ void FUnrealMCPModule::StartupModule()
 	// First, make sure we're not already registered
 	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
 	
-	MCP_LOG_WARNING("Registering OnPostEngineInit delegate");
+	MCP_LOG_INFO("Registering OnPostEngineInit delegate");
 	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
 	
 }
@@ -172,7 +173,7 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 	{
 		FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("MCP");
 		
-		// Create a button that opens the control panel instead of directly toggling the server
+		// Create a button that opens the control panel with status indicator
 		Section.AddEntry(FToolMenuEntry::InitToolBarButton(
 			"MCPServerControl",
 			FUIAction(
@@ -181,7 +182,12 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 			),
 			LOCTEXT("MCPButtonLabel", "MCP Server"),
 			LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"),
-			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon")
+			FSlateIcon(
+				FMCPPluginStyle::Get()->GetStyleSetName(),
+				"MCPPlugin.ServerIcon",
+				NAME_None,
+				IsServerRunning() ? "MCPPlugin.StatusRunning" : "MCPPlugin.StatusStopped"
+			)
 		));
 		
 		MCP_LOG_WARNING("MCP Server button added to main toolbar");

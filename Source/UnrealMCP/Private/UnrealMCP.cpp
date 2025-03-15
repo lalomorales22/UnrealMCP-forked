@@ -340,7 +340,7 @@ TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
 				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
-					.Text(FText::AsNumber(Settings->Port))
+					.Text(FText::FromString(FString::FromInt(Settings->Port)))
 					.Font(FAppStyle::GetFontStyle("NormalText"))
 				]
 			]

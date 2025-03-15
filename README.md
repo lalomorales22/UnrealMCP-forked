@@ -31,6 +31,7 @@ good the integrated LLM is at utilizing these tools.
 - [ ] Blueprints
 - [ ] Materials
 - [ ] Niagara VFX
+- [ ] Metasound
 - [ ] Landscape (I might hold off on this because Epic has mentioned they are going to be updating the landscape tools)
 - [ ] Modeling Tools
 - [ ] PCG

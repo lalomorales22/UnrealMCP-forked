@@ -35,6 +35,7 @@ private:
 	
 	// MCP Control Panel functions
 	void OpenMCPControlPanel();
+	FReply OpenMCPControlPanel_OnClicked();
 	void CloseMCPControlPanel();
 	void OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window);
 	TSharedRef<class SWidget> CreateMCPControlPanelContent();

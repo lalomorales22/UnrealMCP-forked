@@ -37,15 +37,18 @@ public:
 	FMCPPluginStyle() : FSlateStyleSet("MCPPluginStyle")
 	{
 		const FVector2D Icon16x16(16.0f, 16.0f);
-		const FVector2D Icon20x20(20.0f, 20.0f);
-		const FVector2D Icon40x40(40.0f, 40.0f);
 		const FVector2D StatusSize(6.0f, 6.0f);
 
 		// Use path constants instead of finding the plugin each time
 		SetContentRoot(MCPConstants::PluginResourcesPath);
 
 		// Register icon
-		FSlateImageBrush* MCPIconBrush = new FSlateImageBrush(RootToContentDir(TEXT("Icon128.png")), Icon16x16);
+		FSlateImageBrush* MCPIconBrush = new FSlateImageBrush(
+			RootToContentDir(TEXT("Icon128.png")), 
+			Icon16x16,
+			FLinearColor::White,  // Tint (white preserves original colors)
+			ESlateBrushTileType::NoTile  // Ensure no tiling, just the image
+		);
 		Set("MCPPlugin.ServerIcon", MCPIconBrush);
 
 		// Create status indicator brushes
@@ -54,19 +57,28 @@ public:
 		
 		Set("MCPPlugin.StatusRunning", new FSlateRoundedBoxBrush(RunningColor, 3.0f, FVector2f(StatusSize)));
 		Set("MCPPlugin.StatusStopped", new FSlateRoundedBoxBrush(StoppedColor, 3.0f, FVector2f(StatusSize)));
+
+		// Define a custom button style with hover feedback
+		FButtonStyle ToolbarButtonStyle = FAppStyle::Get().GetWidgetStyle<FButtonStyle>("LevelEditor.ToolBar.Button");
+        
+		// Normal state: fully transparent background
+		ToolbarButtonStyle.SetNormal(FSlateColorBrush(FLinearColor(0, 0, 0, 0))); // Transparent
+        
+		// Hovered state: subtle overlay (e.g., light gray with low opacity)
+		ToolbarButtonStyle.SetHovered(FSlateColorBrush(FLinearColor(0.2f, 0.2f, 0.2f, 0.3f))); // Semi-transparent gray
+        
+		// Pressed state: slightly darker overlay
+		ToolbarButtonStyle.SetPressed(FSlateColorBrush(FLinearColor(0.1f, 0.1f, 0.1f, 0.5f))); // Darker semi-transparent gray
+        
+		// Register the custom style
+		Set("MCPPlugin.TransparentToolbarButton", ToolbarButtonStyle);
 	}
 
-	static TSharedRef<FMCPPluginStyle> Create()
-	{
-		TSharedRef<FMCPPluginStyle> StyleRef = MakeShareable(new FMCPPluginStyle());
-		return StyleRef;
-	}
-	
 	static void Initialize()
 	{
 		if (!Instance.IsValid())
 		{
-			Instance = Create();
+			Instance = MakeShareable(new FMCPPluginStyle());
 		}
 	}
 
@@ -125,7 +137,6 @@ void FUnrealMCPModule::StartupModule()
 	
 	MCP_LOG_INFO("Registering OnPostEngineInit delegate");
 	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
-	
 }
 
 void FUnrealMCPModule::ShutdownModule()
@@ -154,64 +165,80 @@ void FUnrealMCPModule::ShutdownModule()
 
 void FUnrealMCPModule::ExtendLevelEditorToolbar()
 {
-	static bool bToolbarExtended = false;
-	
-	if (bToolbarExtended)
-	{
-		MCP_LOG_WARNING("ExtendLevelEditorToolbar called but toolbar already extended, skipping");
-		return;
-	}
-	
-	MCP_LOG_WARNING("ExtendLevelEditorToolbar called - first time");
-	
-	// Register the main menu
-	UToolMenus::Get()->RegisterMenu("LevelEditor.MainMenu", "MainFrame.MainMenu");
-	
-	// Add to the main toolbar
-	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
-	if (ToolbarMenu)
-	{
-		FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("MCP");
-		
-		// Create a button that opens the control panel with status indicator
-		Section.AddEntry(FToolMenuEntry::InitToolBarButton(
-			"MCPServerControl",
-			FUIAction(
-				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
-				FCanExecuteAction()
-			),
-			LOCTEXT("MCPButtonLabel", "MCP Server"),
-			LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"),
-			FSlateIcon(
-				FMCPPluginStyle::Get()->GetStyleSetName(),
-				"MCPPlugin.ServerIcon",
-				NAME_None,
-				IsServerRunning() ? "MCPPlugin.StatusRunning" : "MCPPlugin.StatusStopped"
-			)
-		));
-		
-		MCP_LOG_WARNING("MCP Server button added to main toolbar");
-	}
-	
-	// Add to Window menu
-	UToolMenu* WindowMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.MainMenu.Window");
-	if (WindowMenu)
-	{
-		FToolMenuSection& Section = WindowMenu->FindOrAddSection("WindowLayout");
-		Section.AddMenuEntry(
-			"MCPServerControlWindow",
-			LOCTEXT("MCPWindowMenuLabel", "MCP Server Control Panel"),
-			LOCTEXT("MCPWindowMenuTooltip", "Open MCP Server Control Panel"),
-			FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
-			FUIAction(
-				FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
-				FCanExecuteAction()
-			)
-		);
-		MCP_LOG_WARNING("MCP Server entry added to Window menu");
-	}
-	
-	bToolbarExtended = true;
+    static bool bToolbarExtended = false;
+    
+    if (bToolbarExtended)
+    {
+        MCP_LOG_WARNING("ExtendLevelEditorToolbar called but toolbar already extended, skipping");
+        return;
+    }
+    
+    MCP_LOG_INFO("ExtendLevelEditorToolbar called - first time");
+    
+    UToolMenus::Get()->RegisterMenu("LevelEditor.MainMenu", "MainFrame.MainMenu");
+    
+    UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
+    if (ToolbarMenu)
+    {
+        FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("MCP");
+        
+        // Add a custom widget instead of a static toolbar button
+        Section.AddEntry(FToolMenuEntry::InitWidget(
+            "MCPServerControl",
+            SNew(SButton)
+            .ButtonStyle(FMCPPluginStyle::Get().ToSharedRef(), "MCPPlugin.TransparentToolbarButton")
+            //.ButtonStyle(FAppStyle::Get(), "LevelEditor.ToolBar.Button") // Match toolbar style
+            .OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel_OnClicked))
+            .ToolTipText(LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"))
+            .Content()
+            [
+                SNew(SOverlay)
+                + SOverlay::Slot()
+                [
+                    SNew(SImage)
+                    .Image(FMCPPluginStyle::Get()->GetBrush("MCPPlugin.ServerIcon"))
+                	.ColorAndOpacity(FLinearColor::White)  // Ensure no tint overrides transparency
+                ]
+                + SOverlay::Slot()
+                .HAlign(HAlign_Right)
+                .VAlign(VAlign_Bottom)
+                [
+                    SNew(SImage)
+                    .Image_Lambda([this]() -> const FSlateBrush* {
+                        return IsServerRunning() 
+                            ? FMCPPluginStyle::Get()->GetBrush("MCPPlugin.StatusRunning") 
+                            : FMCPPluginStyle::Get()->GetBrush("MCPPlugin.StatusStopped");
+                    })
+                ]
+            ],
+            FText::GetEmpty(),  // No label needed since the icon is visual
+            true,   // bNoIndent
+            false,  // bSearchable
+            false
+        ));
+        
+        MCP_LOG_INFO("MCP Server button added to main toolbar with dynamic icon");
+    }
+    
+    // Window menu code remains unchanged
+    UToolMenu* WindowMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.MainMenu.Window");
+    if (WindowMenu)
+    {
+        FToolMenuSection& Section = WindowMenu->FindOrAddSection("WindowLayout");
+        Section.AddMenuEntry(
+            "MCPServerControlWindow",
+            LOCTEXT("MCPWindowMenuLabel", "MCP Server Control Panel"),
+            LOCTEXT("MCPWindowMenuTooltip", "Open MCP Server Control Panel"),
+            FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
+            FUIAction(
+                FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+                FCanExecuteAction()
+            )
+        );
+        MCP_LOG_INFO("MCP Server entry added to Window menu");
+    }
+    
+    bToolbarExtended = true;
 }
 
 // Legacy toolbar extension method - no longer used
@@ -260,6 +287,13 @@ void FUnrealMCPModule::OpenMCPControlPanel()
 	FSlateApplication::Get().AddWindow(MCPControlPanelWindow.ToSharedRef());
 
 	MCP_LOG_INFO("MCP Control Panel opened");
+}
+
+FReply FUnrealMCPModule::OpenMCPControlPanel_OnClicked()
+{
+	OpenMCPControlPanel();
+
+	return FReply::Handled();
 }
 
 void FUnrealMCPModule::OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window)
@@ -456,8 +490,11 @@ void FUnrealMCPModule::StartServer()
 	
 	if (Server->Start())
 	{
-		// The server already logs this message, so we don't need to log it here
-		// MCP_LOG_INFO("MCP Server started on port %d", Settings->Port);
+		// Refresh the toolbar to update the status indicator
+		if (UToolMenus* ToolMenus = UToolMenus::Get())
+		{
+			ToolMenus->RefreshAllWidgets();
+		}
 	}
 	else
 	{
@@ -472,6 +509,12 @@ void FUnrealMCPModule::StopServer()
 		Server->Stop();
 		Server.Reset();
 		MCP_LOG_INFO("MCP Server stopped");
+		
+		// Refresh the toolbar to update the status indicator
+		if (UToolMenus* ToolMenus = UToolMenus::Get())
+		{
+			ToolMenus->RefreshAllWidgets();
+		}
 	}
 }
 

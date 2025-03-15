@@ -30,7 +30,8 @@ good the integrated LLM is at utilizing these tools.
 - [ ] User Extensions (in progress)
 - [ ] Blueprints
 - [ ] Materials
-- [ ] Landscape
+- [ ] Niagara VFX
+- [ ] Landscape (I might hold off on this because Epic has mentioned they are going to be updating the landscape tools)
 - [ ] Modeling Tools
 - [ ] PCG
 

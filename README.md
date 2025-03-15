@@ -12,8 +12,7 @@ Also, I only use windows, so I don't know how this would be setup for mac/unix
 UnrealMCP is an Unofficial Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
 
 I only just learned about MCP a few days ago, so I'm not that familiar with it, I'm still learning so things might be initially pretty rough.
-I've implemented this using https://github.com/ahujasid/blender-mcp as a reference, which relies on claude for desktop. It may or may not work with other models.
-Working on getting some installation instructions now.
+I've implemented this using https://github.com/ahujasid/blender-mcp as a reference, which relies on claude for desktop. It may or may not work with other models, if you experiment with any, please let me know!
 
 ## Features
 - TCP server implementation for remote control of Unreal Engine
@@ -29,9 +28,12 @@ good the integrated LLM is at utilizing these tools.
 - [X] Basic operations working
 - [X] Python working
 - [ ] User Extensions (in progress)
+- [ ] Asset tools
 - [ ] Blueprints
 - [ ] Materials
-- [ ] Landscape
+- [ ] Niagara VFX
+- [ ] Metasound
+- [ ] Landscape (I might hold off on this because Epic has mentioned they are going to be updating the landscape tools)
 - [ ] Modeling Tools
 - [ ] PCG
 

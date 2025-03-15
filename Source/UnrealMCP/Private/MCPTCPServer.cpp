@@ -16,6 +16,12 @@
 #include "UnrealMCP.h"
 #include "MCPFileLogger.h"
 #include "MCPCommandHandlers.h"
+#include "MCPCommandHandlers_Materials.h"
+#include "HAL/PlatformFilemanager.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
+#include "Misc/Guid.h"
+#include "MCPConstants.h"
 
 // Shorthand for logger
 #define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))

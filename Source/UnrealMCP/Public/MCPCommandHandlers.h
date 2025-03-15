@@ -5,8 +5,6 @@
 #include "Engine/World.h"
 #include "Engine/StaticMeshActor.h"
 #include "Components/StaticMeshComponent.h"
-#include "ActorEditorUtils.h"
-#include "EngineUtils.h"
 
 /**
  * Base class for MCP command handlers
@@ -184,99 +182,4 @@ public:
      * @return JSON response object
      */
     virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
-};
-
-/**
- * Handler for the create_material command
- */
-class FMCPCreateMaterialHandler : public FMCPCommandHandlerBase
-{
-public:
-    FMCPCreateMaterialHandler()
-        : FMCPCommandHandlerBase("create_material")
-    {
-    }
-
-    /**
-     * Execute the create_material command
-     * @param Params - The command parameters
-     * @param ClientSocket - The client socket
-     * @return JSON response object
-     */
-    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
-
-protected:
-    /**
-     * Create a new material
-     * @param PackagePath - The path where the material should be created
-     * @param MaterialName - The name of the material
-     * @param Properties - Optional material properties to set
-     * @return The created material and a success flag
-     */
-    TPair<UMaterial*, bool> CreateMaterial(const FString& PackagePath, const FString& MaterialName, const TSharedPtr<FJsonObject>& Properties = nullptr);
-    
-    /**
-     * Modify a material's properties
-     * @param Material - The material to modify
-     * @param Properties - The properties to set
-     * @return Success flag
-     */
-    bool ModifyMaterialProperties(UMaterial* Material, const TSharedPtr<FJsonObject>& Properties);
-};
-
-/**
- * Handler for the modify_material command
- */
-class FMCPModifyMaterialHandler : public FMCPCommandHandlerBase
-{
-public:
-    FMCPModifyMaterialHandler()
-        : FMCPCommandHandlerBase("modify_material")
-    {
-    }
-
-    /**
-     * Execute the modify_material command
-     * @param Params - The command parameters
-     * @param ClientSocket - The client socket
-     * @return JSON response object
-     */
-    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
-
-protected:
-    /**
-     * Modify a material's properties
-     * @param Material - The material to modify
-     * @param Properties - The properties to set
-     * @return Success flag
-     */
-    bool ModifyMaterialProperties(UMaterial* Material, const TSharedPtr<FJsonObject>& Properties);
-};
-
-/**
- * Handler for the get_material_info command
- */
-class FMCPGetMaterialInfoHandler : public FMCPCommandHandlerBase
-{
-public:
-    FMCPGetMaterialInfoHandler()
-        : FMCPCommandHandlerBase("get_material_info")
-    {
-    }
-
-    /**
-     * Execute the get_material_info command
-     * @param Params - The command parameters
-     * @param ClientSocket - The client socket
-     * @return JSON response object
-     */
-    virtual TSharedPtr<FJsonObject> Execute(const TSharedPtr<FJsonObject>& Params, FSocket* ClientSocket) override;
-
-protected:
-    /**
-     * Get information about a material
-     * @param Material - The material to get info about
-     * @return JSON object containing material info
-     */
-    TSharedPtr<FJsonObject> GetMaterialInfo(UMaterial* Material);
 }; 

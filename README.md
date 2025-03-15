@@ -14,6 +14,25 @@ UnrealMCP is an Unofficial Unreal Engine plugin designed to control Unreal Engin
 I only just learned about MCP a few days ago, so I'm not that familiar with it, I'm still learning so things might be initially pretty rough.
 I've implemented this using https://github.com/ahujasid/blender-mcp as a reference, which relies on claude for desktop. It may or may not work with other models, if you experiment with any, please let me know!
 
+## ⚠️ DISCLAIMER
+This plugin allows AI agents to directly modify your Unreal Engine project. While it can be a powerful tool, it also comes with risks:
+
+- AI agents may make unexpected changes to your project
+- Files could be accidentally deleted or modified
+- Project settings could be altered
+- Assets could be overwritten
+
+**IMPORTANT SAFETY MEASURES:**
+1. Always use source control (like Git or Perforce) with your project
+2. Make regular backups of your project
+3. Test the plugin in a separate project first
+4. Review changes before committing them
+
+By using this plugin, you acknowledge that:
+- You are solely responsible for any changes made to your project
+- The plugin author is not responsible for any damage, data loss, or issues caused by AI agents
+- You use this plugin at your own risk
+
 ## Features
 - TCP server implementation for remote control of Unreal Engine
 - JSON-based command protocol for AI tools integration

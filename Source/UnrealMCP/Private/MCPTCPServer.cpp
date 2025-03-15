@@ -16,6 +16,7 @@
 #include "UnrealMCP.h"
 #include "MCPFileLogger.h"
 #include "MCPCommandHandlers.h"
+#include "MCPCommandHandlers_Blueprints.h"
 #include "MCPCommandHandlers_Materials.h"
 #include "HAL/PlatformFilemanager.h"
 #include "Misc/FileHelper.h"
@@ -23,12 +24,6 @@
 #include "Misc/Guid.h"
 #include "MCPConstants.h"
 
-// Shorthand for logger
-#define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_INFO(Format, ...) FMCPFileLogger::Get().Info(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_ERROR(Format, ...) FMCPFileLogger::Get().Error(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_WARNING(Format, ...) FMCPFileLogger::Get().Warning(FString::Printf(TEXT(Format), ##__VA_ARGS__))
-#define MCP_LOG_VERBOSE(Format, ...) FMCPFileLogger::Get().Verbose(FString::Printf(TEXT(Format), ##__VA_ARGS__))
 
 FMCPTCPServer::FMCPTCPServer(const FMCPTCPServerConfig& InConfig) 
     : Config(InConfig)
@@ -41,9 +36,17 @@ FMCPTCPServer::FMCPTCPServer(const FMCPTCPServerConfig& InConfig)
     RegisterCommandHandler(MakeShared<FMCPModifyObjectHandler>());
     RegisterCommandHandler(MakeShared<FMCPDeleteObjectHandler>());
     RegisterCommandHandler(MakeShared<FMCPExecutePythonHandler>());
+
+    // Material command handlers
     RegisterCommandHandler(MakeShared<FMCPCreateMaterialHandler>());
     RegisterCommandHandler(MakeShared<FMCPModifyMaterialHandler>());
     RegisterCommandHandler(MakeShared<FMCPGetMaterialInfoHandler>());
+
+    // Blueprint command handlers
+    RegisterCommandHandler(MakeShared<FMCPCreateBlueprintHandler>());
+    RegisterCommandHandler(MakeShared<FMCPModifyBlueprintHandler>());
+    RegisterCommandHandler(MakeShared<FMCPGetBlueprintInfoHandler>());
+    RegisterCommandHandler(MakeShared<FMCPCreateBlueprintEventHandler>());
 }
 
 FMCPTCPServer::~FMCPTCPServer()

@@ -12,3 +12,8 @@ Logs/
 
 # Python modules
 MCP/python_modules/
+MCP/__pycache__/
+MCP/Commands/__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class

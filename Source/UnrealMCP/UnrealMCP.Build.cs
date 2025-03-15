@@ -26,14 +26,16 @@ public class UnrealMCP : ModuleRules
 			new string[] {
 				"Core", "CoreUObject", "Engine", "UnrealEd",
 				"Networking", "Sockets", "Slate", "SlateCore", "EditorStyle",
-				"DeveloperSettings", "Projects", "ToolMenus"
+				"DeveloperSettings", "Projects", "ToolMenus",
+				"BlueprintGraph", "GraphEditor", "KismetCompiler"
 			}
 		);
 			
 		
 		PrivateDependencyModuleNames.AddRange(
 			new string[] { 
-				"Json", "JsonUtilities", "Settings", "InputCore", "PythonScriptPlugin"
+				"Json", "JsonUtilities", "Settings", "InputCore", "PythonScriptPlugin",
+				"Kismet", "KismetWidgets"
 			}
 		);
 		

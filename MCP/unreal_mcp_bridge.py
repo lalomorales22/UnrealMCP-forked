@@ -88,11 +88,20 @@ mcp = FastMCP(
     description="Unreal Engine integration through the Model Context Protocol"
 )
 
-def send_command(command_type, params=None):
-    """Send a command to the C++ MCP server and return the response."""
+def send_command(command_type, params=None, timeout=DEFAULT_TIMEOUT):
+    """Send a command to the C++ MCP server and return the response.
+    
+    Args:
+        command_type: The type of command to send
+        params: Optional parameters for the command
+        timeout: Timeout in seconds (default: DEFAULT_TIMEOUT)
+    
+    Returns:
+        The JSON response from the server
+    """
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(DEFAULT_TIMEOUT)  # Set a timeout
+            s.settimeout(timeout)  # Set a timeout
             s.connect(("localhost", DEFAULT_PORT))  # Connect to Unreal C++ server
             command = {
                 "type": command_type,

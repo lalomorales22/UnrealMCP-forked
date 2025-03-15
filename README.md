@@ -27,10 +27,10 @@ I'm not sure what's possible yet, in theory anything, but it depends on how
 good the integrated LLM is at utilizing these tools.
 - [X] Basic operations working
 - [X] Python working
+- [X] Materials
 - [ ] User Extensions (in progress)
 - [ ] Asset tools
 - [ ] Blueprints
-- [ ] Materials
 - [ ] Niagara VFX
 - [ ] Metasound
 - [ ] Landscape (I might hold off on this because Epic has mentioned they are going to be updating the landscape tools)

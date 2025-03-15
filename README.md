@@ -22,6 +22,19 @@ Working on getting some installation instructions now.
 - Comprehensive scene manipulation capabilities
 - Python companion scripts for client-side interaction
 
+## Roadmap
+These are what I have in mind for development as of 3/14/2025
+I'm not sure what's possible yet, in theory anything, but it depends on how
+good the integrated LLM is at utilizing these tools.
+- [X] Basic operations working
+- [X] Python working
+- [ ] User Extensions (in progress)
+- [ ] Blueprints
+- [ ] Materials
+- [ ] Landscape
+- [ ] Modeling Tools
+- [ ] PCG
+
 ## Requirements
 - Unreal Engine 5.5 (I have only tested on this version, may work with earlier, but no official support)
 - C++ development environment configured for Unreal Engine

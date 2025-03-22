@@ -192,7 +192,7 @@ SOFTWARE.
 ## Credits
 - Created by: kvick
 - X: [@kvickart](https://x.com/kvickart)
-- Discord: https://discord.gg/abRftdSe
+- Discord: https://discord.gg/XzxSse49
   
 ### Thank you to testers!!!
 - https://github.com/TheMurphinatur

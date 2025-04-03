@@ -1,5 +1,12 @@
 # UnrealMCP Plugin
 
+
+[![Discord][discord-shield]][discord-url]
+
+[discord-shield]: https://img.shields.io/badge/Discord-Join-5865F2?style=flat&logo=discord&logoColor=white
+[discord-url]: https://discord.gg/ThkpVxdzet
+
+
 # VERY WIP REPO
 I'm working on adding more tools now and cleaning up the codebase, 
 I plan to allow for easy tool extension outside the main plugin

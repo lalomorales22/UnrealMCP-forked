@@ -143,7 +143,7 @@ echo 1. Run run_unreal_mcp.bat to start the MCP bridge
 echo 2. Open Claude Desktop and it should automatically use the correct configuration
 echo ========================================================
 echo.
-echo Press any key to exit...
+echo Please Press any key to exit...
 pause >nul
 
 :end

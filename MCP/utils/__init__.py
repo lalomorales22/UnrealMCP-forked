@@ -34,12 +34,20 @@ except Exception as e:
     # If anything goes wrong, use the defaults (which are already defined)
     print(f"Warning: Could not read constants from MCPConstants.h: {e}", file=sys.stderr)
 
-def send_command(command_type, params=None):
+# Allow environment variable override
+env_port = os.environ.get("MCP_PORT")
+if env_port:
+    try:
+        DEFAULT_PORT = int(env_port)
+    except ValueError:
+        print(f"Invalid MCP_PORT environment variable: {env_port}", file=sys.stderr)
+
+def send_command(command_type, params=None, port=DEFAULT_PORT):
     """Send a command to the C++ MCP server and return the response."""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(DEFAULT_TIMEOUT)  # Set a timeout
-            s.connect(("localhost", DEFAULT_PORT))  # Connect to Unreal C++ server
+            s.connect(("localhost", port))  # Connect to Unreal C++ server
             command = {
                 "type": command_type,
                 "params": params or {}

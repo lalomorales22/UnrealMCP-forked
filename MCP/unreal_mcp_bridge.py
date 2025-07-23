@@ -21,6 +21,7 @@ import sys
 import os
 import importlib.util
 import importlib
+import argparse
 
 # Try to get the port from MCPConstants
 DEFAULT_PORT = 13377
@@ -52,6 +53,14 @@ except Exception as e:
     print(f"Warning: Could not read constants from MCPConstants.h: {e}", file=sys.stderr)
     # No need to redefine DEFAULT_PORT and DEFAULT_BUFFER_SIZE here
 
+
+# Override with environment variable if provided
+env_port = os.environ.get("MCP_PORT")
+if env_port:
+    try:
+        DEFAULT_PORT = int(env_port)
+    except ValueError:
+        print(f"Invalid MCP_PORT environment variable: {env_port}", file=sys.stderr)
 
 print(f"Using port: {DEFAULT_PORT}", file=sys.stderr)
 print(f"Using buffer size: {DEFAULT_BUFFER_SIZE}", file=sys.stderr)
@@ -88,7 +97,7 @@ mcp = FastMCP(
     description="Unreal Engine integration through the Model Context Protocol"
 )
 
-def send_command(command_type, params=None, timeout=DEFAULT_TIMEOUT):
+def send_command(command_type, params=None, timeout=DEFAULT_TIMEOUT, port=DEFAULT_PORT):
     """Send a command to the C++ MCP server and return the response.
     
     Args:
@@ -102,7 +111,7 @@ def send_command(command_type, params=None, timeout=DEFAULT_TIMEOUT):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(timeout)  # Set a timeout
-            s.connect(("localhost", DEFAULT_PORT))  # Connect to Unreal C++ server
+            s.connect(("localhost", port))  # Connect to Unreal C++ server
             command = {
                 "type": command_type,
                 "params": params or {}
@@ -216,11 +225,20 @@ def load_user_tools():
 
 def main():
     """Main entry point for the Unreal MCP bridge."""
+    parser = argparse.ArgumentParser(description="Unreal MCP bridge")
+    parser.add_argument("--port", type=int, help="Port to connect to")
+    args, _ = parser.parse_known_args()
+
+    if args.port:
+        global DEFAULT_PORT
+        DEFAULT_PORT = args.port
+
     print("Starting Unreal MCP bridge...", file=sys.stderr)
+    print(f"Connecting on port {DEFAULT_PORT}", file=sys.stderr)
     try:
         load_commands()  # Load built-in commands
         load_user_tools()  # Load user-defined tools
-        mcp.run()  # Start the MCP bridge
+        mcp.run()
     except Exception as e:
         print(f"Error starting MCP bridge: {str(e)}", file=sys.stderr)
         sys.exit(1)

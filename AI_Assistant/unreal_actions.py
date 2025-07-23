@@ -71,3 +71,30 @@ def scale_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
     for actor in actors:
         actor.set_actor_scale3d(scale_vector)
     return f"Scaled {len(actors)} actor(s)"
+
+
+def set_material(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
+    """Apply a material to selected actors."""
+    material_path = entities.get("asset_path")
+    if not material_path:
+        return "No material specified"
+
+    material = unreal.EditorAssetLibrary.load_asset(material_path)
+    if material is None:
+        return f"Material not found: {material_path}"
+
+    actors = context.get("actors") or _get_selected_actors()
+    for actor in actors:
+        components = actor.get_components_by_class(unreal.StaticMeshComponent)
+        for comp in components:
+            comp.set_material(0, material)
+    return f"Applied material to {len(actors)} actor(s)"
+
+
+def bake_lighting(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
+    """Start the lighting build process."""
+    try:
+        unreal.EditorLevelLibrary.build_light()
+        return "Lighting build started"
+    except Exception as exc:  # pragma: no cover - relies on Unreal API
+        return f"Error building lighting: {exc}"

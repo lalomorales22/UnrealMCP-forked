@@ -230,6 +230,13 @@ TSharedPtr<FJsonObject> FMCPCreateBlueprintHandler::Execute(const TSharedPtr<FJs
         TSharedPtr<FJsonObject> ResultObj = MakeShared<FJsonObject>();
         ResultObj->SetStringField("name", Result.Key->GetName());
         ResultObj->SetStringField("path", Result.Key->GetPathName());
+
+        FString FilePath = Result.Key->GetOutermost()->GetMetaData(TEXT("MCPFilePath"));
+        if (!FilePath.IsEmpty())
+        {
+            ResultObj->SetStringField("file_path", FilePath);
+        }
+
         return CreateSuccessResponse(ResultObj);
     }
     else
@@ -307,7 +314,15 @@ TPair<UBlueprint*, bool> FMCPCreateBlueprintHandler::CreateBlueprint(
     }
 
     // Create the blueprint directly in the specified directory
-    return FMCPBlueprintUtils::CreateBlueprintAsset(DirectoryPath, AssetName, ParentClass);
+    TPair<UBlueprint*, bool> Result = FMCPBlueprintUtils::CreateBlueprintAsset(DirectoryPath, AssetName, ParentClass);
+
+    if (Result.Value && Result.Key)
+    {
+        FString PackageFileName = FPackageName::LongPackageNameToFilename(FullPackagePath, FPackageName::GetAssetPackageExtension());
+        Result.Key->GetOutermost()->SetMetaData(TEXT("MCPFilePath"), *PackageFileName);
+    }
+
+    return Result;
 }
 
 //

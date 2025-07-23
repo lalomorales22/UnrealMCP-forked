@@ -13,6 +13,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Engine/Blueprint.h"
 #include "Engine/BlueprintGeneratedClass.h"
+#include "Misc/MessageDialog.h"
 
 
 //
@@ -411,6 +412,17 @@ TSharedPtr<FJsonObject> FMCPDeleteObjectHandler::Execute(const TSharedPtr<FJsonO
 //
 TSharedPtr<FJsonObject> FMCPExecutePythonHandler::Execute(const TSharedPtr<FJsonObject> &Params, FSocket *ClientSocket)
 {
+    static bool bConsentGiven = false;
+    if (!bConsentGiven)
+    {
+        EAppReturnType::Type Response = FMessageDialog::Open(EAppMsgType::YesNo, FText::FromString(TEXT("Execute arbitrary Python code?")));
+        if (Response == EAppReturnType::No)
+        {
+            return CreateErrorResponse(TEXT("User declined to execute Python code"));
+        }
+        bConsentGiven = true;
+    }
+
     // Check if we have code or file parameter
     FString PythonCode;
     FString PythonFile;

@@ -66,42 +66,12 @@ def test_create_blueprint():
         # Store the actual path from the response for later tests
         if response["status"] == "success":
             blueprint_path = response["result"]["path"]
+            file_path = response["result"].get("file_path")
             print(f"Blueprint created at: {blueprint_path}")
-            
-            # Check if the blueprint file exists in either expected location
-            if os.path.exists(expected_path_in_dir):
-                print(f"✓ Blueprint file found at: {expected_path_in_dir}")
-            elif os.path.exists(expected_path_as_asset):
-                print(f"✓ Blueprint file found at: {expected_path_as_asset}")
+            if file_path and os.path.exists(file_path):
+                print(f"\u2713 Blueprint file found at: {file_path}")
             else:
-                print(f"✗ Blueprint file NOT found at expected locations")
-                
-                # Try to find the file in other possible locations
-                possible_locations = [
-                    os.path.join(project_dir, "Saved", "Blueprints"),
-                    os.path.join(project_dir, "Saved", "Autosaves", "Game", "Blueprints"),
-                    os.path.join(project_dir, "Plugins", "UnrealArchitect", "Content", "Blueprints")
-                ]
-                
-                for location in possible_locations:
-                    potential_path = os.path.join(location, f"{blueprint_name}.uasset")
-                    if os.path.exists(potential_path):
-                        print(f"✓ Blueprint file found at alternative location: {potential_path}")
-                        break
-                else:
-                    print("✗ Blueprint file not found in any expected location")
-                    
-                    # Try to find the file using a more extensive search
-                    print("Searching for the blueprint file in the project directory...")
-                    for root, dirs, files in os.walk(project_dir):
-                        for file in files:
-                            if "Blueprint" in file and file.endswith(".uasset"):
-                                found_path = os.path.join(root, file)
-                                print(f"✓ Blueprint file found at: {found_path}")
-                                break
-                        else:
-                            continue
-                        break
+                print("\u2717 Blueprint file not found at reported path")
             
         return response["status"] == "success"
     except Exception as e:

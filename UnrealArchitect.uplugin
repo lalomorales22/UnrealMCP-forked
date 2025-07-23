@@ -1,0 +1,24 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "0.1.0",
+    "FriendlyName": "Unreal Architect",
+    "Description": "A plugin to control Unreal Engine with AI Tools using the Model Context Protocol (MCP).",
+    "Category": "AI",
+    "CreatedBy": "Your Name/Company",
+    "CreatedByURL": "https://your-url.example.com",
+    "DocsURL": "https://your-url.example.com/docs",
+    "MarketplaceURL": "",
+    "SupportURL": "https://your-url.example.com/support",
+    "CanContainContent": true,
+    "IsBetaVersion": true,
+    "IsExperimentalVersion": false,
+    "Installed": false,
+    "Modules": [
+        {
+            "Name": "UnrealArchitect",
+            "Type": "Editor",
+            "LoadingPhase": "PreDefault"
+        }
+    ]
+}

@@ -17,7 +17,7 @@ void MCPConstants::InitializePathConstants()
     ProjectRootPath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
     
     // Get the plugin root path
-    TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin("UnrealMCP");
+    TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin("UnrealArchitect");
     if (Plugin.IsValid())
     {
         PluginRootPath = FPaths::ConvertRelativePathToFull(Plugin->GetBaseDir());
@@ -44,7 +44,7 @@ void MCPConstants::InitializePathConstants()
     else
     {
         // Fallback to project-relative paths if plugin is not found
-        PluginRootPath = FPaths::Combine(ProjectRootPath, TEXT("Plugins/UnrealMCP"));
+        PluginRootPath = FPaths::Combine(ProjectRootPath, TEXT("Plugins/UnrealArchitect"));
         PluginContentPath = FPaths::Combine(PluginRootPath, TEXT("Content"));
         PluginResourcesPath = FPaths::Combine(PluginRootPath, TEXT("Resources"));
         PluginLogsPath = FPaths::Combine(PluginRootPath, TEXT("Logs"));

@@ -1,6 +1,6 @@
 """Scene-related commands for Unreal Engine.
 
-This module contains all scene-related commands for the UnrealMCP bridge,
+This module contains all scene-related commands for the UnrealArchitect bridge,
 including getting scene information, creating, modifying, and deleting objects.
 """
 

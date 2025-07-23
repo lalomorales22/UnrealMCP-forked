@@ -1,7 +1,7 @@
-"""Test script for UnrealMCP basic commands.
+"""Test script for UnrealArchitect basic commands.
 
-This script tests the basic scene and Python execution commands available in the UnrealMCP bridge.
-Make sure Unreal Engine is running with the UnrealMCP plugin enabled before running this script.
+This script tests the basic scene and Python execution commands available in the UnrealArchitect bridge.
+Make sure Unreal Engine is running with the UnrealArchitect plugin enabled before running this script.
 """
 
 import sys
@@ -66,8 +66,8 @@ print(f"Number of actors in level: {len(actors)}")
 
 def main():
     """Run all basic command tests."""
-    print("Starting UnrealMCP basic command tests...")
-    print("Make sure Unreal Engine is running with the UnrealMCP plugin enabled!")
+    print("Starting UnrealArchitect basic command tests...")
+    print("Make sure Unreal Engine is running with the UnrealArchitect plugin enabled!")
     
     try:
         results = {

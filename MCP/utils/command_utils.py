@@ -13,7 +13,7 @@ try:
     # Try to read the port from the C++ constants
     import os
     plugin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    constants_path = os.path.join(plugin_dir, "Source", "UnrealMCP", "Public", "MCPConstants.h")
+    constants_path = os.path.join(plugin_dir, "Source", "UnrealArchitect", "Public", "MCPConstants.h")
     
     if os.path.exists(constants_path):
         with open(constants_path, 'r') as f:

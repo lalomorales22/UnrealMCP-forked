@@ -6,12 +6,12 @@
 #include "Modules/ModuleManager.h"
 
 // Declare custom log category
-UNREALMCP_API DECLARE_LOG_CATEGORY_EXTERN(LogMCP, Log, All);
+UNREALARCHITECT_API DECLARE_LOG_CATEGORY_EXTERN(LogMCP, Log, All);
 
 class FMCPTCPServer;
 class SWindow;
 
-class FUnrealMCPModule : public IModuleInterface, public TSharedFromThis<FUnrealMCPModule>
+class FUnrealArchitectModule : public IModuleInterface, public TSharedFromThis<FUnrealArchitectModule>
 {
 public:
 	/** IModuleInterface implementation */
@@ -23,7 +23,7 @@ public:
 	 * External modules can use this to register custom handlers
 	 * @return The MCP server instance, or nullptr if not available
 	 */
-	UNREALMCP_API FMCPTCPServer* GetServer() const { return Server.Get(); }
+	UNREALARCHITECT_API FMCPTCPServer* GetServer() const { return Server.Get(); }
 
 private:
 	void ExtendLevelEditorToolbar();

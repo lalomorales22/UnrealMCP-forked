@@ -17,7 +17,7 @@ TPair<UBlueprint*, bool> FMCPBlueprintUtils::CreateBlueprintAsset(
 {
     // Print debug information about the paths
     FString GameContentDir = FPaths::ProjectContentDir();
-    FString PluginContentDir = FPaths::EnginePluginsDir() / TEXT("UnrealMCP") / TEXT("Content");
+    FString PluginContentDir = FPaths::EnginePluginsDir() / TEXT("UnrealArchitect") / TEXT("Content");
     
     // Create the full path for the blueprint
     FString FullPackagePath = FString::Printf(TEXT("%s/%s"), *PackagePath, *BlueprintName);

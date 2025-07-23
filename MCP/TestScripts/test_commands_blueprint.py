@@ -1,7 +1,7 @@
-"""Test script for UnrealMCP blueprint commands.
+"""Test script for UnrealArchitect blueprint commands.
 
-This script tests the blueprint-related commands available in the UnrealMCP bridge.
-Make sure Unreal Engine is running with the UnrealMCP plugin enabled before running this script.
+This script tests the blueprint-related commands available in the UnrealArchitect bridge.
+Make sure Unreal Engine is running with the UnrealArchitect plugin enabled before running this script.
 """
 
 import sys
@@ -80,7 +80,7 @@ def test_create_blueprint():
                 possible_locations = [
                     os.path.join(project_dir, "Saved", "Blueprints"),
                     os.path.join(project_dir, "Saved", "Autosaves", "Game", "Blueprints"),
-                    os.path.join(project_dir, "Plugins", "UnrealMCP", "Content", "Blueprints")
+                    os.path.join(project_dir, "Plugins", "UnrealArchitect", "Content", "Blueprints")
                 ]
                 
                 for location in possible_locations:
@@ -206,8 +206,8 @@ def test_modify_blueprint():
 
 def main():
     """Run all blueprint-related tests."""
-    print("Starting UnrealMCP blueprint command tests...")
-    print("Make sure Unreal Engine is running with the UnrealMCP plugin enabled!")
+    print("Starting UnrealArchitect blueprint command tests...")
+    print("Make sure Unreal Engine is running with the UnrealArchitect plugin enabled!")
     
     try:
         # Run tests in sequence, with each test depending on the previous one

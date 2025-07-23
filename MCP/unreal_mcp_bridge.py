@@ -8,7 +8,7 @@ between Claude for Desktop and Unreal Engine through the MCP protocol.
 Requirements:
     - Python 3.7+
     - MCP package (pip install mcp>=0.1.0)
-    - Running Unreal Engine with the UnrealMCP plugin enabled
+    - Running Unreal Engine with the UnrealArchitect plugin enabled
 
 The bridge connects to the Unreal Engine plugin (which acts as the actual MCP server)
 and exposes MCP functionality to Claude for Desktop. This allows Claude to interact
@@ -30,7 +30,7 @@ DEFAULT_TIMEOUT = 10  # 10 second timeout
 try:
     # Try to read the port from the C++ constants
     plugin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    constants_path = os.path.join(plugin_dir, "Source", "UnrealMCP", "Public", "MCPConstants.h")
+    constants_path = os.path.join(plugin_dir, "Source", "UnrealArchitect", "Public", "MCPConstants.h")
     
     if os.path.exists(constants_path):
         with open(constants_path, 'r') as f:
@@ -84,7 +84,7 @@ except ImportError as e:
 
 # Initialize the MCP server
 mcp = FastMCP(
-    "UnrealMCP",
+    "UnrealArchitect",
     description="Unreal Engine integration through the Model Context Protocol"
 )
 
@@ -205,7 +205,8 @@ def load_user_tools():
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
                 if hasattr(module, 'register_tools'):
-                    from utils import send_command
+                    # Provide the bridge's send_command utility so user tools
+                    # can communicate with Unreal Engine.
                     module.register_tools(mcp, {'send_command': send_command})
                     print(f"Loaded user tool: {module_name}", file=sys.stderr)
                 else:

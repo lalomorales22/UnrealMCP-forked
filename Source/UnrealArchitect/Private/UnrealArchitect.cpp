@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "UnrealMCP.h"
+#include "UnrealArchitect.h"
 #include "MCPTCPServer.h"
 #include "MCPSettings.h"
 #include "MCPConstants.h"
@@ -28,7 +28,7 @@
 // Define the log category
 DEFINE_LOG_CATEGORY(LogMCP);
 
-#define LOCTEXT_NAMESPACE "FUnrealMCPModule"
+#define LOCTEXT_NAMESPACE "FUnrealArchitectModule"
 
 // Define a style set for our plugin
 class FMCPPluginStyle : public FSlateStyleSet
@@ -102,13 +102,13 @@ private:
 
 TSharedPtr<FMCPPluginStyle> FMCPPluginStyle::Instance = nullptr;
 
-void FUnrealMCPModule::StartupModule()
+void FUnrealArchitectModule::StartupModule()
 {
 	// Initialize path constants first
 	MCPConstants::InitializePathConstants();
 	
 	// Initialize our custom log category
-	MCP_LOG_INFO("UnrealMCP Plugin is starting up");
+	MCP_LOG_INFO("UnrealArchitect Plugin is starting up");
 	
 	// Initialize file logger - now using path constants
 	FString LogFilePath = FPaths::Combine(MCPConstants::PluginLogsPath, TEXT("MCPServer.log"));
@@ -119,7 +119,7 @@ void FUnrealMCPModule::StartupModule()
 	FSlateStyleRegistry::RegisterSlateStyle(*FMCPPluginStyle::Get());
 	
 	// More debug logging
-	MCP_LOG_INFO("UnrealMCP Style registered");
+	MCP_LOG_INFO("UnrealArchitect Style registered");
 
 	// Register settings
 	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
@@ -136,10 +136,10 @@ void FUnrealMCPModule::StartupModule()
 	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
 	
 	MCP_LOG_INFO("Registering OnPostEngineInit delegate");
-	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealMCPModule::ExtendLevelEditorToolbar);
+	FCoreDelegates::OnPostEngineInit.AddRaw(this, &FUnrealArchitectModule::ExtendLevelEditorToolbar);
 }
 
-void FUnrealMCPModule::ShutdownModule()
+void FUnrealArchitectModule::ShutdownModule()
 {
 	// Unregister style set
 	FMCPPluginStyle::Shutdown();
@@ -163,7 +163,7 @@ void FUnrealMCPModule::ShutdownModule()
 	FCoreDelegates::OnPostEngineInit.RemoveAll(this);
 }
 
-void FUnrealMCPModule::ExtendLevelEditorToolbar()
+void FUnrealArchitectModule::ExtendLevelEditorToolbar()
 {
     static bool bToolbarExtended = false;
     
@@ -188,7 +188,7 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
             SNew(SButton)
             .ButtonStyle(FMCPPluginStyle::Get().ToSharedRef(), "MCPPlugin.TransparentToolbarButton")
             //.ButtonStyle(FAppStyle::Get(), "LevelEditor.ToolBar.Button") // Match toolbar style
-            .OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel_OnClicked))
+            .OnClicked(FOnClicked::CreateRaw(this, &FUnrealArchitectModule::OpenMCPControlPanel_OnClicked))
             .ToolTipText(LOCTEXT("MCPButtonTooltip", "Open MCP Server Control Panel"))
             .Content()
             [
@@ -231,7 +231,7 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
             LOCTEXT("MCPWindowMenuTooltip", "Open MCP Server Control Panel"),
             FSlateIcon(FMCPPluginStyle::Get()->GetStyleSetName(), "MCPPlugin.ServerIcon"),
             FUIAction(
-                FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+                FExecuteAction::CreateRaw(this, &FUnrealArchitectModule::OpenMCPControlPanel),
                 FCanExecuteAction()
             )
         );
@@ -242,11 +242,11 @@ void FUnrealMCPModule::ExtendLevelEditorToolbar()
 }
 
 // Legacy toolbar extension method - no longer used
-void FUnrealMCPModule::AddToolbarButton(FToolBarBuilder& Builder)
+void FUnrealArchitectModule::AddToolbarButton(FToolBarBuilder& Builder)
 {
 	Builder.AddToolBarButton(
 		FUIAction(
-			FExecuteAction::CreateRaw(this, &FUnrealMCPModule::OpenMCPControlPanel),
+			FExecuteAction::CreateRaw(this, &FUnrealArchitectModule::OpenMCPControlPanel),
 			FCanExecuteAction()
 		),
 		NAME_None,
@@ -256,7 +256,7 @@ void FUnrealMCPModule::AddToolbarButton(FToolBarBuilder& Builder)
 	);
 }
 
-void FUnrealMCPModule::OpenMCPControlPanel()
+void FUnrealArchitectModule::OpenMCPControlPanel()
 {
 	// If the window already exists, just focus it
 	if (MCPControlPanelWindow.IsValid())
@@ -281,7 +281,7 @@ void FUnrealMCPModule::OpenMCPControlPanel()
 	MCPControlPanelWindow->SetContent(CreateMCPControlPanelContent());
 
 	// Register a callback for when the window is closed
-	MCPControlPanelWindow->GetOnWindowClosedEvent().AddRaw(this, &FUnrealMCPModule::OnMCPControlPanelClosed);
+	MCPControlPanelWindow->GetOnWindowClosedEvent().AddRaw(this, &FUnrealArchitectModule::OnMCPControlPanelClosed);
 
 	// Show the window
 	FSlateApplication::Get().AddWindow(MCPControlPanelWindow.ToSharedRef());
@@ -289,20 +289,20 @@ void FUnrealMCPModule::OpenMCPControlPanel()
 	MCP_LOG_INFO("MCP Control Panel opened");
 }
 
-FReply FUnrealMCPModule::OpenMCPControlPanel_OnClicked()
+FReply FUnrealArchitectModule::OpenMCPControlPanel_OnClicked()
 {
 	OpenMCPControlPanel();
 
 	return FReply::Handled();
 }
 
-void FUnrealMCPModule::OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window)
+void FUnrealArchitectModule::OnMCPControlPanelClosed(const TSharedRef<SWindow>& Window)
 {
 	MCPControlPanelWindow.Reset();
 	MCP_LOG_INFO("MCP Control Panel closed");
 }
 
-void FUnrealMCPModule::CloseMCPControlPanel()
+void FUnrealArchitectModule::CloseMCPControlPanel()
 {
 	if (MCPControlPanelWindow.IsValid())
 	{
@@ -312,7 +312,7 @@ void FUnrealMCPModule::CloseMCPControlPanel()
 	}
 }
 
-TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
+TSharedRef<SWidget> FUnrealArchitectModule::CreateMCPControlPanelContent()
 {
 	const UMCPSettings* Settings = GetDefault<UMCPSettings>();
 	
@@ -403,7 +403,7 @@ TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
 					.VAlign(VAlign_Center)
 					.Text(LOCTEXT("StartServerButton", "Start Server"))
 					.IsEnabled_Lambda([this]() -> bool { return !IsServerRunning(); })
-					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OnStartServerClicked))
+					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealArchitectModule::OnStartServerClicked))
 				]
 				
 				// Stop button
@@ -414,7 +414,7 @@ TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
 					.VAlign(VAlign_Center)
 					.Text(LOCTEXT("StopServerButton", "Stop Server"))
 					.IsEnabled_Lambda([this]() -> bool { return IsServerRunning(); })
-					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealMCPModule::OnStopServerClicked))
+					.OnClicked(FOnClicked::CreateRaw(this, &FUnrealArchitectModule::OnStopServerClicked))
 				]
 			]
 			
@@ -439,19 +439,19 @@ TSharedRef<SWidget> FUnrealMCPModule::CreateMCPControlPanelContent()
 		];
 }
 
-FReply FUnrealMCPModule::OnStartServerClicked()
+FReply FUnrealArchitectModule::OnStartServerClicked()
 {
 	StartServer();
 	return FReply::Handled();
 }
 
-FReply FUnrealMCPModule::OnStopServerClicked()
+FReply FUnrealArchitectModule::OnStopServerClicked()
 {
 	StopServer();
 	return FReply::Handled();
 }
 
-void FUnrealMCPModule::ToggleServer()
+void FUnrealArchitectModule::ToggleServer()
 {
 	MCP_LOG_WARNING("ToggleServer called - Server state: %s", (Server && Server->IsRunning()) ? TEXT("Running") : TEXT("Not Running"));
 	
@@ -469,7 +469,7 @@ void FUnrealMCPModule::ToggleServer()
 	MCP_LOG_WARNING("ToggleServer completed - Server state: %s", (Server && Server->IsRunning()) ? TEXT("Running") : TEXT("Not Running"));
 }
 
-void FUnrealMCPModule::StartServer()
+void FUnrealArchitectModule::StartServer()
 {
 	// Check if server is already running to prevent double-start
 	if (Server && Server->IsRunning())
@@ -502,7 +502,7 @@ void FUnrealMCPModule::StartServer()
 	}
 }
 
-void FUnrealMCPModule::StopServer()
+void FUnrealArchitectModule::StopServer()
 {
 	if (Server)
 	{
@@ -518,11 +518,11 @@ void FUnrealMCPModule::StopServer()
 	}
 }
 
-bool FUnrealMCPModule::IsServerRunning() const
+bool FUnrealArchitectModule::IsServerRunning() const
 {
 	return Server && Server->IsRunning();
 }
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FUnrealMCPModule, UnrealMCP)
+IMPLEMENT_MODULE(FUnrealArchitectModule, UnrealArchitect)

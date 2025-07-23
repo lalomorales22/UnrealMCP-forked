@@ -5,7 +5,7 @@
 #include "MCPSettings.generated.h"
 
 UCLASS(config = Editor, defaultconfig)
-class UNREALMCP_API UMCPSettings : public UDeveloperSettings
+class UNREALARCHITECT_API UMCPSettings : public UDeveloperSettings
 {
     GENERATED_BODY()
 public:

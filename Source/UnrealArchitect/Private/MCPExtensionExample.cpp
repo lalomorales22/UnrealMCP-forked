@@ -103,7 +103,7 @@ void YourGameModule::StartupModule()
     // ... your existing code ...
     
     // Get a reference to the MCP server
-    FUnrealMCPModule& MCPModule = FModuleManager::LoadModuleChecked<FUnrealMCPModule>("UnrealMCP");
+    FUnrealArchitectModule& MCPModule = FModuleManager::LoadModuleChecked<FUnrealArchitectModule>("UnrealArchitect");
     FMCPTCPServer* MCPServer = MCPModule.GetServer();
     
     if (MCPServer && MCPServer->IsRunning())
@@ -123,7 +123,7 @@ void YourGameModule::StartupModule()
 void YourGameModule::ShutdownModule()
 {
     // Get a reference to the MCP server
-    FUnrealMCPModule& MCPModule = FModuleManager::GetModulePtr<FUnrealMCPModule>("UnrealMCP");
+    FUnrealArchitectModule& MCPModule = FModuleManager::GetModulePtr<FUnrealArchitectModule>("UnrealArchitect");
     if (MCPModule)
     {
         FMCPTCPServer* MCPServer = MCPModule.GetServer();

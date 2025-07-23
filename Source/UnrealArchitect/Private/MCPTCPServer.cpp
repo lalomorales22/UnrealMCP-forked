@@ -13,7 +13,7 @@
 #include "ActorEditorUtils.h"
 #include "EngineUtils.h"
 #include "Containers/Ticker.h"
-#include "UnrealMCP.h"
+#include "UnrealArchitect.h"
 #include "MCPFileLogger.h"
 #include "MCPCommandHandlers.h"
 #include "MCPCommandHandlers_Blueprints.h"

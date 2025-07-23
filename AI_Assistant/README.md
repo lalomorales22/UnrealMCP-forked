@@ -22,3 +22,13 @@ The Python modules in this directory provide the backend logic to process user c
 this context to the action functions. Commands like "move it up by 200" operate
 on the selection without needing an explicit object name. The NLP parser also
 extracts more transformation values, including rotation and scaling.
+
+## Phase 3: Asynchronous Tasks & Conversational Memory
+
+`command_dispatcher.py` can run long operations on a background thread. It
+immediately returns "Working on it..." and logs the final result once the task
+finishes. `nlp_service.py` now remembers the last command, so follow-up phrases
+like "apply it to the sphere" work as expected.
+
+Update your `WBP_AI_Assistant` widget to show a thinking indicator while a task
+is running and append the logged completion message to the chat history.

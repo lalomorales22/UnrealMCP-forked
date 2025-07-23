@@ -1,7 +1,20 @@
 """Utility to spawn the AI Assistant widget inside the editor."""
 import unreal
 
+from .nlp_service import NLPService
+from .command_dispatcher import CommandDispatcher
+
 ASSET_PATH = "/Game/AI_Assistant/WBP_AI_Assistant"
+
+
+# Persistent instances to keep conversational memory
+_SERVICE = NLPService()
+_DISPATCHER = CommandDispatcher()
+
+
+def _on_async_complete(message: str) -> None:
+    """Log asynchronous task completion in the editor."""
+    unreal.log(message)
 
 
 def open_ai_assistant():
@@ -15,13 +28,6 @@ def open_ai_assistant():
 
 def process_user_command(text: str):
     """Entry point called from the UI Blueprint."""
-    from .nlp_service import NLPService
-    from .command_dispatcher import CommandDispatcher
-
-    service = NLPService()
-    dispatcher = CommandDispatcher()
-
-    command = service.parse_command(text)
-    result = dispatcher.dispatch_command(command)
-
+    command = _SERVICE.parse_command(text)
+    result = _DISPATCHER.dispatch_command_async(command, _on_async_complete)
     return result

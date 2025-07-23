@@ -17,9 +17,14 @@ class NLPService:
             "set_material": ["material", "texture", "apply material"],
             "get_info": ["info", "details", "properties", "what is"],
         }
+        # Simple short-term memory of the last parsed command for follow-ups
+        self.last_command: Dict[str, Any] | None = None
 
     def parse_command(self, text: str) -> Dict[str, Any]:
         text_lower = text.lower()
+
+        # If the user references "it" or "them", seed entities from last command
+        use_memory = any(word in text_lower for word in {"it", "them", "that"})
 
         # capture currently selected actors in the editor
         try:
@@ -35,6 +40,11 @@ class NLPService:
                 break
 
         entities: Dict[str, Any] = {}
+        if use_memory and self.last_command:
+            # Pre-fill entities and context from the previous command
+            entities.update(self.last_command.get("entities", {}))
+            for key, val in self.last_command.get("context", {}).items():
+                context.setdefault(key, val)
 
         # enhanced regex for position extraction: x 100.5 y -50 z 0
         position_match = re.search(
@@ -91,4 +101,7 @@ class NLPService:
             if obj_match:
                 entities["object_type"] = obj_match.group(1)
 
-        return {"intent": intent, "entities": entities, "context": context}
+        command = {"intent": intent, "entities": entities, "context": context}
+        # Remember this command for simple follow-ups
+        self.last_command = command
+        return command

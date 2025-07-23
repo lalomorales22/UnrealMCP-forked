@@ -1,7 +1,7 @@
-"""Test script for UnrealMCP material commands.
+"""Test script for UnrealArchitect material commands.
 
-This script tests the material-related commands available in the UnrealMCP bridge.
-Make sure Unreal Engine is running with the UnrealMCP plugin enabled before running this script.
+This script tests the material-related commands available in the UnrealArchitect bridge.
+Make sure Unreal Engine is running with the UnrealArchitect plugin enabled before running this script.
 """
 
 import sys
@@ -71,8 +71,8 @@ def test_material_modification():
 
 def main():
     """Run all material-related tests."""
-    print("Starting UnrealMCP material command tests...")
-    print("Make sure Unreal Engine is running with the UnrealMCP plugin enabled!")
+    print("Starting UnrealArchitect material command tests...")
+    print("Make sure Unreal Engine is running with the UnrealArchitect plugin enabled!")
     
     try:
         results = {

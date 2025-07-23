@@ -1,6 +1,6 @@
 """Material-related commands for Unreal Engine.
 
-This module contains all material-related commands for the UnrealMCP bridge,
+This module contains all material-related commands for the UnrealArchitect bridge,
 including creation, modification, and querying of materials.
 """
 

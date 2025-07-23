@@ -1,4 +1,4 @@
-# UnrealMCP Plugin
+# Unreal Architect Plugin
 
 
 [![Discord][discord-shield]][discord-url]
@@ -16,7 +16,7 @@ This is very much a work in progress, and I need to clean up a lot of stuff!!!!!
 Also, I only use windows, so I don't know how this would be setup for mac/unix
 
 ## Overview
-UnrealMCP is an Unofficial Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
+Unreal Architect is an Unofficial Unreal Engine plugin designed to control Unreal Engine with AI tools. It implements a Machine Control Protocol (MCP) within Unreal Engine, allowing external AI systems to interact with and manipulate the Unreal environment programmatically.
 
 I only just learned about MCP a few days ago, so I'm not that familiar with it, I'm still learning so things might be initially pretty rough.
 I've implemented this using https://github.com/ahujasid/blender-mcp as a reference, which relies on claude for desktop. It may or may not work with other models, if you experiment with any, please let me know!
@@ -72,14 +72,14 @@ good the integrated LLM is at utilizing these tools.
 ## Installation
 1. Clone this repository into your Unreal project's `Plugins` directory:
    ```
-   git clone https://github.com/kvick-games/UnrealMCP.git Plugins/UnrealMCP
+   git clone https://github.com/kvick-games/UnrealArchitect.git Plugins/UnrealArchitect
    ```
    The project path should match this pattern like so:
-...\UNREAL_PROJECT\Plugins\UnrealMCP\
+...\UNREAL_PROJECT\Plugins\UnrealArchitect\
 
 3. Regenerate your project files (right-click your .uproject file and select "Generate Visual Studio project files")
 4. Build the project in whatever IDE you use, I use Rider, Visual Studio works (working on releases now)
-5. Open your project and enable the plugin in Edit > Plugins > UnrealMCP
+5. Open your project and enable the plugin in Edit > Plugins > UnrealArchitect
 6. Enable Python plugins in Unreal
 7. Run setup_unreal_mcp.bat (I probably need to make some fixes to this file as more people try it out)
 8. Currently I've only tested with Claude for Desktop so follow the instructions below to continue
@@ -90,14 +90,14 @@ You will need to find your installation directory for claude for desktop. Find c
 {
     "mcpServers": {
         "unreal": {
-            "command": "C:\\UnrealMCP_Project\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
+            "command": "C:\\UnrealArchitect_Project\\Plugins\\UnrealArchitect\\MCP\\run_unreal_architect.bat",
             "args": []
         }
     }
 }
 ```
-IN THE COMMAND FIELD PUT YOUR PATH TO YOUR PLUGIN DIRECTORY POINTED TO THE SCRIPT: "run_unreal_mcp.bat"
-This script is located within ../plugin_root_directory/MCP/run_unreal_mcp.bat
+IN THE COMMAND FIELD PUT YOUR PATH TO YOUR PLUGIN DIRECTORY POINTED TO THE SCRIPT: "run_unreal_architect.bat"
+This script is located within ../plugin_root_directory/MCP/run_unreal_architect.bat
 
 You can refer to this link for more info:
 https://modelcontextprotocol.io/quickstart/user
@@ -166,7 +166,7 @@ Refer to the documentation in the `Docs` directory for a complete command refere
   Discord (Dreamatron Studios): https://discord.gg/abRftdSe
   
 ### Project Structure
-- `Source/UnrealMCP/`: Core plugin implementation
+- `Source/UnrealArchitect/`: Core plugin implementation
   - `Private/`: Internal implementation files
   - `Public/`: Public header files
 - `Content/`: Plugin assets
@@ -197,7 +197,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ## Credits
-- Created by: kvick
+- Created by: Your Name/Company
 - X: [@kvickart](https://x.com/kvickart)
   
 ### Thank you to testers!!!

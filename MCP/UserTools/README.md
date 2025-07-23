@@ -1,10 +1,10 @@
 
 ### User Guide: Adding Custom MCP Tools
 
-To extend the functionality of the UnrealMCP plugin with your own tools, follow these steps:
+To extend the functionality of the UnrealArchitect plugin with your own tools, follow these steps:
 
 1. **Locate the `user_tools` Directory**
-   - Find the `user_tools` directory in the plugin’s MCP folder (e.g., `Plugins/UnrealMCP/MCP/user_tools`).
+   - Find the `user_tools` directory in the plugin’s MCP folder (e.g., `Plugins/UnrealArchitect/MCP/user_tools`).
    - If it doesn’t exist, create it manually.
 
 2. **Create a Python Script**

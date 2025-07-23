@@ -20,7 +20,7 @@ DECLARE_DELEGATE_RetVal_TwoParams(
  * Helper class for creating external command handlers
  * Makes it easy for external code to register custom commands with the MCP server
  */
-class UNREALMCP_API FMCPExtensionHandler : public IMCPCommandHandler
+class UNREALARCHITECT_API FMCPExtensionHandler : public IMCPCommandHandler
 {
 public:
     /**
@@ -77,7 +77,7 @@ private:
 /**
  * Helper utility for working with the MCP extension system
  */
-class UNREALMCP_API FMCPExtensionSystem
+class UNREALARCHITECT_API FMCPExtensionSystem
 {
 public:
     /**

@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Misc/FileHelper.h"
 #include "HAL/PlatformFilemanager.h"
-#include "UnrealMCP.h"
+#include "UnrealArchitect.h"
 
 // Shorthand for logger
 #define MCP_LOG(Verbosity, Format, ...) FMCPFileLogger::Get().Log(ELogVerbosity::Verbosity, FString::Printf(TEXT(Format), ##__VA_ARGS__))

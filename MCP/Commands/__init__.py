@@ -1,1 +1,1 @@
-"""Command modules for the UnrealMCP bridge.""" 
+"""Command modules for the UnrealArchitect bridge.""" 

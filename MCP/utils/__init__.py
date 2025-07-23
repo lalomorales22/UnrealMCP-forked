@@ -1,4 +1,4 @@
-"""Utility functions for the UnrealMCP bridge."""
+"""Utility functions for the UnrealArchitect bridge."""
 
 import json
 import socket
@@ -13,7 +13,7 @@ DEFAULT_TIMEOUT = 10  # 10 second timeout
 try:
     # Try to read the port from the C++ constants
     plugin_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".."))
-    constants_path = os.path.join(plugin_dir, "Source", "UnrealMCP", "Public", "MCPConstants.h")
+    constants_path = os.path.join(plugin_dir, "Source", "UnrealArchitect", "Public", "MCPConstants.h")
     
     if os.path.exists(constants_path):
         with open(constants_path, 'r') as f:

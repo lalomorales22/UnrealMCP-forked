@@ -21,16 +21,16 @@ To set up the MCP interface, ensure you have the following:
 
 - **Python 3.7 or newer** installed on your system
 - **Claude Desktop** application
-- **Unreal Engine** with the UnrealMCP plugin enabled
+- **Unreal Engine** with the UnrealArchitect plugin enabled
 
 ## Quick Setup
 
 The setup process is streamlined with a single script that handles all installation scenarios:
 
-1. Navigate to the `Plugins\UnrealMCP\MCP\` directory.
+1. Navigate to the `Plugins\UnrealArchitect\MCP\` directory.
 2. Run the following script:
    ```
-   Plugins\UnrealMCP\MCP\setup_unreal_mcp.bat
+   Plugins\UnrealArchitect\MCP\setup_unreal_architect.bat
    ```
 
 This script will:
@@ -38,7 +38,7 @@ This script will:
 - Detect available Python environments (System Python, Miniconda/Anaconda, Claude Desktop environment)
 - Prompt you to choose a Python environment
 - Install the required `mcp` package in the selected environment
-- Generate a `run_unreal_mcp.bat` script tailored to the chosen Python environment
+- Generate a `run_unreal_architect.bat` script tailored to the chosen Python environment
 - Create or update the Claude Desktop configuration file
 
 ### Python Environment Options
@@ -64,7 +64,7 @@ python -m pip install mcp>=0.1.0
 
 ### 2. Create a Run Script
 
-Create a batch file named `run_unreal_mcp.bat` with this content:
+Create a batch file named `run_unreal_architect.bat` with this content:
 
 ```batch
 @echo off
@@ -73,7 +73,7 @@ cd /d "%~dp0"
 python "%~dp0unreal_mcp_server.py"
 ```
 
-Save it in the `Plugins\UnrealMCP\MCP\` directory.
+Save it in the `Plugins\UnrealArchitect\MCP\` directory.
 
 ### 3. Configure Claude Desktop
 
@@ -83,13 +83,13 @@ Locate or create the Claude Desktop configuration file at:
 %APPDATA%\Claude\claude_desktop_config.json
 ```
 
-Add or update it with the following content, replacing the path with the actual location of your `run_unreal_mcp.bat`:
+Add or update it with the following content, replacing the path with the actual location of your `run_unreal_architect.bat`:
 
 ```json
 {
     "mcpServers": {
         "unreal": {
-            "command": "C:\\Path\\To\\Your\\Plugins\\UnrealMCP\\MCP\\run_unreal_mcp.bat",
+            "command": "C:\\Path\\To\\Your\\Plugins\\UnrealArchitect\\MCP\\run_unreal_architect.bat",
             "args": []
         }
     }
@@ -102,7 +102,7 @@ Add or update it with the following content, replacing the path with the actual 
 
 1. **"No module named 'mcp'"**
    - **Cause**: The `mcp` package isn’t installed in the Python environment used by Claude Desktop.
-   - **Solution**: Rerun the `setup_unreal_mcp.bat` script and select the correct Python environment.
+   - **Solution**: Rerun the `setup_unreal_architect.bat` script and select the correct Python environment.
 
 2. **Connection refused errors**
    - **Cause**: The MCP server isn’t running or isn’t listening on port 13377.
@@ -115,7 +115,7 @@ Add or update it with the following content, replacing the path with the actual 
    - **Solution**:
      - Check the logs at: `%APPDATA%\Claude\logs\mcp-server-unreal.log`
      - Verify the path in `claude_desktop_config.json` is correct.
-     - Ensure `run_unreal_mcp.bat` exists and references the correct Python interpreter.
+     - Ensure `run_unreal_architect.bat` exists and references the correct Python interpreter.
 
 ### Checking Logs
 
@@ -154,7 +154,7 @@ To test the MCP server independently of Claude Desktop:
 
 1. Run the following script:
    ```
-   Plugins\UnrealMCP\MCP\run_unreal_mcp.bat
+   Plugins\UnrealArchitect\MCP\run_unreal_architect.bat
    ```
 
 This starts the MCP server using the configured Python interpreter, allowing it to listen for connections.

@@ -90,7 +90,7 @@ public:
  * MCP TCP Server
  * Manages connections and command routing
  */
-class UNREALMCP_API FMCPTCPServer
+class UNREALARCHITECT_API FMCPTCPServer
 {
 public:
     /**

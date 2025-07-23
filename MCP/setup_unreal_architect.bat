@@ -2,7 +2,7 @@
 setlocal EnableDelayedExpansion
 
 echo ========================================================
-echo Unreal MCP - Python Environment Setup
+echo Unreal Architect - Python Environment Setup
 echo ========================================================
 echo.
 
@@ -108,7 +108,7 @@ echo set "PYTHON_PATH=%%ENV_DIR%%\Scripts\python.exe"
 echo.
 echo REM Check if Python environment exists
 echo if not exist "%%PYTHON_PATH%%" (
-echo     echo ERROR: Python environment not found. Please run setup_unreal_mcp.bat first. ^>^&2
+echo     echo ERROR: Python environment not found. Please run setup_unreal_architect.bat first. ^>^&2
 echo     goto :end
 echo )
 echo.
@@ -116,18 +116,18 @@ echo REM Activate the virtual environment silently
 echo call "%%ENV_DIR%%\Scripts\activate.bat" ^>nul 2^>^&1
 echo.
 echo REM Log start message to stderr
-echo echo Starting Unreal MCP bridge... ^>^&2
+echo echo Starting Unreal Architect bridge... ^>^&2
 echo.
 echo REM Run the Python bridge script
 echo python "%%SCRIPT_DIR%%\unreal_mcp_bridge.py" %%*
 echo.
 echo :end
-) > "%SCRIPT_DIR%\run_unreal_mcp.bat"
+) > "%SCRIPT_DIR%\run_unreal_architect.bat"
 
 REM Update Claude Desktop configuration using Python
 echo.
 echo Updating Claude Desktop configuration...
-python temp_update_config.py "%CLAUDE_CONFIG_FILE%" "%SCRIPT_DIR%\run_unreal_mcp.bat"
+python temp_update_config.py "%CLAUDE_CONFIG_FILE%" "%SCRIPT_DIR%\run_unreal_architect.bat"
 if %ERRORLEVEL% neq 0 (
     echo ERROR: Failed to update Claude Desktop configuration.
     goto :end
@@ -139,7 +139,7 @@ echo ========================================================
 echo Setup complete!
 echo.
 echo To use with Claude Desktop:
-echo 1. Run run_unreal_mcp.bat to start the MCP bridge
+echo 1. Run run_unreal_architect.bat to start the MCP bridge
 echo 2. Open Claude Desktop and it should automatically use the correct configuration
 echo ========================================================
 echo.

@@ -15,3 +15,10 @@ This folder contains Python utilities for the in-editor AI Assistant.
 5. Add a toolbar button or menu entry that opens `WBP_AI_Assistant` so it can be launched from the editor.
 
 The Python modules in this directory provide the backend logic to process user commands and can be called from the widget's graph.
+
+## Phase 2: Context-Aware Commands
+
+`nlp_service.py` now collects the currently selected actors in the editor and passes
+this context to the action functions. Commands like "move it up by 200" operate
+on the selection without needing an explicit object name. The NLP parser also
+extracts more transformation values, including rotation and scaling.

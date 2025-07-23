@@ -48,6 +48,37 @@ class NLPService:
                 "z": float(position_match.group(3)),
             }
 
+        # rotation: pitch 30 yaw 60 roll 0 (any order, values optional)
+        rot = {}
+        pitch_match = re.search(r"pitch\s*(-?\d+(?:\.\d+)?)", text_lower)
+        yaw_match = re.search(r"yaw\s*(-?\d+(?:\.\d+)?)", text_lower)
+        roll_match = re.search(r"roll\s*(-?\d+(?:\.\d+)?)", text_lower)
+        if pitch_match:
+            rot["pitch"] = float(pitch_match.group(1))
+        if yaw_match:
+            rot["yaw"] = float(yaw_match.group(1))
+        if roll_match:
+            rot["roll"] = float(roll_match.group(1))
+        if rot:
+            entities["rotation"] = rot
+
+        # scale: either uniform 'scale 2' or axes 'scale x 1 y 2 z 3'
+        scale_xyz_match = re.search(
+            r"scale\s*x\s*(-?\d+(?:\.\d+)?)\s*y\s*(-?\d+(?:\.\d+)?)\s*z\s*(-?\d+(?:\.\d+)?)",
+            text_lower,
+        )
+        if scale_xyz_match:
+            entities["scale"] = {
+                "x": float(scale_xyz_match.group(1)),
+                "y": float(scale_xyz_match.group(2)),
+                "z": float(scale_xyz_match.group(3)),
+            }
+        else:
+            scale_uniform = re.search(r"scale\s*(-?\d+(?:\.\d+)?)", text_lower)
+            if scale_uniform:
+                val = float(scale_uniform.group(1))
+                entities["scale"] = {"x": val, "y": val, "z": val}
+
         # capture asset paths like '/Game/Path/Asset.Asset'
         asset_match = re.search(r"(/[-\w/]+(?:\.[-\w]+)?)", text)
         if asset_match:

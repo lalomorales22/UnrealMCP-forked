@@ -10,16 +10,17 @@ def _get_selected_actors() -> list[unreal.Actor]:
     return list(unreal.EditorLevelLibrary.get_selected_level_actors())
 
 
-def create_object(entities: Dict[str, Any]) -> str:
-    """Spawn a basic actor like a cube or sphere."""
+def create_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
+    """Spawn a basic actor like a cube or sphere or from an asset path."""
     object_type = entities.get("object_type")
     position = entities.get("position", {"x": 0, "y": 0, "z": 0})
+    asset_path = entities.get("asset_path")
 
-    mesh_path = None
+    mesh_path = asset_path
     if object_type in {"cube", "box"}:
-        mesh_path = "/Engine/BasicShapes/Cube.Cube"
+        mesh_path = mesh_path or "/Engine/BasicShapes/Cube.Cube"
     elif object_type == "sphere":
-        mesh_path = "/Engine/BasicShapes/Sphere.Sphere"
+        mesh_path = mesh_path or "/Engine/BasicShapes/Sphere.Sphere"
 
     if mesh_path is None:
         return f"Unsupported object type: {object_type}"
@@ -31,42 +32,42 @@ def create_object(entities: Dict[str, Any]) -> str:
     return f"Created {actor.get_name()}"
 
 
-def move_object(entities: Dict[str, Any]) -> str:
+def move_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
     """Move selected actors to a new location."""
     position = entities.get("position")
     if not position:
         return "No position specified"
 
     location = unreal.Vector(position.get("x", 0), position.get("y", 0), position.get("z", 0))
-    actors = _get_selected_actors()
+    actors = context.get("actors") or _get_selected_actors()
     for actor in actors:
         actor.set_actor_location(location, False, True)
     return f"Moved {len(actors)} actor(s)"
 
 
-def delete_object(entities: Dict[str, Any]) -> str:
+def delete_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
     """Delete selected actors from the level."""
-    actors = _get_selected_actors()
+    actors = context.get("actors") or _get_selected_actors()
     for actor in actors:
         unreal.EditorLevelLibrary.destroy_actor(actor)
     return f"Deleted {len(actors)} actor(s)"
 
 
-def rotate_object(entities: Dict[str, Any]) -> str:
+def rotate_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
     """Rotate selected actors."""
     rotation = entities.get("rotation", {})
     rotator = unreal.Rotator(rotation.get("pitch", 0.0), rotation.get("yaw", 0.0), rotation.get("roll", 0.0))
-    actors = _get_selected_actors()
+    actors = context.get("actors") or _get_selected_actors()
     for actor in actors:
         actor.set_actor_rotation(rotator, False)
     return f"Rotated {len(actors)} actor(s)"
 
 
-def scale_object(entities: Dict[str, Any]) -> str:
+def scale_object(entities: Dict[str, Any], context: Dict[str, Any]) -> str:
     """Scale selected actors."""
     scale = entities.get("scale", {})
     scale_vector = unreal.Vector(scale.get("x", 1.0), scale.get("y", 1.0), scale.get("z", 1.0))
-    actors = _get_selected_actors()
+    actors = context.get("actors") or _get_selected_actors()
     for actor in actors:
         actor.set_actor_scale3d(scale_vector)
     return f"Scaled {len(actors)} actor(s)"

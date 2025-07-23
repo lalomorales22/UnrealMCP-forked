@@ -1,6 +1,8 @@
-"""Simple keyword based NLP service."""
+"""Simple keyword based NLP service with editor context awareness."""
 import re
-from typing import Dict, Any
+from typing import Any, Dict
+
+import unreal
 
 
 class NLPService:
@@ -18,6 +20,14 @@ class NLPService:
 
     def parse_command(self, text: str) -> Dict[str, Any]:
         text_lower = text.lower()
+
+        # capture currently selected actors in the editor
+        try:
+            selected = list(unreal.EditorLevelLibrary.get_selected_level_actors())
+        except Exception:
+            selected = []
+        context = {"actors": selected}
+
         intent = None
         for key, kws in self.intent_keywords.items():
             if any(kw in text_lower for kw in kws):
@@ -26,14 +36,22 @@ class NLPService:
 
         entities: Dict[str, Any] = {}
 
-        # crude regex for position extraction: x 100 y 50 z 0
-        position_match = re.search(r"x\s*(-?\d+)\s*y\s*(-?\d+)\s*z\s*(-?\d+)", text_lower)
+        # enhanced regex for position extraction: x 100.5 y -50 z 0
+        position_match = re.search(
+            r"x\s*(-?\d+(?:\.\d+)?)\s*y\s*(-?\d+(?:\.\d+)?)\s*z\s*(-?\d+(?:\.\d+)?)",
+            text_lower,
+        )
         if position_match:
             entities["position"] = {
-                "x": int(position_match.group(1)),
-                "y": int(position_match.group(2)),
-                "z": int(position_match.group(3)),
+                "x": float(position_match.group(1)),
+                "y": float(position_match.group(2)),
+                "z": float(position_match.group(3)),
             }
+
+        # capture asset paths like '/Game/Path/Asset.Asset'
+        asset_match = re.search(r"(/[-\w/]+(?:\.[-\w]+)?)", text)
+        if asset_match:
+            entities["asset_path"] = asset_match.group(1)
 
         # extract simple object type (first word after intent)
         if intent:
@@ -42,4 +60,4 @@ class NLPService:
             if obj_match:
                 entities["object_type"] = obj_match.group(1)
 
-        return {"intent": intent, "entities": entities}
+        return {"intent": intent, "entities": entities, "context": context}
